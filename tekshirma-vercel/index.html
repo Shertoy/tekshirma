@@ -300,13 +300,13 @@ input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 4px var(--a
 .ring-read b{font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 108;font-weight:900;font-size:54px;line-height:1;letter-spacing:-.055em;font-variant-numeric:tabular-nums}
 .ring-read span{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);display:block;margin-top:8px}
 
-.verdict-nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(176px,1fr));border-top:1px solid var(--hair);position:relative;z-index:1}
+.verdict-nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border-top:1px solid var(--hair);position:relative;z-index:1}
 .vnum{padding:22px 24px;border-right:1px solid var(--hair)}
 @media(min-width:820px){.vnum{padding:26px 42px}}
 .vnum:last-child{border-right:0}
 @media(max-width:740px){.vnum{border-right:0;border-bottom:1px solid var(--hair)}.vnum:last-child{border-bottom:0}}
 .vnum .k{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:10px}
-.vnum .v{font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 108;font-weight:900;font-size:clamp(26px,4.4vw,36px);letter-spacing:-.045em;font-variant-numeric:tabular-nums;display:block;line-height:1.02}
+.vnum .v{font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 106;font-weight:900;font-size:clamp(21px,3.4vw,31px);letter-spacing:-.04em;font-variant-numeric:tabular-nums;display:block;line-height:1.08;text-wrap:balance}
 .vnum.bad .v{color:var(--crit)}
 .vnum.good .v{color:var(--ok)}
 .vnum.warn .v{color:var(--warn)}
@@ -535,6 +535,10 @@ section.block > h3 .n{
       <span class="wordmark">Tekshir<i>ma</i></span>
       <span class="tagline">Tekshir. Tahlil qil. Ishonch hosil qil.</span>
     </a>
+    <button class="icon-btn" id="curBtn" type="button" style="display:none" aria-label="Valyutani almashtirish">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h14l-3-3M21 16H7l3 3"/></svg>
+      <span class="lbl" id="curBtnLbl">So&lsquo;mda</span>
+    </button>
     <button class="icon-btn" id="printBtn" type="button" style="display:none">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6M6 18H4v-7h16v7h-2M8 14h8v7H8z"/></svg>
       <span class="lbl">PDF</span>
@@ -772,6 +776,18 @@ section.block > h3 .n{
 <section class="panel wrap" id="p-3">
   <div class="panel-head"><span class="bar"></span><p class="eyebrow">Bosqich 03</p><h2>Moliyaviy model</h2><p>Bu yerdagi to&lsquo;rt raqam butun auditning tayanchi. Marja maydonini bo&lsquo;sh qoldirmang &mdash; usiz daromad maqsadi ma&rsquo;nosiz bo&lsquo;lib qoladi.</p></div>
   <div class="qgrid">
+    <div class="q full"><span class="qlab">Hisob-kitob valyutasi</span>
+      <p class="hint">Raqamlarni qaysi valyutada kiritmoqchisiz. Hisobotni keyin bir bosishda ikkinchisiga o&lsquo;tkazish mumkin.</p>
+      <div class="opts" data-field="cur" data-type="single">
+        <button class="opt" data-v="uzs" type="button">O&lsquo;zbek so&lsquo;mi</button>
+        <button class="opt" data-v="usd" type="button">AQSh dollari</button>
+      </div>
+      <div class="suffix" id="rateRow" style="margin-top:4px">
+        <input type="number" data-field="rate" placeholder="11824" min="1" step="0.01" inputmode="decimal">
+        <span class="u">so&lsquo;m = 1 USD</span>
+      </div>
+      <p class="hint" id="rateNote">Markaziy bank kursi, 2026-yil 27-avgust: 11&thinsp;823,69 so&lsquo;m. Kurs faqat etalon lid narxini o&lsquo;tkazish va valyutani almashtirish uchun ishlatiladi &mdash; o&lsquo;z raqamlaringizga tegmaydi.</p>
+    </div>
     <div class="q"><span class="qlab">Oylik DAROMAD maqsadingiz</span><p class="hint">Tushum (aylanma), foyda emas.</p><div class="suffix"><input type="number" data-field="goal" placeholder="120000" min="0" inputmode="numeric"><span class="u">USD / oy</span></div></div>
     <div class="q"><span class="qlab">Hozirgi oylik tushumingiz</span><p class="hint">Ishga tushmagan bo&lsquo;lsa 0 yozing.</p><div class="suffix"><input type="number" data-field="current" placeholder="65000" min="0" inputmode="numeric"><span class="u">USD / oy</span></div></div>
     <div class="q"><span class="qlab">O&lsquo;rtacha chek</span><p class="hint">Bitta mijoz bitta bitimda qoldiradigan pul. Statsionarda &mdash; bitta yotqizilgan bemorning o&lsquo;rtacha hisobi.</p><div class="suffix"><input type="number" data-field="check" placeholder="450" min="0" inputmode="decimal"><span class="u">USD</span></div></div>
@@ -1207,6 +1223,7 @@ function show(i){
     $("#p-intro").classList.add("on");
     $("#stepper").style.display="none";
     $("#printBtn").style.display="none";
+    $("#curBtn").style.display="none";
     document.body.classList.remove("in-flow");
     window.scrollTo(0,0);
     return;
@@ -1218,6 +1235,7 @@ function show(i){
   $("#"+f[i].id).classList.add("on","anim");
   $("#stepper").style.display="block";
   $("#printBtn").style.display = f[i].id==="p-report" ? "" : "none";
+  $("#curBtn").style.display = f[i].id==="p-report" ? "" : "none";
   $("#resetBtn").style.display="";
   document.body.classList.toggle("in-flow", f[i].id!=="p-report");
   const last = i===f.length-1;
@@ -1256,6 +1274,7 @@ document.addEventListener("click",e=>{
     opt.setAttribute("aria-pressed","true");
     S[f]=opt.dataset.v;
     if(f==="sector") drawStepper();
+    if(f==="cur"){ VIEW_CUR=null; refreshUnits(); }
     return;
   }
   const nav=e.target.closest("[data-nav]");
@@ -1270,8 +1289,40 @@ function readEl(el){
 }
 document.addEventListener("input",e=>readEl(e.target));
 document.addEventListener("change",e=>readEl(e.target));
+document.addEventListener("input",e=>{ if(e.target.dataset && e.target.dataset.field==="rate") refreshUnits(); });
 
 $("#startBtn").onclick=()=>{ DEMO_ON=false; show(0); };
+
+/* pul maydonlarini belgilab olamiz */
+$$(".suffix").forEach(sfx=>{
+  const u=sfx.querySelector(".u"), inp=sfx.querySelector("input[type=number]");
+  if(u && inp && /USD/.test(u.textContent) && !/= 1 USD/.test(u.textContent)){
+    u.dataset.money="1"; u.dataset.orig=u.textContent;
+    if(inp.placeholder) inp.dataset.ph=inp.placeholder;
+  }
+});
+function refreshUnits(){
+  const uzs = baseCur()==="uzs";
+  $$(".u[data-money]").forEach(u=>{
+    u.textContent = uzs ? u.dataset.orig.replace("USD","so‘m") : u.dataset.orig;
+    const inp=u.closest(".suffix").querySelector("input[type=number]");
+    if(inp && inp.dataset.ph){
+      const v=parseFloat(inp.dataset.ph);
+      inp.placeholder = (uzs && isFinite(v)) ? grp(Math.round(v*fxRate()/1000)*1000) : inp.dataset.ph;
+    }
+  });
+  const rr=$("#rateRow"); if(rr) rr.style.display = uzs ? "flex" : "none";
+  const rn=$("#rateNote"); if(rn) rn.style.display = uzs ? "block" : "none";
+  updateCurBtn();
+}
+function updateCurBtn(){
+  const l=$("#curBtnLbl"); if(l) l.textContent = viewCur()==="usd" ? "So‘mda" : "Dollarda";
+}
+$("#curBtn").onclick=()=>{
+  VIEW_CUR = viewCur()==="usd" ? "uzs" : "usd";
+  updateCurBtn();
+  if($("#p-report.on")) build();
+};
 $("#printBtn").onclick=()=>window.print();
 $("#resetBtn").onclick=()=>{ if(confirm("Barcha javoblar tozalansinmi?")) location.reload(); };
 
@@ -1283,6 +1334,7 @@ function showSheet(on){
   $("#stepper").style.display="none";
   $("#printBtn").style.display = on ? "" : "none";
   $("#resetBtn").style.display = on ? "" : "none";
+  $("#curBtn").style.display="none";
   document.body.classList.remove("in-flow");
   cur=-1;
   window.scrollTo(0,0);
@@ -1324,7 +1376,7 @@ const DEMO = {
   company:"Namuna klinikasi (70 o‘rin)", sector:"tibbiyot", market:"uz", age:"y3p", team:"s50p",
   crm:"no", sales:"one", response:"h24", script:"no", analytics:"no",
   retarget:"no", social:"mid", site:"basic", retention:"no",
-  goal:260000, current:137000, check:510, margin:52, conv:22, freq:1.6, budget:900, channel:"instagram",
+  cur:"usd", goal:260000, current:137000, check:510, margin:52, conv:22, freq:1.6, budget:900, channel:"instagram",
   h_days:26, h_docs:12, h_slots:16, h_booked:2400, h_noshow:430, h_check:15, h_repeat:28, h_remind:"no", h_online:"no",
   i_beds:70, i_occ:30, i_alos:6, i_arpob:60, i_vc:24, i_fc:95000, i_staff:55000, i_target:85,
   d_ors:90, r_surgp:350, r_lab:22000, r_labext:20, r_labchk:12, r_total:137000,
@@ -1332,7 +1384,7 @@ const DEMO = {
   d_tpa:0, d_ref:2, d_corp:0, d_camp:0, d_or:3, d_diag:5, d_dbn:12, d_cadence:"monthly"
 };
 $("#demoBtn").onclick=()=>{
-  DEMO_ON=true;
+  DEMO_ON=true; VIEW_CUR=null;
   Object.keys(DEMO).forEach(k=>{ S[k]=DEMO[k]; });
   ["c1","c2","c4","c7","c10","c11"].forEach(k=>CHECKS[k]=true);
   $$("input[data-field]").forEach(el=>{ if(DEMO[el.dataset.field]!==undefined) el.value=DEMO[el.dataset.field]; });
@@ -1341,6 +1393,7 @@ $("#demoBtn").onclick=()=>{
     const v=DEMO[g.dataset.field];
     $$(".opt",g).forEach(o=>o.setAttribute("aria-pressed", String(o.dataset.v===v)));
   });
+  refreshUnits();
   drawStepper();
   const f=flow(); show(f.length-1);
 };
@@ -1348,12 +1401,37 @@ $("#demoBtn").onclick=()=>{
 /* ==================================================================
    4. YORDAMCHI
    ================================================================== */
+/* ---------- valyuta ---------- */
+const FX = {rate:11823.69, date:"2026-yil 27-avgust", src:"O‘zbekiston Markaziy banki"};
+function fxRate(){ return (S.rate>0) ? S.rate : FX.rate; }
+function baseCur(){ return S.cur==="uzs" ? "uzs" : "usd"; }
+let VIEW_CUR = null;
+function viewCur(){ return VIEW_CUR || baseCur(); }
+const grp = x => String(x).replace(/\B(?=(\d{3})+(?!\d))/g," ");
+function sig3(x){
+  const s = x>=100 ? x.toFixed(0) : x>=10 ? x.toFixed(1) : x.toFixed(2);
+  return s.replace(/\.?0+$/,"").replace(".",",");
+}
+function fmtCur(x,cur){
+  const neg=x<0, a=Math.abs(x);
+  if(cur==="usd"){
+    const s = a<100 ? a.toFixed(2).replace(/\.?0+$/,"") : grp(Math.round(a));
+    return (neg?"−$":"$")+s;
+  }
+  let s;
+  if(a>=1e9) s=sig3(a/1e9)+" mlrd";
+  else if(a>=1e6) s=sig3(a/1e6)+" mln";
+  else s=grp(Math.round(a));
+  return (neg?"−":"")+s+" so‘m";
+}
 const money=n=>{
   if(!isFinite(n))return"—";
-  const a=Math.abs(n), sign=n<0?"−$":"$";
-  if(a<100) return sign+a.toFixed(2).replace(/\.00$/,"");
-  return sign+Math.round(a).toString().replace(/\B(?=(\d{3})+(?!\d))/g," ");
+  const b=baseCur(), v=viewCur();
+  let x=n;
+  if(b!==v) x = (b==="usd") ? n*fxRate() : n/fxRate();
+  return fmtCur(x,v);
 };
+const usdMoney=n=>isFinite(n)?fmtCur(n,"usd"):"—";
 const num=(n,d)=>{
   if(!isFinite(n))return"—";
   return n.toLocaleString("en-US",{minimumFractionDigits:d||0,maximumFractionDigits:d||0}).replace(/,/g," ");
@@ -1405,7 +1483,9 @@ function engine(){
   const convGiven = !!(S.conv>0);
   const cNow = convGiven ? S.conv/100 : sec.cvr/100;
   const cplGiven = !!(S.cpl>0);
-  const cplBench = sec.cpl*mk.k;
+  const fx = (S.cur==="uzs") ? fxRate() : 1;
+  const cplBenchUSD = sec.cpl*mk.k;
+  const cplBench = cplBenchUSD*fx;
   const cplNow = cplGiven ? S.cpl : cplBench;
 
   const N = G/A;
@@ -1435,7 +1515,7 @@ function engine(){
   raw.forEach(f=>{ f.loss = rawSum>0 ? f.r/rawSum*delta : 0; });
   raw.sort((a,b)=>b.loss-a.loss);
 
-  return {sec,mk,G,A,m,freq,R0,N,cNow,cPot,convGiven,cplGiven,cplNow,cplBench,cplPot,
+  return {sec,mk,G,A,m,freq,R0,N,cNow,cPot,convGiven,cplGiven,cplNow,cplBench,cplBenchUSD,fx,cplPot,
           Lnow,budgetNow,budgetPot,delta,GP1,LTV,CAC,ratio,mkShare,Ks,Ka,factors:raw};
 }
 
@@ -2047,7 +2127,7 @@ function build(){
   H+='<div class="verdict"><div class="verdict-top">'+
     '<div><p class="eyebrow">Audit hisoboti &middot; '+stamp+'</p><h2>'+name+'</h2>'+
     '<p class="sub">'+esc(E.sec.name)+' &middot; '+esc(E.mk.name)+' &middot; maqsad '+money(E.G)+'/oy &middot; marja '+pct(E.m,0)+
-    (I?' &middot; '+num(I.beds)+' yotoq':'')+'</p>'+
+    (I?' &middot; '+num(I.beds)+' yotoq':'')+' &middot; '+(viewCur()==="uzs"?"so‘mda":"dollarda")+'</p>'+
     '<div style="margin-top:14px"><span class="chip '+SC.g.c+'">'+SC.g.t+'</span></div></div>'+
     ring(SC.score, SC.score>=70?"ok":SC.score>=55?"warn":"crit")+
     '</div>';
@@ -2254,7 +2334,7 @@ function build(){
   H+=row("Kerakli "+t.client+"lar soni", num(Math.ceil(E.N))+" ta", money(E.G)+" ÷ "+money(E.A));
   H+=row("Sotuv konversiyasi", pct(E.cNow,1), E.convGiven?"kiritilgan":"etalon: "+E.sec.name+" — "+E.sec.cvr+"%");
   H+=row("Kerakli "+t.lead+"lar soni", num(Math.ceil(E.Lnow))+" ta", num(Math.ceil(E.N))+" ÷ "+pct(E.cNow,1));
-  H+=row("Bitta "+t.lead+" narxi (CPL)", money(E.cplNow), E.cplGiven?"o‘lchangan qiymat":"etalon "+money(E.sec.cpl)+" × bozor koeffitsienti "+E.mk.k);
+  H+=row("Bitta "+t.lead+" narxi (CPL)", money(E.cplNow), E.cplGiven?"o‘lchangan qiymat":"AQSh etaloni "+usdMoney(E.sec.cpl)+" × bozor koef. "+E.mk.k+(E.fx!==1?" × kurs "+num(E.fx,0):""));
   H+=row("<b>Kerakli reklama byudjeti</b>", "<b>"+money(E.budgetNow)+"</b>", num(Math.ceil(E.Lnow))+" × "+money(E.cplNow));
   H+=row("Marketing ulushi", pct(E.mkShare,1), money(E.budgetNow)+" ÷ "+money(E.G)+" · etalon 7.7%");
   H+=row("Bir bitimdan yalpi foyda", money(E.GP1), money(E.A)+" × "+pct(E.m,0));
@@ -2426,7 +2506,7 @@ function build(){
   H+='</div>';
   H+='<p class="note"><b>Metodologiya haqida ochiq eslatma.</b> Etalon lid narxi va konversiya AQSh bozori uchun o‘lchangan; mahalliy darajaga bozor koeffitsienti orqali keltirilgan (O‘zbekiston 0.12, MDH 0.28, Turkiya 0.50). Bu koeffitsient va tizim koeffitsientlari K<sub>s</sub>, K<sub>a</sub> &mdash; model taxminlari, o‘lchangan ma’lumot emas. '+
     (I?'Statsionar bo‘limida OECD bandlik ko‘rsatkichi ikkilamchi manba orqali olingan; ambulatoriyadan statsionarga o‘tish ulushining 8–12% oralig‘i sanoat amaliyotidan, ilmiy tekshirilgan etalondan emas. ':'')+
-    'Auditning eng ishonchli qismi &mdash; sizning o‘z raqamlaringizdan chiqadigan arifmetika: bandlik, zararsizlik nuqtasi, marjinal foyda, talab quvuri, CAC va LTV. Ular etalonga emas, sizning ma’lumotingizga tayanadi.</p>';
+    (baseCur()==="uzs"||viewCur()==="uzs" ? 'Valyuta o‘tkazish uchun 1 USD = '+num(fxRate(),0)+' so‘m kursi ishlatilgan ('+FX.src+', '+FX.date+'; 03-bosqichda o‘zgartirish mumkin). Kurs faqat AQSh etalonlarini o‘tkazish va ko‘rinishni almashtirish uchun kerak &mdash; sizning raqamlaringiz o‘zgarmaydi. ' : '')+'Auditning eng ishonchli qismi &mdash; sizning o‘z raqamlaringizdan chiqadigan arifmetika: bandlik, zararsizlik nuqtasi, marjinal foyda, talab quvuri, CAC va LTV. Ular etalonga emas, sizning ma’lumotingizga tayanadi.</p>';
   H+='</section>';
 
   const out=$("#reportOut");
@@ -2441,6 +2521,7 @@ function build(){
   }
 }
 
+refreshUnits();
 drawStepper();
 })();
 </script>
