@@ -76,8 +76,10 @@ button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
 img,svg{max-width:100%}
 ::selection{background:var(--mint);color:var(--void)}
 
-.wrap{max-width:1220px;margin:0 auto;padding:0 20px;position:relative;z-index:2}
-@media(min-width:820px){.wrap{padding:0 44px}}
+:root{--gut:18px}
+@media(min-width:560px){:root{--gut:26px}}
+@media(min-width:820px){:root{--gut:44px}}
+.wrap{max-width:1220px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gut);position:relative;z-index:2;box-sizing:border-box;width:100%}
 .eyebrow{
   font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;
   letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin:0;
@@ -92,7 +94,7 @@ img,svg{max-width:100%}
   border-bottom:1px solid transparent;transition:border-color .3s;
 }
 .masthead.stuck{border-bottom-color:var(--hair)}
-.masthead-in{display:flex;align-items:center;gap:9px;padding:13px 20px;max-width:1220px;margin:0 auto}
+.masthead-in{display:flex;align-items:center;gap:9px;padding:12px var(--gut);max-width:1220px;margin:0 auto;box-sizing:border-box}
 @media(min-width:820px){.masthead-in{gap:14px;padding:15px 44px}}
 .brandmark{display:flex;align-items:center;gap:11px;margin-right:auto;min-width:0;text-decoration:none;color:var(--ink)}
 .brandmark svg{flex:0 0 auto;display:block}
@@ -129,13 +131,14 @@ img,svg{max-width:100%}
   -webkit-mask-image:radial-gradient(130% 95% at 50% 0%,#000 20%,transparent 78%);
   mask-image:radial-gradient(130% 95% at 50% 0%,#000 20%,transparent 78%);
 }
-.hero-in{position:relative;z-index:3;padding:60px 0 76px}
-@media(min-width:820px){.hero-in{padding:104px 0 118px}}
+.hero-in{position:relative;z-index:3;padding-top:56px;padding-bottom:70px}
+@media(min-width:820px){.hero-in{padding-top:104px;padding-bottom:118px}}
 .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:60px;align-items:center}
 @media(max-width:960px){.hero-grid{grid-template-columns:1fr;gap:44px}}
 .hero h1{
-  font-size:clamp(42px,8.4vw,88px);max-width:15ch;font-weight:900;
-  font-variation-settings:"wdth" 118;letter-spacing:-.045em;margin-top:22px;
+  font-size:clamp(33px,8.6vw,88px);max-width:15ch;font-weight:900;line-height:1.04;
+  font-variation-settings:"wdth" 118;letter-spacing:-.04em;margin-top:20px;
+  overflow-wrap:break-word;hyphens:auto;
 }
 .hero h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero .lede{max-width:50ch;color:var(--ink-2);font-size:17px;margin:26px 0 0}
@@ -188,7 +191,7 @@ img,svg{max-width:100%}
 /* ===================== STEPPER ===================== */
 .stepper{position:sticky;top:65px;z-index:50;background:rgba(5,7,13,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--hair)}
 @media(min-width:820px){.stepper{top:69px}}
-.stepper-in{display:flex;padding:0 12px;max-width:1220px;margin:0 auto;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.stepper-in{display:flex;padding:0 calc(var(--gut) - 6px);box-sizing:border-box;max-width:1220px;margin:0 auto;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .stepper-in::-webkit-scrollbar{display:none}
 @media(min-width:820px){.stepper-in{padding:0 38px}}
 .step{
@@ -205,11 +208,11 @@ img,svg{max-width:100%}
 .step b{display:block;font-size:9.5px;opacity:.5;font-weight:400;margin-bottom:3px}
 
 /* ===================== PANELLAR ===================== */
-.panel{display:none;padding:44px 0 120px;position:relative;z-index:2}
-@media(min-width:820px){.panel{padding:60px 0 96px}}
+.panel{display:none;padding-top:40px;padding-bottom:120px;position:relative;z-index:2}
+@media(min-width:820px){.panel{padding-top:60px;padding-bottom:96px}}
 .panel.on{display:block}
 .panel.on.anim{animation:fadeUp .55s cubic-bezier(.16,1,.3,1)}
-#p-intro{padding:0}
+#p-intro{padding-top:0;padding-bottom:0}
 .panel-head{margin-bottom:36px;display:grid;gap:16px}
 .panel-head h2{font-size:clamp(30px,5.6vw,52px)}
 .panel-head p{color:var(--ink-2);margin:0;max-width:62ch;font-size:16.5px}
@@ -266,6 +269,42 @@ input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 4px var(--a
 .ck .ck-t{font-size:15px;font-weight:600;line-height:1.4;display:block;color:var(--ink)}
 .ck .ck-d{font-size:13.5px;color:var(--ink-3);line-height:1.5;display:block;margin-top:3px}
 .ck .idx{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-3);flex:0 0 22px;padding-top:4px}
+
+/* --- soha aralashma jadvali --- */
+.mixwrap{border:1px solid var(--hair);border-radius:var(--r);background:var(--s1);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.mixtable{border-collapse:collapse;width:100%;min-width:520px}
+.mixtable th{
+  text-align:left;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--ink-3);font-weight:500;padding:13px 12px 10px;
+  border-bottom:1px solid var(--hair);vertical-align:bottom;white-space:nowrap;
+}
+.mixtable th i{display:block;font-style:normal;letter-spacing:.04em;text-transform:none;opacity:.6;margin-top:2px}
+.mixtable th:first-child{min-width:150px}
+.mixtable td{padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.045)}
+.mixtable td:first-child{padding-left:12px}
+.mixtable tr:last-child td{border-bottom:0}
+.mixtable input{padding:10px 12px;font-size:15px}
+@media(min-width:820px){.mixtable input{font-size:14px;padding:9px 11px}}
+.mixtable input[type=text]{font-family:inherit}
+
+/* Telefonda jadval o'rniga kartochka — gorizontal siljish yo'qoladi */
+@media(max-width:719px){
+  .mixwrap{border:0;background:none;overflow:visible;display:flex;flex-direction:column;gap:12px}
+  .mixtable,.mixtable tbody,.mixtable tr,.mixtable td{display:block;width:auto;min-width:0}
+  .mixtable thead{display:none}
+  .mixtable tr{
+    background:var(--s1);border:1px solid var(--hair);border-radius:var(--r);
+    padding:15px;display:grid;grid-template-columns:1fr 1fr;gap:11px;
+    box-shadow:0 1px 0 var(--hair-lit) inset;
+  }
+  .mixtable td{padding:0;border:0}
+  .mixtable td:first-child{grid-column:1/-1;padding-left:0}
+  .mixtable td::before{
+    content:attr(data-l);display:block;font-family:"JetBrains Mono",monospace;font-size:10px;
+    letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px;
+  }
+  .mixtable td:first-child::before{content:attr(data-l)}
+}
 
 .navrow{display:flex;gap:13px;margin-top:40px;align-items:center;flex-wrap:wrap}
 .navnote{font-size:13.5px;color:var(--ink-3);margin-left:auto}
@@ -474,7 +513,7 @@ section.block > h3 .n{
 }
 .demo-banner b{font-weight:700;color:var(--warn)}
 
-.footer{border-top:1px solid var(--hair);margin-top:88px;padding:34px 0 60px;color:var(--ink-3);font-size:13.5px;position:relative;z-index:2}
+.footer{border-top:1px solid var(--hair);margin-top:88px;padding-top:34px;padding-bottom:60px;color:var(--ink-3);font-size:13.5px;position:relative;z-index:2}
 .footer a{color:var(--ink-2)}
 
 /* ===================== CHOP ETISH: oq qog'oz ===================== */
@@ -1058,6 +1097,9 @@ section.block > h3 .n{
 </section>
 
 <!-- ============ HISOBOT ============ -->
+<!-- ============ 04. SOHA MODULI (dinamik) ============ -->
+<section class="panel wrap" id="p-sector"><div id="sectorBody"></div></section>
+
 <section class="panel wrap" id="p-report">
   <div id="reportOut"></div>
 </section>
@@ -1206,6 +1248,7 @@ const STEPS = [
   {id:"p-3",     n:"03", t:"Moliya"},
   {id:"p-prod",  n:"04", t:"Ishlab chiqarish", cond:()=>mod()==="prod"},
   {id:"p-clinic",n:"04", t:"Klinika",          cond:()=>mod()==="clinic"},
+  {id:"p-sector",n:"04", t:()=>(sq()?sq().lab:"Soha"), cond:()=>!!sq()},
   {id:"p-report",n:"05", t:"Hisobot"}
 ];
 function mod(){ const s=SECTORS[S.sector]; return s?s.module:null; }
@@ -1231,6 +1274,7 @@ function show(i){
   i=Math.min(i,f.length-1);
   if(f[i].id==="p-report"){ const err=validate(); if(err){ alert(err); return; } build(); }
   cur=i;
+  if(f[i].id==="p-sector") renderSector();
   $$(".panel").forEach(p=>p.classList.remove("on","anim"));
   $("#"+f[i].id).classList.add("on","anim");
   $("#stepper").style.display="block";
@@ -1250,7 +1294,7 @@ function drawStepper(){
     const b=document.createElement("button");
     b.type="button";
     b.className="step"+(i===cur?" active":(i<cur?" done":""));
-    b.innerHTML='<b>'+st.n+'</b>'+st.t;
+    b.innerHTML='<b>'+st.n+'</b>'+(typeof st.t==="function"?st.t():st.t);
     b.onclick=()=>{ if(i<=cur||i===cur+1) show(i); };
     w.appendChild(b);
   });
@@ -1294,13 +1338,16 @@ document.addEventListener("input",e=>{ if(e.target.dataset && e.target.dataset.f
 $("#startBtn").onclick=()=>{ DEMO_ON=false; show(0); };
 
 /* pul maydonlarini belgilab olamiz */
-$$(".suffix").forEach(sfx=>{
-  const u=sfx.querySelector(".u"), inp=sfx.querySelector("input[type=number]");
-  if(u && inp && /USD/.test(u.textContent) && !/= 1 USD/.test(u.textContent)){
-    u.dataset.money="1"; u.dataset.orig=u.textContent;
-    if(inp.placeholder) inp.dataset.ph=inp.placeholder;
-  }
-});
+function markMoney(root){
+  $$(".suffix",root||document).forEach(sfx=>{
+    const u=sfx.querySelector(".u"), inp=sfx.querySelector("input[type=number]");
+    if(u && !u.dataset.money && inp && /USD/.test(u.textContent) && !/= 1 USD/.test(u.textContent)){
+      u.dataset.money="1"; u.dataset.orig=u.textContent;
+      if(inp.placeholder) inp.dataset.ph=inp.placeholder;
+    }
+  });
+}
+markMoney(document);
 function refreshUnits(){
   const uzs = baseCur()==="uzs";
   $$(".u[data-money]").forEach(u=>{
@@ -1470,6 +1517,653 @@ function ring(score, tone){
     '<circle class="prog" cx="75" cy="75" r="'+R+'" fill="none" stroke="'+vc+'" stroke-width="11" '+
       'stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'"/>'+
     '</svg><div class="ring-read"><b style="color:'+vc+'">'+score+'</b><span>Kalibr / 100</span></div></div>';
+}
+
+/* ==================================================================
+   SOHA MODULI — har bir soha uchun alohida savollar, etalon va xulosa
+   ================================================================== */
+
+Object.assign(SRC, {
+  /* --- ta'lim --- */
+  actfl:{t:"Til o‘qitishda optimal guruh kattaligi bo‘yicha ilmiy baza yo‘q — ACTFL buni ochiq tan oladi: «bilimimizda bo‘shliq bor»", o:"ACTFL, 2021", u:"https://www.actfl.org/news/class-size-as-a-factor-influencing-language-learning"},
+  the20:{t:"Universitet o‘quv xonalari vaqtning atigi 20% ida band; ayrim binolarda 10%; 30 dan ortiq muassasa o‘lchangan", o:"Smart Space Forum, Times Higher Education orqali, 2026", u:"https://www.timeshighereducation.com/news/university-teaching-spaces-only-used-20-cent-time"},
+  tesl: {t:"Onlayn til kurslarida tashlab ketish 70% gacha yetishi qayd etilgan", o:"Flood 2002; Evans & Tragant, TESL-EJ 23(4), 2020", u:"http://www.tesl-ej.org/pdf/ej92/a8.pdf"},
+  oecdt:{t:"O‘qituvchining yillik sof dars vaqti: boshlang‘ich 791 soat, quyi o‘rta 723 soat (OECD o‘rtachasi, 2019/20) — haftasiga ~18–20 soat", o:"OECD, Education at a Glance 2021", u:"https://www.oecd.org/en/publications/education-at-a-glance-2021_b35a14e5-en.html"},
+
+  /* --- go'zallik --- */
+  zen:  {t:"Salonlarda usta bandligi o‘rtacha 67%, eng yaxshi 25% da 84%; 24 soat ichida qayta yozilish o‘rtacha 10%, eng yaxshilarda 30%; medspa da bandlik 47%, qayta yozilish 40%", o:"Zenoti 2025 Benchmark Report (2024 ma’lumoti, AQSh va Kanada)", u:"https://www.zenoti.com/thecheckin/beauty-wellness-industry-statistics-2025"},
+  blvd: {t:"Yangi mijozning ikkinchi marta qaytishi o‘rtacha 45%, eng yaxshilarda 70%; onlayn yozilganlar 78%, ko‘chadan kirganlar 39% qaytadi; 11 mln qabul, 30 000 dan ortiq biznes tahlil qilingan", o:"Boulevard, Salon Today orqali, 2023", u:"https://www.salontoday.com/articles/boulevard-report-reveals-top-performing-salons-retain-56-more-first-time-visitors-than-average"},
+
+  /* --- horeca --- */
+  bakt: {t:"Prime cost (mahsulot + ish haqi) me’yori sotuvning 58–62% i, o‘rtacha 60%; 65% dan oshsa foyda olish «nihoyatda qiyin»", o:"Baker Tilly, 2024", u:"https://www.bakertilly.com/insights/prime-cost-target-tips"},
+  toast:{t:"Mahsulot tannarxi tushumning 28–35% i, ish haqi 25–35% i (fast casual 25–30%, fine dining 35–45%); bir o‘rindiqdan tushum ~$27; stol aylanishi: oilaviy restoran ~3, fast casual 3–4 marta", o:"Toast Restaurant Benchmarks, 2024–2026", u:"https://pos.toasttab.com/blog/on-the-line/7-critical-restaurant-benchmarks"},
+  toastp:{t:"Mustaqil restoranlarning sof foyda marjasi 3–5%; QSR va fast casual 6–9%", o:"Toast (Restaurant365 ma’lumoti asosida), 2026", u:"https://pos.toasttab.com/blog/on-the-line/average-restaurant-profit-margin"},
+
+  /* --- savdo --- */
+  irp:  {t:"Onlayn do‘konning o‘rtacha konversiyasi 2.26% (2026-yil iyul); sohalar bo‘yicha: salomatlik 3.57%, sport 2.12%, moda 1.81%, oziq-ovqat 1.47%", o:"IRP Commerce Market Data, 2026-yil iyul", u:"https://www.irpcommerce.com/ecommercemarketdata.aspx"},
+  trur: {t:"Oflayn do‘konda kirgan odamning xarid qilish ulushi taxminan 20%; sohalar bo‘yicha: oziq-ovqat 40–60%, kiyim 15–25%, elektronika 8–15%, hashamat 5–12%. Manba buni «yo‘nalish ko‘rsatkichi, qat’iy etalon emas» deb belgilaydi", o:"Traf-Sys / TruRating, 2026", u:"https://trurating.com/blog/retail-conversion-rate-calculator/"},
+  csim: {t:"Chakana savdo sektorida zaxira aylanishi yiliga 12.21 marta (so‘nggi 12 oy)", o:"CSIMarket, 2026-yil 2-chorak", u:"https://csimarket.com/Industry/industry_Efficiency.php?s=1300"},
+
+  /* --- fitnes --- */
+  hfa:  {t:"Fitnes klublarida yillik a’zolar oqimi (churn) 28.6–33.3%; median EBITDA marjasi 23.6%; median tushum o‘sishi 9.9%; 175 kompaniya, 17 000 dan ortiq obyekt", o:"Health & Fitness Association (IHRSA) 2025 Benchmarking Report", u:"https://www.healthandfitness.org/health-fitness-association-releases-2025-fitness-industry-benchmarking-report/"},
+  hfat: {t:"A’zo oyiga o‘rtacha necha marta keladi: premium klublar 5.2 marta (seans 86 daqiqa), butik studiyalar ~2.5 marta; ~11 000 obyekt o‘lchangan", o:"HFA FIT Tracker, 2025-yil 1-yarim yillik", u:"https://www.healthandfitness.org/2025-fitness-industry-foot-traffic-trends-budget-gyms-booming-engagement-up-across-all-segments/"},
+  gcb:  {t:"Yangi klub loyihalashda 1 m² ga 2.5 a’zo me’yori qo‘llaniladi", o:"GCB Consulting, Health & Fitness Association orqali", u:"https://www.healthandfitness.org/improve-your-club/solve-overcrowding-at-your-gym-with-this-simple-equation/"},
+
+  /* --- ko'chmas mulk --- */
+  narm: {t:"Bitta agent yiliga o‘rtacha 9 ta bitim yopadi (median); 16 yildan ortiq tajribalilarda 10 ta, jamoa mutaxassislarida 32 ta. Median yillik yalpi daromad $59 200, median sotuv hajmi $2.7 mln", o:"National Association of REALTORS, 2026 Member Profile", u:"https://www.nar.realtor/news/real-estate-news/even-in-a-tougher-market-realtors-are-holding-their-ground"},
+  rdf:  {t:"Xaridor agenti komissiyasi o‘rtacha 2.42% (2025-yil 3-chorak); narx oshgani sari pasayadi: $500 mingdan past 2.52%, $1 mln dan yuqori 2.22%", o:"Redfin, 2025", u:"https://www.redfin.com/news/commissions-q3-2025/"},
+  narq: {t:"Uy bozorda o‘rtacha 29 kun turadi (2026-yil iyul)", o:"NAR Realtors Confidence Index, 2026", u:"https://www.nar.realtor/infographics/existing-home-sales-housing-snapshot"},
+
+  /* --- b2b --- */
+  spi:  {t:"Professional xizmatlarda hisoblanadigan bandlik (billable utilisation) fakt 66.4% (2025), 5 yillik o‘rtacha 70.8%, maqsad 75%; tender yutish darajasi 48.1%; bir konsultantdan tushum $210 000; loyiha marjasi 37.7%; xodimlar oqimi 11.3%", o:"SPI Research, 2026 PS Maturity Benchmark (Deltek orqali)", u:"https://www.deltek.com/resources/articles/professional-services-benchmarks/"},
+  impl: {t:"B2B da murojaatning imkoniyatga aylanishi 13% (o‘rtacha 84 kun), imkoniyatning bitimga aylanishi 6% (18 kun), umumiy murojaatdan bitimgacha 3.6%. Sayt orqali kelganlar 31.3% bilan eng kuchli manba. Ma’lumot 2014-yilga tegishli — yo‘nalish ko‘rsatkichi sifatida qaralsin", o:"Implisit, Salesforce orqali, 2014", u:"https://www.salesforce.com/blog/b2b-sales-benchmark-research-finds-some-pipeline-surprises-infographic/"},
+  cgau: {t:"Yillik mijoz ushlab qolish: sanoat xizmatlari 83%, professional xizmatlar 73%, IT xizmatlari 88%, logistika 60%", o:"CustomerGauge, State of B2B Account Experience, 2025", u:"https://customergauge.com/blog/average-customer-retention-rate-by-industry"},
+
+  /* --- qurilish --- */
+  cfma: {t:"Pudratchilarning soliqqacha sof foyda marjasi 6.7% (2024 moliya yili), eng yaxshi 25% da 12.0%; EBITDA 8.8% va 13.2%; yalpi marja (eng yaxshilar) 21.8%; ma’muriy xarajat tushumning 11.8% i; bir xodimdan tushum $514 587", o:"CFMA Construction Financial Benchmarker, 2025", u:"https://cfma.org/articles/cfma-s-2-24-construction-financial-benchmarker-executive-summary"},
+  flyv: {t:"Yirik loyihalarning 10 tasidan 9 tasi byudjetdan oshadi; yo‘l loyihalarida o‘rtacha oshish 20.4%, temir yo‘lda 44.7%; 1 yillik kechikish xarajatni o‘rtacha 4.64% ga oshiradi", o:"Flyvbjerg, Oxford, 2014", u:"https://arxiv.org/pdf/1409.0003"},
+  ascer:{t:"Qayta ishlash (rework) qiymati o‘lchangan holda shartnoma qiymatining 0.38% i (topshirishgacha) va 0.76% i (keyingi tuzatishlar bilan). Keng tarqalgan «5–12%» raqamlari haddan tashqari yuqori deb baholangan", o:"Love, JCEM; ASCE, 2026", u:"https://www.asce.org/publications-and-news/civil-engineering-source/article/2026/01/22/how-much-does-field-rework-in-construction-actually-cost"},
+  dam:  {t:"Soha marjalari (birjada listing qilingan kompaniyalar, 2026-yil yanvar): mebel va uy jihozlari sof 1.10% / yalpi 30.28%; muhandislik-qurilish sof 5.94% / yalpi 15.46%; biznes va iste’mol xizmatlari sof 7.03% / yalpi 33.38%; yuk tashish sof 3.79%", o:"NYU Stern, Damodaran, 2026-yil yanvar", u:"https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/margin.html"},
+
+  /* --- xizmat --- */
+  aqu:  {t:"Birinchi tashrifda muammoni hal qilish: eng yaxshi kompaniyalarda 86%, eng pastlarda 53%. Keraksiz chiqish 3% ga qarshi 24%. Hal qilish muddati 3 kunga qarshi 11 kun; muvaffaqiyatsiz birinchi tashrif yana 2 ta tashrif va 14 kun qo‘shadi. 160 tashkilot, 600 000 dan ortiq yozuv", o:"Aquant, 2025 Field Service Benchmark Report", u:"https://www.globenewswire.com/news-release/2025/02/13/3026225/0/en/Aquant-s-2025-Field-Service-Benchmark-Report-Reveals-AI-Enabling-39-Faster-Machinery-Repairs-and-More.html"}
+});
+
+/* ------------------------------------------------------------------
+   SOHA SAVOLLARI
+   mode: "stock" — quvvat bir vaqtda xizmat ko'rsatiladigan mijozlar soni
+         "flow"  — quvvat oydagi tashriflar / buyurtmalar soni
+         "conv"  — quvvat oqimdan emas, konversiyadan chiqadi
+   ------------------------------------------------------------------ */
+const SQ = {
+
+  talim:{
+    lab:"Ta’lim markazi",
+    intro:"Ta’lim markazining quvvati oddiy ko‘paytma bilan chiqadi: xona × kunlik smena × bir guruh sig‘imi. Ayni vaqtdagi o‘quvchi soni shu ko‘paytmadan qancha past bo‘lsa, farq bo‘sh turgan pul.",
+    mode:"stock",
+    cap:{
+      unit :{f:"x_unit", l:"O‘quv xonalari soni",                 ph:"6",  u:"xona"},
+      slot :{f:"x_slot", l:"Bir xonada kuniga nechta guruh o‘tadi",ph:"4", u:"guruh / kun", hint:"Ertalabki, kunduzgi, kechki smenalarni sanang."},
+      seat :{f:"x_seat", l:"Bitta guruhga sig‘adigan o‘quvchi",    ph:"12", u:"o‘quvchi", hint:"Xonadagi jismoniy sig‘im — hozirgi to‘ldirish emas."},
+      days :{f:"x_days", l:"Oyiga necha kun dars bo‘ladi",         ph:"24", u:"kun"},
+      used :{f:"x_used", l:"Ayni vaqtda ishlayotgan guruhlar",     ph:"18", u:"guruh"},
+      fill :{f:"x_fill", l:"Bitta guruhdagi o‘rtacha o‘quvchi",    ph:"8",  u:"o‘quvchi"},
+      price:{f:"x_price",l:"Bitta o‘quvchining oylik to‘lovi",     ph:"45", u:"USD"}
+    },
+    mix:{
+      t:"Yo‘nalishlar kesimi",
+      hint:"Har bir yo‘nalishni alohida yozing — ingliz tili, rus tili, koreys tili, matematika. Bo‘sh qatorlarni tashlab keting. Shu jadval qaysi yo‘nalish pul olib kelayotganini va qaysi ustoz bo‘sh turganini ko‘rsatadi.",
+      row:"Yo‘nalish",
+      def:["Ingliz tili","Rus tili","Koreys tili","Matematika","Boshqa"],
+      cols:[{k:"st",l:"Ustoz",u:"kishi"},{k:"cl",l:"O‘quvchi",u:"kishi"},{k:"rv",l:"Oylik tushum",u:"USD"}]
+    },
+    kpi:[
+      {f:"x_k1",l:"Kursni oxirigacha tugatganlar ulushi",u:"%",ph:"70",
+       hint:"Guruh boshlanganda 10 kishi bo‘lsa, oxirida nechtasi qolgan.",
+       bench:null,src:"tesl",
+       why:"Til o‘qitish bo‘yicha bironta uyushma tugatish darajasining etalonini e’lon qilmagan. Yagona qiyoslash nuqtasi — onlayn kurslarda tashlab ketish 70% gacha chiqishi. Shu sababli bu raqam sizning o‘z bazangizga qarshi o‘lchanadi, tashqi etalonga emas."},
+      {f:"x_k2",l:"Kursni tugatib, keyingi bosqichga yozilganlar ulushi",u:"%",ph:"50",
+       hint:"Eng arzon o‘quvchi — allaqachon sizda o‘qiyotgan o‘quvchi.",
+       bench:null,src:"bain",
+       why:"Bain hisob-kitobiga ko‘ra ushlab qolishni 5% ga oshirish foydani 25–95% ga oshiradi. Ta’limda bu ayniqsa kuchli: keyingi bosqichga o‘tgan o‘quvchi uchun reklama puli qaytadan sarflanmaydi."},
+      {f:"x_k3",l:"Bitta ustozning haftalik dars soati",u:"soat",ph:"18",
+       hint:"To‘liq stavkadagi ustoz haftasiga necha soat dars beradi.",
+       bench:19,dir:"up",benchLab:"OECD ~18–20 soat/hafta",src:"oecdt",
+       why:"OECD bo‘yicha o‘qituvchining yillik sof dars vaqti 723–791 soat, ya’ni haftasiga taxminan 18–20 soat. Bundan sezilarli past bo‘lsa ustoz jadvali to‘ldirilmagan; sezilarli yuqori bo‘lsa sifat va kadr oqimi xavf ostida."}
+    ]
+  },
+
+  gozallik:{
+    lab:"Go‘zallik salon / kosmetologiya",
+    intro:"Salonda quvvat — ish o‘rni. Kreslo bo‘sh turgan har bir soat qaytarib bo‘lmaydigan yo‘qotish: uni ertaga sotib bo‘lmaydi.",
+    mode:"flow",
+    cap:{
+      unit :{f:"x_unit", l:"Ish o‘rinlari soni",                   ph:"6",  u:"kreslo / kabinet"},
+      slot :{f:"x_slot", l:"Bitta o‘rinda kuniga nechta mijoz sig‘adi",ph:"8",u:"mijoz / kun",hint:"Ish soati ÷ o‘rtacha muolaja davomiyligi."},
+      seat :{f:"x_seat", l:"Bir seansda nechta mijoz",             ph:"1",  u:"mijoz"},
+      days :{f:"x_days", l:"Oyiga ish kunlari",                    ph:"26", u:"kun"},
+      used :{f:"x_used", l:"Kuniga fakt xizmat ko‘rsatilgan mijoz",ph:"26", u:"mijoz / kun"},
+      price:{f:"x_price",l:"O‘rtacha chek",                        ph:"25", u:"USD"}
+    },
+    mix:{
+      t:"Ustalar kesimi",
+      hint:"Har bir ustani alohida yozing. Jadval kim bandligini, kim bo‘sh turganini va tushumning necha foizi bitta odamga bog‘lanib qolganini ko‘rsatadi.",
+      row:"Usta / yo‘nalish",
+      def:["Soch","Manikyur","Kosmetolog","Massaj",""],
+      cols:[{k:"st",l:"Usta",u:"kishi"},{k:"cl",l:"Kunlik mijoz",u:"kishi"},{k:"rv",l:"Oylik tushum",u:"USD"}]
+    },
+    kpi:[
+      {f:"x_k1",l:"Usta bandligi",u:"%",ph:"55",
+       hint:"Ish vaqtining necha foizi haqiqiy mijoz bilan o‘tadi.",
+       bench:67,top:84,dir:"up",benchLab:"o‘rtacha 67%, eng yaxshi 84%",src:"zen",
+       why:"Zenoti 2024-yil ma’lumotida salonlarda usta bandligi o‘rtacha 67%, eng yaxshi choragida 84%. Bandlik 50% dan past bo‘lsa, muammo ustada emas — jadvalni to‘ldiruvchi oqimda."},
+      {f:"x_k2",l:"Ketayotganda darhol qayta yozilganlar ulushi",u:"%",ph:"12",
+       hint:"Mijoz to‘lov paytida keyingi safarga yozilib ketdimi.",
+       bench:10,top:30,dir:"up",benchLab:"o‘rtacha 10%, eng yaxshi 30%",src:"zen",
+       why:"Zenoti bo‘yicha 24 soat ichida qayta yozilish o‘rtacha 10%, eng yaxshilarda 30%. Bu bitta jumla bilan hal bo‘ladigan ko‘rsatkich — kassada «keyingi safar qachon qulay?» deb so‘rash."},
+      {f:"x_k3",l:"Yangi mijozning ikkinchi marta qaytishi",u:"%",ph:"35",
+       hint:"Birinchi marta kelgan 100 mijozdan nechtasi ikkinchi marta keldi.",
+       bench:45,top:70,dir:"up",benchLab:"o‘rtacha 45%, eng yaxshi 70%",src:"blvd",
+       why:"Boulevard 11 mln qabulni tahlil qilib, yangi mijozning ikkinchi tashrifi o‘rtacha 45%, eng yaxshilarda 70% ekanini ko‘rsatgan. O‘sha tadqiqotda onlayn yozilganlar 78%, ko‘chadan kirganlar 39% qaytgan — onlayn yozuvni ochish shu farqni beradi."}
+    ]
+  },
+
+  horeca:{
+    lab:"Restoran / kafe",
+    intro:"Restoranda ikkita alohida savol bor: zal to‘lyaptimi va to‘lgan zal foyda qoldiryaptimi. Prime cost 65% dan oshsa, band stollar ham foyda bermaydi.",
+    mode:"flow",
+    cap:{
+      unit :{f:"x_unit", l:"Stollar soni",                          ph:"18", u:"stol"},
+      slot :{f:"x_slot", l:"Bitta stol kuniga necha marta almashadi",ph:"3", u:"aylanma / kun",hint:"Nonushta, tushlik, kechki ovqat — har biri alohida aylanma."},
+      seat :{f:"x_seat", l:"Bitta stoldagi o‘rindiq",               ph:"4",  u:"o‘rindiq"},
+      days :{f:"x_days", l:"Oyiga ish kunlari",                     ph:"30", u:"kun"},
+      used :{f:"x_used", l:"Kuniga fakt mehmonlar soni",            ph:"110",u:"mehmon / kun"},
+      price:{f:"x_price",l:"O‘rtacha chek (bir mehmon)",            ph:"9",  u:"USD"}
+    },
+    mix:{
+      t:"Menyu guruhlari kesimi",
+      hint:"Oshxona, ichimlik, desert, yetkazib berish — har birini alohida yozing. Ko‘p sotilib, kam marja qoldiradigan pozitsiya shu yerda ko‘rinadi.",
+      row:"Guruh",
+      def:["Oshxona","Ichimlik","Desert","Yetkazib berish",""],
+      cols:[{k:"st",l:"Pozitsiya",u:"dona"},{k:"cl",l:"Kunlik sotuv",u:"dona"},{k:"rv",l:"Oylik tushum",u:"USD"}]
+    },
+    kpi:[
+      {f:"x_k1",l:"Mahsulot tannarxi (food cost)",u:"%",ph:"33",
+       hint:"Oyiga sarflangan mahsulot ÷ oylik tushum.",
+       bench:31,dir:"down",benchLab:"28–35%",src:"toast",
+       why:"Toast ma’lumotida mahsulot tannarxi tushumning 28–35% ini tashkil qiladi. 35% dan oshsa sabab uchtadan biri: porsiya nazorati yo‘q, chiqindi ko‘p yoki menyu narxi bozordan orqada qolgan."},
+      {f:"x_k2",l:"Ish haqi ulushi",u:"%",ph:"32",
+       hint:"Barcha oylik va ustama ÷ oylik tushum.",
+       bench:30,dir:"down",benchLab:"25–35%",src:"toast",
+       why:"Toast bo‘yicha ish haqi tushumning 25–35% i: fast casual 25–30%, fine dining 35–45%. Bu ko‘rsatkich smena jadvali bilan boshqariladi — bo‘sh soatlarda ortiqcha odam turgani shu yerda ko‘rinadi."},
+      {f:"x_k3",l:"Sof foyda marjasi",u:"%",ph:"4",
+       hint:"Barcha xarajatdan keyin qolgan foyda ÷ tushum.",
+       bench:4,dir:"up",benchLab:"mustaqil restoran 3–5%",src:"toastp",
+       why:"Restaurant365 ma’lumotiga ko‘ra mustaqil restoranlarning sof marjasi 3–5%. Bu shuni anglatadiki, tannarxdagi 2 foiz punkt xato butun foydaning yarmini yeb qo‘yadi."}
+    ]
+  },
+
+  savdo:{
+    lab:"Savdo / do‘kon / onlayn do‘kon",
+    intro:"Savdoda quvvat javonda emas, oqimda: do‘konga kirgan yoki saytga tushgan odam sonida. Konversiyaning bir foiz punkti aylanmaning necha puli ekanini shu modul hisoblaydi.",
+    mode:"conv",
+    cap:{
+      unit :{f:"x_unit", l:"Kuniga tashrif (do‘konga kirgan yoki saytga tushgan)",ph:"120",u:"kishi / kun"},
+      days :{f:"x_days", l:"Oyiga ish kunlari",                    ph:"30", u:"kun"},
+      used :{f:"x_used", l:"Kuniga xarid qilganlar soni",          ph:"18", u:"xarid / kun"},
+      price:{f:"x_price",l:"O‘rtacha chek",                        ph:"22", u:"USD"}
+    },
+    convBench:{online:2.26, offline:20},
+    kpi:[
+      {f:"x_k1",l:"Yalpi marja",u:"%",ph:"30",
+       hint:"(Sotuv narxi − tannarx) ÷ sotuv narxi.",
+       bench:null,src:"dam",
+       why:"Chakana savdoda yalpi marja tovar guruhiga qarab keskin farq qiladi, shuning uchun yagona etalon qo‘yilmaydi. Damodaran bazasida umumiy bozor yalpi marjasi 37.76%, sof marja 9.74% — faqat kattalik tartibini tekshirish uchun."},
+      {f:"x_k2",l:"Zaxira aylanishi",u:"marta / yil",ph:"6",
+       hint:"Yillik tannarx ÷ o‘rtacha zaxira qiymati.",
+       bench:12.21,dir:"up",benchLab:"sektor 12.21 marta/yil",src:"csim",
+       why:"CSIMarket bo‘yicha chakana savdo sektorida zaxira yiliga 12.21 marta aylanadi. Aylanish sekin bo‘lsa, pul javonda muzlab qoladi va har oy ijara, saqlash, eskirish orqali kamayadi."},
+      {f:"x_k3",l:"Qaytib kelgan xaridorlar ulushi",u:"%",ph:"25",
+       hint:"Oydagi xaridlarning necha foizi eski mijozdan.",
+       bench:null,src:"bain",
+       why:"Bain hisobiga ko‘ra ushlab qolishni 5% ga oshirish foydani 25–95% ga oshiradi. Qaytgan xaridorda reklama xarajati nolga teng, shuning uchun uning marjasi yangi mijoznikidan yuqori."}
+    ]
+  },
+
+  fitnes:{
+    lab:"Sport zal / fitnes",
+    intro:"Fitnesda quvvat pik soatga qarab o‘lchanadi, foyda esa a’zolar oqimiga qarab. Yiliga uchdan bir a’zo ketadi — bu me’yor, lekin uni qoplaydigan oqim bo‘lishi shart.",
+    mode:"stock",
+    cap:{
+      unit :{f:"x_unit", l:"Bir vaqtda sig‘adigan mijoz (pik quvvat)",ph:"40",u:"kishi"},
+      slot :{f:"x_slot", l:"Kuniga to‘liq almashinuv (seans) soni", ph:"6",  u:"seans / kun",hint:"Ish soati ÷ o‘rtacha mashg‘ulot davomiyligi."},
+      seat :{f:"x_seat", l:"Bir seansda nechta mijoz",              ph:"1",  u:"mijoz"},
+      days :{f:"x_days", l:"Oyiga ish kunlari",                     ph:"30", u:"kun"},
+      used :{f:"x_used", l:"Hozirgi faol a’zolar soni",             ph:"320",u:"a’zo"},
+      price:{f:"x_price",l:"Bitta a’zoning oylik to‘lovi",          ph:"30", u:"USD"}
+    },
+    perClient:{f:"x_freq",l:"Bitta a’zo oyiga necha marta keladi",ph:"5",u:"marta",bench:5.2,src:"hfat",
+      hint:"Kunlik tashrifni a’zo soniga bo‘lib chiqarish mumkin."},
+    mix:{
+      t:"Yo‘nalishlar kesimi",
+      hint:"Trenajyor zali, guruh mashg‘ulotlari, shaxsiy murabbiy, basseyn — har birini alohida yozing.",
+      row:"Yo‘nalish",
+      def:["Trenajyor zali","Guruh mashg‘ulotlari","Shaxsiy murabbiy","Basseyn",""],
+      cols:[{k:"st",l:"Murabbiy",u:"kishi"},{k:"cl",l:"A’zo",u:"kishi"},{k:"rv",l:"Oylik tushum",u:"USD"}]
+    },
+    kpi:[
+      {f:"x_k1",l:"Yillik a’zolar oqimi (churn)",u:"%",ph:"40",
+       hint:"Yil boshida bo‘lgan a’zolarning necha foizi yil oxirigacha ketgan.",
+       bench:29,dir:"down",benchLab:"28.6–33.3%",src:"hfa",
+       why:"HFA (IHRSA) 2025 hisobotida yillik oqim 28.6–33.3%. Bundan yuqori bo‘lsa, marketing byudjeti o‘sish uchun emas, teshikni yopish uchun ishlaydi — bu foydani yeydi."},
+      {f:"x_k2",l:"EBITDA marjasi",u:"%",ph:"15",
+       hint:"Amortizatsiya, foiz va soliqqacha bo‘lgan foyda ÷ tushum.",
+       bench:23.6,dir:"up",benchLab:"median 23.6%",src:"hfa",
+       why:"HFA 2025 hisobotida median EBITDA marjasi 23.6% (narx segmentlari bo‘yicha 23–27%). Sezilarli past bo‘lsa, sabab odatda ikkitadan biri: a’zo narxi past yoki ijara maydoni ortiqcha."},
+      {f:"x_k3",l:"Zal maydoni",u:"m²",ph:"400",
+       hint:"Mashg‘ulot maydoni — yordamchi xonalarsiz.",
+       bench:null,src:"gcb",
+       why:"GCB Consulting me’yori: yangi klub loyihalashda 1 m² ga 2.5 a’zo. Bu sizning maydoningiz nazariy jihatdan qancha a’zoni ko‘tara olishini ko‘rsatadi."}
+    ]
+  },
+
+  kochmas:{
+    lab:"Ko‘chmas mulk agentligi",
+    intro:"Agentlikda quvvat — agent. Ko‘rsatkich bitta: bir agent oyiga nechta bitim yopadi. Qolgan hamma narsa shu raqamning oqibati.",
+    mode:"flow",
+    cap:{
+      unit :{f:"x_unit", l:"Agentlar soni",                         ph:"8",  u:"agent"},
+      slot :{f:"x_slot", l:"Bir agent oyiga nechta bitim yopishi mumkin",ph:"1",u:"bitim / oy",hint:"NAR bo‘yicha median yiliga 9 ta bitim — oyiga 0.75."},
+      seat :{f:"x_seat", l:"Bir bitimda nechta tomon xizmat qilinadi",ph:"1",u:"tomon"},
+      days :{f:"x_days", l:"Hisob davri (oy)",                      ph:"1",  u:"oy"},
+      used :{f:"x_used", l:"Oyiga fakt yopilgan bitimlar",          ph:"4",  u:"bitim / oy"},
+      price:{f:"x_price",l:"Bir bitimdan o‘rtacha komissiya",       ph:"2500",u:"USD"}
+    },
+    mix:{
+      t:"Yo‘nalishlar kesimi",
+      hint:"Birlamchi bozor, ikkilamchi bozor, ijara, tijorat — har birini alohida yozing.",
+      row:"Yo‘nalish",
+      def:["Birlamchi bozor","Ikkilamchi bozor","Ijara","Tijorat",""],
+      cols:[{k:"st",l:"Agent",u:"kishi"},{k:"cl",l:"Oylik bitim",u:"dona"},{k:"rv",l:"Oylik tushum",u:"USD"}]
+    },
+    kpi:[
+      {f:"x_k1",l:"Bir agent yiliga nechta bitim yopadi",u:"bitim",ph:"6",
+       bench:9,dir:"up",benchLab:"median 9 ta/yil",src:"narm",
+       why:"NAR 2026 Member Profile bo‘yicha median agent yiliga 9 ta bitim yopadi; 16 yildan ortiq tajribalilarda 10 ta, jamoa mutaxassislarida 32 ta. Bundan past bo‘lsa, savol agentda emas — unga berilayotgan murojaat sonida."},
+      {f:"x_k2",l:"Komissiya stavkasi",u:"%",ph:"2.5",
+       bench:2.42,dir:"up",benchLab:"o‘rtacha 2.42%",src:"rdf",
+       why:"Redfin bo‘yicha xaridor agenti komissiyasi o‘rtacha 2.42% va obyekt narxi oshgani sari pasayadi. Bu stavka bitim sonini ko‘paytirmasdan tushumni oshirishning yagona tugmasi."},
+      {f:"x_k3",l:"Obyekt bozorda o‘rtacha necha kun turadi",u:"kun",ph:"60",
+       bench:29,dir:"down",benchLab:"29 kun",src:"narq",
+       why:"NAR bo‘yicha 2026-yil iyulda o‘rtacha ekspozitsiya 29 kun. Uzoq turgan obyekt agentning vaqtini yeydi va narx noto‘g‘ri qo‘yilganini bildiradi."}
+    ]
+  },
+
+  b2b:{
+    lab:"B2B / professional xizmatlar",
+    intro:"Professional xizmatda sotiladigan narsa — soat. Hisoblanadigan bandlik 75% dan past bo‘lsa, farq to‘g‘ridan-to‘g‘ri yo‘qotilgan tushum.",
+    mode:"flow",
+    cap:{
+      unit :{f:"x_unit", l:"Hisoblanadigan xodimlar soni",          ph:"10", u:"kishi"},
+      slot :{f:"x_slot", l:"Bir xodimning oylik ish soati",         ph:"168",u:"soat / oy"},
+      seat :{f:"x_seat", l:"Bir soatda nechta loyiha yuritiladi",   ph:"1",  u:"loyiha"},
+      days :{f:"x_days", l:"Hisob davri (oy)",                      ph:"1",  u:"oy"},
+      used :{f:"x_used", l:"Oyiga fakt hisoblangan (billable) soat",ph:"1100",u:"soat / oy"},
+      price:{f:"x_price",l:"Bir soatning sotish narxi",             ph:"25", u:"USD"}
+    },
+    mix:{
+      t:"Xizmat yo‘nalishlari kesimi",
+      hint:"Konsalting, audit, yuridik, IT — har birini alohida yozing.",
+      row:"Yo‘nalish",
+      def:["Konsalting","Audit","Yuridik","IT",""],
+      cols:[{k:"st",l:"Xodim",u:"kishi"},{k:"cl",l:"Faol mijoz",u:"dona"},{k:"rv",l:"Oylik tushum",u:"USD"}]
+    },
+    kpi:[
+      {f:"x_k1",l:"Tender / taklif yutish darajasi",u:"%",ph:"35",
+       hint:"Yuborilgan takliflarning necha foizi shartnomaga aylandi.",
+       bench:48.1,dir:"up",benchLab:"48.1%",src:"spi",
+       why:"SPI Research 2026 hisobotida professional xizmatlarda yutish darajasi 48.1%. Bundan sezilarli past bo‘lsa, muammo odatda narxda emas — mos kelmaydigan so‘rovlarga ham taklif yuborilayotganida."},
+      {f:"x_k2",l:"Yillik mijoz ushlab qolish",u:"%",ph:"70",
+       bench:73,dir:"up",benchLab:"professional xizmatlar 73%",src:"cgau",
+       why:"CustomerGauge bo‘yicha professional xizmatlarda yillik ushlab qolish 73%, sanoat xizmatlarida 83%, IT xizmatlarida 88%. Ushlab qolish past bo‘lsa, har yili portfelning choragi qaytadan sotilishi kerak."},
+      {f:"x_k3",l:"Murojaatdan shartnomagacha o‘rtacha muddat",u:"kun",ph:"90",
+       bench:102,dir:"down",benchLab:"~102 kun",src:"impl",
+       why:"Implisit CRM ma’lumotida murojaatdan bitimgacha o‘rtacha 102 kun (84 + 18). Sikl uzun bo‘lsa, pul aylanmasi kechikadi — bu foydani emas, likvidlikni yeydi."}
+    ]
+  },
+
+  qurilish:{
+    lab:"Qurilish / mebel ishlab chiqarish",
+    intro:"Qurilishda pul obyektda emas, kalendarda yo‘qoladi. Byudjetdan oshish va kechikish — yagona, bitta hodisaning ikki nomi.",
+    mode:"flow",
+    cap:{
+      unit :{f:"x_unit", l:"Brigada / ish guruhlari soni",          ph:"4",  u:"brigada"},
+      slot :{f:"x_slot", l:"Bir brigada bir vaqtda nechta obyekt olib boradi",ph:"1",u:"obyekt"},
+      seat :{f:"x_seat", l:"Bir obyektda oyiga nechta bosqich topshiriladi",ph:"1",u:"bosqich"},
+      days :{f:"x_days", l:"Hisob davri (oy)",                      ph:"1",  u:"oy"},
+      used :{f:"x_used", l:"Ayni vaqtda olib borilayotgan obyektlar",ph:"3", u:"obyekt"},
+      price:{f:"x_price",l:"Bir obyektning oylik tushumi",          ph:"12000",u:"USD"}
+    },
+    mix:{
+      t:"Obyekt turlari kesimi",
+      hint:"Turar joy, tijorat, ta’mir, mebel — har birini alohida yozing.",
+      row:"Yo‘nalish",
+      def:["Turar joy","Tijorat","Ta’mir","Mebel",""],
+      cols:[{k:"st",l:"Xodim",u:"kishi"},{k:"cl",l:"Obyekt",u:"dona"},{k:"rv",l:"Oylik tushum",u:"USD"}]
+    },
+    kpi:[
+      {f:"x_k1",l:"Soliqqacha sof foyda marjasi",u:"%",ph:"5",
+       bench:6.7,top:12,dir:"up",benchLab:"o‘rtacha 6.7%, eng yaxshi 12.0%",src:"cfma",
+       why:"CFMA 2025 bazasida pudratchilarning soliqqacha marjasi 6.7%, eng yaxshi choragida 12.0%. Mebel ishlab chiqarishda listing kompaniyalarining sof marjasi atigi 1.10% — bu sohada xato uchun joy deyarli yo‘q."},
+      {f:"x_k2",l:"Loyihalarning byudjetdan oshishi",u:"%",ph:"15",
+       hint:"Fakt xarajat smetadan o‘rtacha necha foiz oshgan.",
+       bench:0,dir:"down",benchLab:"yo‘l loyihalarida 20.4%",src:"flyv",
+       why:"Flyvbjerg tadqiqotida yirik loyihalarning 10 tasidan 9 tasi byudjetdan oshgan; yo‘llarda o‘rtacha oshish 20.4%. Bir yillik kechikish xarajatni o‘rtacha 4.64% ga oshiradi — vaqt va pul bir xil o‘zgaruvchi."},
+      {f:"x_k3",l:"Ma’muriy xarajat ulushi (SG&A)",u:"%",ph:"14",
+       hint:"Ofis, boshqaruv, marketing ÷ tushum.",
+       bench:11.8,dir:"down",benchLab:"o‘rtacha 11.8%, eng yaxshi 10.8%",src:"cfma",
+       why:"CFMA bo‘yicha ma’muriy xarajat tushumning 11.8% i, eng yaxshi pudratchilarda 10.8%. Marja 6.7% bo‘lgan sohada bu moddaning 2 foiz punkti butun foydaning uchdan birini tashkil qiladi."}
+    ]
+  },
+
+  xizmat:{
+    lab:"Xizmat ko‘rsatish (ta’mir, tozalash, logistika)",
+    intro:"Chiqma xizmatda birinchi tashrifda hal qilinmagan har bir buyurtma yana ikkita tashrif va o‘n to‘rt kun qo‘shadi. Sifat bu yerda xarajat bilan bir xil narsa.",
+    mode:"flow",
+    cap:{
+      unit :{f:"x_unit", l:"Usta / brigadalar soni",                ph:"6",  u:"kishi"},
+      slot :{f:"x_slot", l:"Bir usta kuniga nechta buyurtma bajaradi",ph:"5",u:"buyurtma / kun"},
+      seat :{f:"x_seat", l:"Bir chiqishda nechta buyurtma yopiladi",ph:"1",  u:"buyurtma"},
+      days :{f:"x_days", l:"Oyiga ish kunlari",                     ph:"26", u:"kun"},
+      used :{f:"x_used", l:"Kuniga fakt bajarilgan buyurtma",       ph:"18", u:"buyurtma / kun"},
+      price:{f:"x_price",l:"Bir buyurtmadan o‘rtacha tushum",       ph:"35", u:"USD"}
+    },
+    mix:{
+      t:"Xizmat turlari kesimi",
+      hint:"Har bir xizmat turini alohida yozing.",
+      row:"Xizmat turi",
+      def:["Ta’mir","Profilaktika","Montaj","Shoshilinch chaqiruv",""],
+      cols:[{k:"st",l:"Usta",u:"kishi"},{k:"cl",l:"Kunlik buyurtma",u:"dona"},{k:"rv",l:"Oylik tushum",u:"USD"}]
+    },
+    kpi:[
+      {f:"x_k1",l:"Birinchi tashrifda hal qilingan buyurtmalar",u:"%",ph:"65",
+       bench:86,dir:"up",benchLab:"eng yaxshilar 86%, eng pastlar 53%",src:"aqu",
+       why:"Aquant 600 000 dan ortiq yozuvni tahlil qilib, eng yaxshi kompaniyalarda birinchi tashrifda hal qilish 86%, eng pastlarida 53% ekanini ko‘rsatgan. Muvaffaqiyatsiz birinchi tashrif o‘rtacha yana 2 ta tashrif va 14 kun qo‘shadi — ya’ni bitta buyurtmaning tannarxini uch barobar qiladi."},
+      {f:"x_k2",l:"Yillik mijoz ushlab qolish",u:"%",ph:"70",
+       bench:83,dir:"up",benchLab:"sanoat xizmatlari 83%, logistika 60%",src:"cgau",
+       why:"CustomerGauge bo‘yicha sanoat xizmatlarida yillik ushlab qolish 83%, professional xizmatlarda 73%, logistikada 60%. Xizmat biznesida takroriy mijoz reklama xarajatisiz keladi."},
+      {f:"x_k3",l:"Sof foyda marjasi",u:"%",ph:"8",
+       bench:7.03,dir:"up",benchLab:"biznes va iste’mol xizmatlari 7.03%",src:"dam",
+       why:"Damodaran 2026-yil bazasida biznes va iste’mol xizmatlarining sof marjasi 7.03%, yuk tashishda 3.79%. Marja shundan past bo‘lsa, o‘sish emas — narx siyosati qaraladi."}
+    ]
+  },
+
+  boshqa:{
+    lab:"Umumiy quvvat moduli",
+    intro:"Sohangiz ro‘yxatda yo‘q bo‘lsa ham quvvat mantiqi bir xil: ish o‘rni × kunlik almashinuv × ish kuni. Fakt bilan farq — bo‘sh turgan pul.",
+    mode:"flow",
+    cap:{
+      unit :{f:"x_unit", l:"Ish o‘rinlari / xizmat nuqtalari soni", ph:"5",  u:"dona"},
+      slot :{f:"x_slot", l:"Bir o‘rinda kuniga nechta mijoz sig‘adi",ph:"8", u:"mijoz / kun"},
+      seat :{f:"x_seat", l:"Bir seansda nechta mijoz",              ph:"1",  u:"mijoz"},
+      days :{f:"x_days", l:"Oyiga ish kunlari",                     ph:"26", u:"kun"},
+      used :{f:"x_used", l:"Kuniga fakt xizmat ko‘rsatilgan mijoz", ph:"22", u:"mijoz / kun"},
+      price:{f:"x_price",l:"O‘rtacha chek",                         ph:"20", u:"USD"}
+    },
+    mix:{
+      t:"Yo‘nalishlar kesimi",
+      hint:"Asosiy yo‘nalishlaringizni alohida qatorlarga yozing.",
+      row:"Yo‘nalish",
+      def:["","","","",""],
+      cols:[{k:"st",l:"Xodim",u:"kishi"},{k:"cl",l:"Mijoz",u:"kishi"},{k:"rv",l:"Oylik tushum",u:"USD"}]
+    },
+    kpi:[
+      {f:"x_k1",l:"Yalpi marja",u:"%",ph:"35",bench:37.76,dir:"up",benchLab:"umumiy bozor 37.76%",src:"dam",
+       why:"Damodaran 2026-yil bazasida AQSh bozorining o‘rtacha yalpi marjasi 37.76%, sof marjasi 9.74%. Bu qat’iy etalon emas — kattalik tartibini tekshirish uchun."},
+      {f:"x_k2",l:"Qaytib kelgan mijozlar ulushi",u:"%",ph:"30",bench:null,src:"bain",
+       why:"Bain hisobiga ko‘ra ushlab qolishni 5% ga oshirish foydani 25–95% ga oshiradi."},
+      {f:"x_k3",l:"Sof foyda marjasi",u:"%",ph:"10",bench:9.74,dir:"up",benchLab:"umumiy bozor 9.74%",src:"dam",
+       why:"Damodaran bazasida 5 994 kompaniya bo‘yicha sof marja 9.74%."}
+    ]
+  }
+};
+SQ.stomatologiya = null; SQ.tibbiyot = null; SQ.ishlab_chiqarish = null;
+
+function sq(){ return S.sector ? (SQ[S.sector]||null) : null; }
+
+/* ------------------------------------------------------------------
+   SOHA PANELINI CHIZISH
+   ------------------------------------------------------------------ */
+const MIXN = 5;
+function fieldHtml(q){
+  const hint = q.hint ? '<p class="hint">'+q.hint+'</p>' : '';
+  const step = /%|marta|soat|kun/.test(q.u||"") ? ' step="0.1"' : ' step="any"';
+  return '<div class="q"><span class="qlab">'+q.l+'</span>'+hint+
+    '<div class="suffix"><input type="number" data-field="'+q.f+'" placeholder="'+(q.ph||"")+'" min="0"'+step+
+    ' inputmode="decimal"><span class="u">'+(q.u||"")+'</span></div></div>';
+}
+function renderSector(){
+  const c=sq(), box=$("#sectorBody"); if(!c||!box) return;
+  let h='';
+  h+='<div class="panel-head"><span class="bar"></span><p class="eyebrow">Bosqich 04 &middot; '+c.lab+'</p>'+
+     '<h2>'+c.lab+' moduli</h2><p>'+c.intro+'</p></div>';
+
+  h+='<p class="sub-head">A. Quvvat va ayni holat</p><div class="qgrid">';
+  ["unit","slot","seat","days","used","fill","price"].forEach(k=>{ if(c.cap[k]) h+=fieldHtml(c.cap[k]); });
+  if(c.perClient) h+=fieldHtml(c.perClient);
+  h+='</div>';
+
+  if(c.mix){
+    h+='<p class="sub-head">B. '+c.mix.t+'</p><p class="hint" style="margin:-14px 0 16px">'+c.mix.hint+'</p>';
+    h+='<div class="mixwrap"><table class="mixtable"><thead><tr><th>'+c.mix.row+'</th>'+
+       c.mix.cols.map(col=>'<th>'+col.l+'<i>'+col.u+'</i></th>').join('')+'</tr></thead><tbody>';
+    for(let i=0;i<MIXN;i++){
+      h+='<tr><td data-l="'+c.mix.row+'"><input type="text" data-field="mx_n'+i+'" placeholder="'+(c.mix.def[i]||"—")+'" value="'+(c.mix.def[i]||"")+'"></td>';
+      c.mix.cols.forEach(col=>{ h+='<td data-l="'+col.l+', '+col.u+'"><input type="number" data-field="mx_'+col.k+i+'" min="0" step="any" inputmode="decimal" placeholder="0"></td>'; });
+      h+='</tr>';
+    }
+    h+='</tbody></table></div>';
+  }
+
+  h+='<p class="sub-head">C. Soha ko‘rsatkichlari</p><div class="qgrid">';
+  c.kpi.forEach(k=>{
+    const bl = k.benchLab ? '<p class="hint" style="color:var(--ink-3)">Etalon: '+k.benchLab+'</p>' : '';
+    h+='<div class="q"><span class="qlab">'+k.l+'</span>'+(k.hint?'<p class="hint">'+k.hint+'</p>':'')+bl+
+       '<div class="suffix"><input type="number" data-field="'+k.f+'" placeholder="'+k.ph+'" min="0" step="0.01" inputmode="decimal"><span class="u">'+k.u+'</span></div></div>';
+  });
+  h+='</div>';
+  h+='<div class="navrow"><button class="btn ghost" data-nav="back" type="button">Orqaga</button><button class="btn" data-nav="next" type="button">Davom etish</button></div>';
+  box.innerHTML=h;
+  markMoney(box);
+  refreshUnits();
+  /* saqlangan qiymatlarni qaytarish */
+  $$("[data-field]",box).forEach(el=>{ const v=S[el.dataset.field]; if(v!==undefined&&v!==null&&v!=="") el.value=v; });
+}
+
+/* ------------------------------------------------------------------
+   SOHA DVIGATELI
+   ------------------------------------------------------------------ */
+function sectorEngine(){
+  const c=sq(); if(!c) return null;
+  const n=k=>{ const v=S[k]; return (typeof v==="number"&&isFinite(v))?v:0; };
+  const X={c:c, mode:c.mode, ok:false};
+  const price=n("x_price"), days=n("x_days")||1;
+
+  if(c.mode==="conv"){
+    const foot=n("x_unit"), buy=n("x_used");
+    if(!(foot>0&&price>0)) return X;
+    X.foot=foot; X.buy=buy; X.price=price; X.days=days;
+    X.conv = foot>0 ? buy/foot : 0;
+    X.benchOn = c.convBench.online/100;
+    X.benchOff= c.convBench.offline/100;
+    X.revNow  = buy*price*days;
+    X.revOff  = foot*X.benchOff*price*days;
+    X.gapOff  = Math.max(0, X.revOff - X.revNow);
+    X.onePP   = foot*0.01*price*days;   /* 1 foiz punkt konversiya = qancha pul */
+    X.util    = X.benchOff>0 ? X.conv/X.benchOff : 0;
+    X.ok=true;
+  } else {
+    const unit=n("x_unit"), slot=n("x_slot"), seat=n("x_seat")||1;
+    if(!(unit>0&&slot>0&&price>0)) return X;
+    const perDay = unit*slot*seat;
+    X.perDay=perDay; X.price=price; X.days=days;
+    if(c.mode==="stock"){
+      let capacity = perDay;                     /* bir vaqtdagi o'rin */
+      if(c.perClient){                            /* tashrif chastotasi orqali a'zoga aylantirish */
+        const freq=n(c.perClient.f)||c.perClient.bench;
+        X.freq=freq; X.freqBench=c.perClient.bench;
+        capacity = freq>0 ? (perDay*days)/freq : perDay;
+      } else if(c.cap.fill){                      /* guruh modeli: guruh o'rniga o'quvchi */
+        capacity = perDay;                        /* xona × smena × sig'im = o'quvchi o'rni */
+      }
+      const usedGroups=n("x_used"), fill=n("x_fill");
+      let actual;
+      if(c.cap.fill && usedGroups>0 && fill>0) actual = usedGroups*fill;
+      else actual = usedGroups;
+      X.cap=capacity; X.actual=actual;
+      X.util = capacity>0 ? actual/capacity : 0;
+      X.revNow = actual*price;
+      X.revFull= capacity*price;
+      /* guruh to'ldirish alohida ko'rsatkich */
+      if(c.cap.fill){
+        X.grpUsed=usedGroups; X.grpCap = unit*slot;
+        X.grpFill = n("x_seat")>0 ? fill/n("x_seat") : 0;
+        X.grpUtil = X.grpCap>0 ? usedGroups/X.grpCap : 0;
+      }
+    } else {                                      /* flow */
+      const used=n("x_used");
+      X.cap = perDay*days; X.actual = used*days;
+      X.util = X.cap>0 ? X.actual/X.cap : 0;
+      X.revNow = X.actual*price;
+      X.revFull= X.cap*price;
+    }
+    /* realistik shift: to'liq 100% quvvat hech qayerda ushlanmaydi.
+       Chastota orqali hisoblangan modelda (fitnes) tashriflar pik soatga yig'iladi,
+       shuning uchun shift sezilarli pastroq olinadi. */
+    X.ceil = c.perClient ? 0.55 : (c.mode==="stock" ? 0.85 : 0.80);
+    X.ceilNote = c.perClient
+      ? "Tashriflar kun bo‘yicha teng taqsimlanmaydi — asosiy qism pik soatga to‘g‘ri keladi, shuning uchun shift 55% olindi."
+      : "To‘liq 100% quvvat hech qayerda uzoq ushlanmaydi: tanaffus, bekor qilish va mavsumiylik doim bor.";
+    X.capReal = X.cap*X.ceil;
+    X.gap = Math.max(0, X.capReal - X.actual);
+    X.gapMoney = X.gap*price;
+    X.ok=true;
+  }
+
+  /* aralashma jadvali */
+  const rows=[];
+  for(let i=0;i<MIXN;i++){
+    const nm=(S["mx_n"+i]||"").trim(); if(!nm) continue;
+    const st=n("mx_st"+i), cl=n("mx_cl"+i), rv=n("mx_rv"+i);
+    if(st===0&&cl===0&&rv===0) continue;
+    rows.push({nm, st, cl, rv, per: st>0?rv/st:0, perCl: cl>0?rv/cl:0});
+  }
+  const tot=rows.reduce((a,r)=>a+r.rv,0);
+  rows.forEach(r=>r.share = tot>0 ? r.rv/tot : 0);
+  rows.sort((a,b)=>b.rv-a.rv);
+  X.mix=rows; X.mixTotal=tot;
+  X.mixTop = rows.length ? rows[0] : null;
+  X.mixIdle = rows.filter(r=>r.st>0 && r.rv/tot < 0.05);
+  X.mixConc = rows.length>1 ? rows[0].share : 0;
+
+  /* KPI baholari */
+  X.kpi = c.kpi.map(k=>{
+    const v=S[k.f];
+    const has = (typeof v==="number"&&isFinite(v));
+    let gap=null, bad=false;
+    if(has && k.bench!=null){
+      gap = k.dir==="down" ? (v - k.bench) : (k.bench - v);
+      bad = gap > 0.0001;
+    }
+    return {k, v: has?v:null, has, gap, bad};
+  });
+  return X;
+}
+
+/* ------------------------------------------------------------------
+   SOHA XULOSALARI
+   ------------------------------------------------------------------ */
+function sectorFindings(X){
+  if(!X||!X.ok) return [];
+  const out=[], c=X.c;
+
+  if(X.mode==="conv"){
+    const cp=(X.conv*100), bo=X.benchOff;
+    if(X.conv < bo){
+      out.push({
+        sev: X.conv < bo*0.6 ? "crit" : "warn", kind:"now", loss:X.gapOff,
+        title:"Kirgan odamning xaridga aylanishi past",
+        fact:"Kuniga "+grp(Math.round(X.foot))+" ta tashrifdan "+grp(Math.round(X.buy))+" tasi xarid qilyapti — "+sig3(cp)+"%.",
+        bench:"Oflayn savdo uchun yo‘nalish ko‘rsatkichi ~20% (Traf-Sys); onlayn do‘konlarda o‘rtacha 2.26% (IRP Commerce, 2026-yil iyul).",
+        src:"trur",
+        why:"Trafik allaqachon sotib olingan: odam do‘konga kirdi yoki saytga tushdi. Konversiyaning har bir foiz punkti oyiga "+money(X.onePP)+" beradi — reklama byudjetini oshirmasdan.",
+        fix:"Uch narsani ketma-ket tekshiring: narx ko‘rinadimi, sotuvchi birinchi 30 soniyada murojaat qiladimi, kassa navbati necha daqiqa. Har birini bir hafta o‘lchang va konversiyani solishtiring."
+      });
+    }
+  } else {
+    if(X.util < X.ceil - 0.05){
+      const pct=Math.round(X.util*100);
+      out.push({
+        sev: X.util < 0.5 ? "crit" : "warn", kind:"now", loss:X.gapMoney,
+        title:"Quvvatning katta qismi bo‘sh turibdi",
+        fact:"Nazariy quvvat "+grp(Math.round(X.cap))+" ta "+(X.mode==="stock"?"o‘rin":"xizmat / oy")+", fakt "+grp(Math.round(X.actual))+" ta. Bandlik "+pct+"%.",
+        bench:"Realistik shift "+Math.round(X.ceil*100)+"%. "+X.ceilNote,
+        src:null,
+        why:"Bo‘sh turgan o‘rin xarajatni kamaytirmaydi: ijara, oylik va amortizatsiya band bo‘lganda ham, bo‘sh turganda ham bir xil to‘lanadi. "+Math.round(X.ceil*100)+"% gacha to‘ldirish oyiga "+money(X.gapMoney)+" qo‘shadi va yangi investitsiya talab qilmaydi.",
+        fix:"Avval sabab ajratilsin: bo‘sh o‘rin talab yetishmaganidan (murojaat kam) yoki jadval tuzilishidan (murojaat bor, lekin joy taklif qilinmayapti). Bir hafta rad etilgan va javobsiz qolgan murojaatlarni sanang — javob shu yerda chiqadi."
+      });
+    }
+    if(X.grpUtil!=null && X.grpFill!=null && X.grpFill>0 && X.grpFill<0.7){
+      const lost=(X.cap - X.actual)*X.price*0.5;
+      out.push({
+        sev:"warn", kind:"struct", loss:0,
+        title:"Guruhlar to‘ldirilmagan holda ochilyapti",
+        fact:"Guruhdagi o‘rtacha to‘ldirish "+Math.round(X.grpFill*100)+"% — sig‘im "+grp(S.x_seat)+" o‘rin, fakt "+sig3(S.x_fill)+" kishi.",
+        bench:"Guruh xarajati (ustoz soati, xona, kommunal) o‘quvchi soniga qarab o‘zgarmaydi.",
+        src:null,
+        why:"To‘ldirilmagan guruh — eng qimmat xato turi, chunki xarajat to‘liq guruhnikidek qoladi, tushum esa yarmi. Ikkita yarim guruhni bittaga birlashtirish xarajatni ikki barobar kamaytiradi va sifatni pasaytirmaydi.",
+        fix:"Jadvalni qayta yig‘ing: bir xil daraja va bir xil vaqtdagi kichik guruhlarni birlashtiring. Yangi guruhni minimal to‘ldirish chegarasiga yetmaguncha ochmang — chegarani hisoblab yozing."
+      });
+    }
+  }
+
+  /* aralashma xulosalari */
+  if(X.mix.length>1){
+    if(X.mixConc>0.55){
+      out.push({
+        sev:"warn", kind:"struct", loss:0,
+        title:"Tushum bitta yo‘nalishga bog‘lanib qolgan",
+        fact:"«"+X.mixTop.nm+"» butun tushumning "+Math.round(X.mixConc*100)+"% ini beradi.",
+        bench:"Bitta yo‘nalish 55% dan oshsa, biznes shu yo‘nalishdagi bitta hodisaga (ustoz ketishi, talab tushishi, raqobatchi ochilishi) to‘liq ochiq qoladi.",
+        src:null,
+        why:"Bu foyda muammosi emas, barqarorlik muammosi. Bugungi raqamlar yaxshi ko‘rinadi, lekin yagona yo‘nalishning 20% pasayishi butun biznesning "+Math.round(X.mixConc*20)+"% ini olib ketadi.",
+        fix:"Ikkinchi yo‘nalishni maqsadli o‘stiring: bir chorakda uning ulushini 10 foiz punktga ko‘tarish rejasini yozing. Asosiy yo‘nalishni qisqartirish shart emas — ikkinchisini ko‘tarish kifoya."
+      });
+    }
+    if(X.mixIdle.length){
+      out.push({
+        sev:"warn", kind:"struct", loss:0,
+        title:"Xodim band, yo‘nalish tushum bermayapti",
+        fact:X.mixIdle.map(r=>"«"+r.nm+"» — "+grp(r.st)+" xodim, tushum ulushi "+sig3(r.share*100)+"%").join("; ")+".",
+        bench:"Xodim ulushi tushum ulushidan sezilarli yuqori bo‘lgan yo‘nalish o‘zini qoplamaydi.",
+        src:null,
+        why:"Bunday yo‘nalish ikki yo‘ldan biri bilan hal qilinadi: yo unga talab yaratiladi, yo xodim tushum beradigan yo‘nalishga o‘tkaziladi. Uchinchi yo‘l — hech narsa qilmaslik — har oy bir xil summani yeb turadi.",
+        fix:"Har bir bunday yo‘nalish bo‘yicha bitta savolga yozma javob bering: so‘nggi 3 oyda unga nechta murojaat kelgan? Murojaat yo‘q bo‘lsa — talab yo‘q, xodim boshqa yo‘nalishga o‘tadi. Murojaat bor bo‘lsa — muammo konversiyada."
+      });
+    }
+  }
+
+  /* KPI xulosalari */
+  X.kpi.forEach(r=>{
+    if(!r.has || !r.bad) return;
+    const k=r.k;
+    out.push({
+      sev: (k.bench>0 && Math.abs(r.gap)/k.bench > 0.35) ? "crit" : "warn",
+      kind:"struct", loss:0,
+      title:k.l+" etalondan chetda",
+      fact:"Sizda "+sig3(r.v)+" "+k.u+", etalon "+(k.benchLab||sig3(k.bench)+" "+k.u)+".",
+      bench:k.benchLab||"",
+      src:k.src||null,
+      why:k.why,
+      fix:"Bu ko‘rsatkichni oylik boshqaruv hisobotiga kiriting va uch oy ketma-ket o‘lchang. Bitta o‘lchov tendentsiyani ko‘rsatmaydi."
+    });
+  });
+
+  /* etalonsiz, lekin muhim ko'rsatkichlar — ochiq aytiladi */
+  X.kpi.forEach(r=>{
+    if(!r.has || r.k.bench!=null) return;
+    out.push({
+      sev:"info", kind:"struct", loss:0,
+      title:r.k.l+" — tashqi etalon mavjud emas",
+      fact:"Sizda "+sig3(r.v)+" "+r.k.u+".",
+      bench:"Bu ko‘rsatkich bo‘yicha e’lon qilingan sanoat etaloni topilmadi.",
+      src:r.k.src||null,
+      why:r.k.why,
+      fix:"Raqamni bugungi holat sifatida yozib qo‘ying va keyingi o‘lchovni shu bilan solishtiring. O‘z bazangizga qarshi o‘sish — etalon yo‘q joyda yagona halol o‘lchov."
+    });
+  });
+
+  return out;
 }
 
 /* ==================================================================
@@ -1812,7 +2506,7 @@ function scoring(E,P,C,I){
 /* ==================================================================
    7. MUAMMOLAR REYESTRI
    ================================================================== */
-function findings(E,P,C,I){
+function findings(E,P,C,I,X){
   const F=[]; const t=T();
   const add=o=>F.push(Object.assign({sev:"warn",loss:0,kind:"now"},o));
 
@@ -2083,6 +2777,9 @@ function findings(E,P,C,I){
         fix:"Yotqizish ko‘rsatmasi bo‘lgan har bir bemor uchun mas’ul koordinator tayinlang: narx, sana va tayyorgarlik ro‘yxati bir kunda hal qilinsin."});
   }
 
+  /* ---------- soha moduli ---------- */
+  if(X && X.ok) sectorFindings(X).forEach(o=>add(o));
+
   const ord={crit:0,warn:1,info:2};
   F.sort((a,b)=> (b.loss-a.loss) || (ord[a.sev]-ord[b.sev]) );
   return F;
@@ -2096,8 +2793,9 @@ function build(){
   const P = mod()==="prod" ? prodEngine() : null;
   const C = mod()==="clinic" ? clinicEngine(E) : null;
   const I = mod()==="clinic" ? inpatientEngine(E,C) : null;
+  const X = sq() ? sectorEngine() : null;
   const SC=scoring(E,P,C,I);
-  const F=findings(E,P,C,I);
+  const F=findings(E,P,C,I,X);
 
   const lossNow =F.filter(x=>x.kind==="now" ).reduce((a,x)=>a+(x.loss||0),0);
   const lossPath=F.filter(x=>x.kind==="path").reduce((a,x)=>a+(x.loss||0),0);
@@ -2108,6 +2806,7 @@ function build(){
   if(P){ usedSrc.add("oee"); usedSrc.add("oeeb"); }
   if(C){ usedSrc.add("nosh"); usedSrc.add("lic"); usedSrc.add("lic2"); usedSrc.add("dna"); }
   if(I){ ["bor","eff","bev","cost","ind","alos","eu","dbn","nar","nar2","arv","arv2","bum","aci","hub","mri","staff","krung"].forEach(k=>usedSrc.add(k)); }
+  if(X && X.ok){ (X.c.kpi||[]).forEach(k=>{ if(k.src) usedSrc.add(k.src); }); if(X.mode==="conv"){ usedSrc.add("trur"); usedSrc.add("irp"); } if(X.c.perClient && X.c.perClient.src) usedSrc.add(X.c.perClient.src); }
 
   const name=S.company?esc(S.company):"Nomsiz tashkilot";
   const dt=new Date();
@@ -2370,6 +3069,62 @@ function build(){
         ? "Ishlab chiqarilgan sifatli mahsulotning "+pct(P.salesGap,0)+" i sotilmagan. Cheklov <b>sotuvda</b>, uskunada emas. Quvvatga investitsiya omborni to‘ldiradi."
         : "Sotuv ishlab chiqarilgan hajmni deyarli to‘liq yutmoqda ("+pct(1-P.salesGap,0)+"). Cheklov <b>ishlab chiqarishda</b>: har +1% OEE ≈ "+money(0.01*P.maxUnits*P.CM)+" / oy.")+'</div>';
     H+='<p class="note">85% jahon darajasi mutlaq maqsad emas. To‘g‘ri o‘lchov — o‘z bazangizdan o‘sish sur’ati. '+srcTag("oeeb")+'</p></section>';
+  }
+
+  /* ---------------- SOHA MODULI ---------------- */
+  if(X && X.ok){
+    const c=X.c;
+    H+='<section class="block"><h3><span class="n">'+secN()+'</span> '+esc(c.lab)+' — quvvat tahlili</h3>';
+    H+='<div class="tblwrap"><table class="tbl"><thead><tr><th>Ko‘rsatkich</th><th style="text-align:right">Qiymat</th><th>Formula / etalon</th></tr></thead><tbody>';
+    if(X.mode==="conv"){
+      H+=row("Kunlik tashrif", num(X.foot), "do‘konga kirgan yoki saytga tushgan");
+      H+=row("Kunlik xarid", num(X.buy), "");
+      H+=row("<b>Konversiya</b>", "<b>"+pct(X.conv)+"</b>", "xarid ÷ tashrif · oflayn yo‘nalish ~20%, onlayn 2.26%");
+      H+=row("O‘rtacha chek", money(X.price), "");
+      H+=row("Oylik tushum (fakt)", money(X.revNow), num(X.buy)+" × "+money(X.price)+" × "+num(X.days)+" kun");
+      H+=row("Konversiyaning 1 foiz punkti", money(X.onePP), "shu trafikda, reklamasiz");
+      H+=row("<b>20% konversiyada tushum</b>", "<b>"+money(X.revOff)+"</b>", "farq "+money(X.gapOff)+" / oy");
+    } else {
+      const cap=c.cap;
+      H+=row(esc(cap.unit.l), num(S[cap.unit.f]||0)+" "+cap.unit.u, "");
+      if(cap.slot) H+=row(esc(cap.slot.l), num(S[cap.slot.f]||0)+" "+cap.slot.u, "");
+      if(cap.seat) H+=row(esc(cap.seat.l), num(S[cap.seat.f]||0)+" "+cap.seat.u, "");
+      H+=row("Kunlik nazariy quvvat", num(X.perDay), "o‘rin × almashinuv × sig‘im");
+      if(X.freq) H+=row("Bir mijozning oylik tashrifi", num(X.freq,1)+" marta", "etalon: premium klub 5.2, butik studiya 2.5");
+      H+=row("<b>Nazariy quvvat</b>", "<b>"+num(X.cap)+"</b>", X.mode==="stock" ? "bir vaqtda xizmat ko‘rsatiladigan mijoz" : "oyiga xizmat / tashrif");
+      H+=row("Fakt", num(X.actual), "");
+      H+=row("<b>Bandlik</b>", "<b>"+pct(X.util)+"</b>", "fakt ÷ nazariy quvvat");
+      H+=row("Realistik shift", pct(X.ceil,0)+" = "+num(X.capReal, X.capReal<10?1:0), X.ceilNote||"");
+      H+=row("Bo‘sh turgan o‘rin", num(X.gap, X.gap<10?1:0), "shift − fakt");
+      H+=row("<b>Bo‘sh turgan pul</b>", "<b>"+money(X.gapMoney)+" / oy</b>", num(X.gap, X.gap<10?1:0)+" × "+money(X.price));
+      if(X.grpCap){
+        H+=row("Guruh o‘rinlari", num(X.grpCap)+" / "+num(X.grpUsed)+" ochiq", "bandlik "+pct(X.grpUtil));
+        H+=row("Guruh to‘ldirilishi", pct(X.grpFill), "o‘rtacha o‘quvchi ÷ xona sig‘imi");
+      }
+    }
+    H+='</tbody></table></div>';
+
+    if(X.mix.length){
+      H+='<div class="tblwrap" style="margin-top:14px"><table class="tbl"><thead><tr><th>'+esc(c.mix.row)+'</th><th style="text-align:right">'+esc(c.mix.cols[0].l)+'</th><th style="text-align:right">'+esc(c.mix.cols[1].l)+'</th><th style="text-align:right">Oylik tushum</th><th style="text-align:right">Ulush</th><th style="text-align:right">1 xodimga</th></tr></thead><tbody>';
+      X.mix.forEach(r=>{
+        H+='<tr><td>'+esc(r.nm)+'</td><td class="n">'+num(r.st)+'</td><td class="n">'+num(r.cl)+'</td><td class="n">'+money(r.rv)+'</td><td class="n">'+pct(r.share)+'</td><td class="n">'+(r.st>0?money(r.per):"—")+'</td></tr>';
+      });
+      H+='<tr><td><b>Jami</b></td><td class="n"><b>'+num(X.mix.reduce((a,r)=>a+r.st,0))+'</b></td><td class="n"><b>'+num(X.mix.reduce((a,r)=>a+r.cl,0))+'</b></td><td class="n"><b>'+money(X.mixTotal)+'</b></td><td class="n">100%</td><td class="n"></td></tr>';
+      H+='</tbody></table></div>';
+      H+='<p class="note">Oxirgi ustun har bir yo‘nalishning bitta xodimi qancha pul olib kelayotganini ko‘rsatadi. Farq ikki barobardan katta bo‘lsa, sabab odam emas — o‘sha yo‘nalishga berilayotgan murojaat soni.</p>';
+    }
+
+    const shown=X.kpi.filter(r=>r.has);
+    if(shown.length){
+      H+='<div class="tblwrap" style="margin-top:14px"><table class="tbl"><thead><tr><th>Soha ko‘rsatkichi</th><th style="text-align:right">Sizda</th><th>Etalon</th><th>Holat</th></tr></thead><tbody>';
+      shown.forEach(r=>{
+        const st = r.k.bench==null ? '<span style="color:var(--ink-3)">etalon yo‘q</span>'
+                 : (r.bad ? '<span style="color:var(--crit)">chetda</span>' : '<span style="color:var(--ok)">me’yorda</span>');
+        H+='<tr><td>'+esc(r.k.l)+'</td><td class="n">'+num(r.v, r.v%1===0?0:(Math.abs(r.v)<10?2:1))+(r.k.u==="%"?"%":" "+esc(r.k.u))+'</td><td>'+(r.k.benchLab?esc(r.k.benchLab):"—")+(r.k.src?' '+srcTag(r.k.src):'')+'</td><td>'+st+'</td></tr>';
+      });
+      H+='</tbody></table></div>';
+    }
+    H+='</section>';
   }
 
   /* ---------------- KLINIKA: AMBULATOR ---------------- */
