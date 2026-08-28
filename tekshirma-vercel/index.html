@@ -306,6 +306,19 @@ input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 4px var(--a
   .mixtable td:first-child::before{content:attr(data-l)}
 }
 
+/* --- kiritilgan raqamlardan darhol chiqadigan hisob --- */
+.derived{
+  margin:-2px 0 4px;padding:14px 17px;border-radius:var(--r-sm);
+  background:var(--accent-wash);border:1px solid rgba(47,224,168,.22);
+  font-size:14.5px;line-height:1.55;display:flex;flex-direction:column;gap:3px;
+}
+.derived b{color:var(--accent-2);font-weight:700}
+.derived span{color:var(--ink-2);font-size:13.5px}
+
+.credit{margin-top:14px;padding-top:14px;border-top:1px solid var(--hair);font-size:13px;color:var(--ink-3)}
+.credit b{color:var(--ink-2);font-weight:600}
+.credit span{color:var(--ink-2)}
+
 .navrow{display:flex;gap:13px;margin-top:40px;align-items:center;flex-wrap:wrap}
 .navnote{font-size:13.5px;color:var(--ink-3);margin-left:auto}
 @media(max-width:600px){.navnote{margin-left:0;flex:1 0 100%}}
@@ -828,12 +841,12 @@ section.block > h3 .n{
       <p class="hint" id="rateNote">Markaziy bank kursi, 2026-yil 27-avgust: 11&thinsp;823,69 so&lsquo;m. Kurs faqat etalon lid narxini o&lsquo;tkazish va valyutani almashtirish uchun ishlatiladi &mdash; o&lsquo;z raqamlaringizga tegmaydi.</p>
     </div>
     <div class="q"><span class="qlab">Oylik DAROMAD maqsadingiz</span><p class="hint">Tushum (aylanma), foyda emas.</p><div class="suffix"><input type="number" data-field="goal" placeholder="120000" min="0" inputmode="numeric"><span class="u">USD / oy</span></div></div>
-    <div class="q"><span class="qlab">Hozirgi oylik tushumingiz</span><p class="hint">Ishga tushmagan bo&lsquo;lsa 0 yozing.</p><div class="suffix"><input type="number" data-field="current" placeholder="65000" min="0" inputmode="numeric"><span class="u">USD / oy</span></div></div>
-    <div class="q"><span class="qlab">O&lsquo;rtacha chek</span><p class="hint">Bitta mijoz bitta bitimda qoldiradigan pul. Statsionarda &mdash; bitta yotqizilgan bemorning o&lsquo;rtacha hisobi.</p><div class="suffix"><input type="number" data-field="check" placeholder="450" min="0" inputmode="decimal"><span class="u">USD</span></div></div>
-    <div class="q"><span class="qlab">Yalpi marja</span><p class="hint">Chekdan bevosita xarajat (dori, sarf materiallari, ishbay ish haqi) ayirilgach qolgan ulush.</p><div class="suffix"><input type="number" data-field="margin" placeholder="55" min="1" max="100" inputmode="decimal"><span class="u">%</span></div></div>
-    <div class="q"><span class="qlab">Sotuv konversiyasi</span><p class="hint">100 ta murojaatning nechtasi to&lsquo;lovchi mijozga aylanadi. Bilmasangiz bo&lsquo;sh qoldiring.</p><div class="suffix"><input type="number" data-field="conv" placeholder="20" min="0.1" max="100" step="0.1" inputmode="decimal"><span class="u">%</span></div></div>
-    <div class="q"><span class="qlab">Bir mijoz yiliga necha marta murojaat qiladi?</span><p class="hint">Bir martalik bo&lsquo;lsa 1 yozing. Bu LTV ni belgilaydi.</p><div class="suffix"><input type="number" data-field="freq" placeholder="2" min="1" step="0.1" inputmode="decimal"><span class="u">marta / yil</span></div></div>
-    <div class="q"><span class="qlab">Haqiqiy murojaat narxi (CPL)</span><p class="hint">O&lsquo;lchagan bo&lsquo;lsangiz kiriting &mdash; bu etalondan ustun turadi.</p><div class="suffix"><input type="number" data-field="cpl" placeholder="masalan 3" min="0" step="0.01" inputmode="decimal"><span class="u">USD</span></div></div>
+    <div class="q" id="qCurrent"><span class="qlab">Hozirgi oylik tushumingiz</span><p class="hint">Ishga tushmagan bo&lsquo;lsa 0 yozing.</p><div class="suffix"><input type="number" data-field="current" placeholder="65000" min="0" inputmode="numeric"><span class="u">USD / oy</span></div></div>
+    <div class="q" id="qCheck"><span class="qlab">O&lsquo;rtacha chek</span><p class="hint">Bitta mijoz bitta bitimda qoldiradigan pul.</p><div class="suffix"><input type="number" data-field="check" placeholder="450" min="0" inputmode="decimal"><span class="u">USD</span></div></div>
+    <div class="q" id="qMargin"><span class="qlab">Yalpi marja</span><p class="hint">Chekdan bevosita xarajat ayirilgach qolgan ulush.</p><div class="suffix"><input type="number" data-field="margin" placeholder="55" min="1" max="100" inputmode="decimal"><span class="u">%</span></div></div>
+    <div class="q" id="qConv"><span class="qlab">Sotuv konversiyasi</span><p class="hint">100 ta murojaatning nechtasi to&lsquo;lovchi mijozga aylanadi. Bilmasangiz bo&lsquo;sh qoldiring.</p><div class="suffix"><input type="number" data-field="conv" placeholder="20" min="0.1" max="100" step="0.1" inputmode="decimal"><span class="u">%</span></div></div>
+    <div class="q" id="qFreq"><span class="qlab">Bir mijoz yiliga necha marta murojaat qiladi?</span><p class="hint">Bir martalik bo&lsquo;lsa 1 yozing. Bu LTV ni belgilaydi.</p><div class="suffix"><input type="number" data-field="freq" placeholder="2" min="1" step="0.1" inputmode="decimal"><span class="u">marta / yil</span></div></div>
+    <div class="q" id="qCPL"><span class="qlab">Haqiqiy murojaat narxi (CPL)</span><p class="hint">O&lsquo;lchagan bo&lsquo;lsangiz kiriting &mdash; bu etalondan ustun turadi.</p><div class="suffix"><input type="number" data-field="cpl" placeholder="3" min="0" step="0.01" inputmode="decimal"><span class="u">USD</span></div></div>
     <div class="q"><span class="qlab">Hozirgi oylik reklama byudjeti</span><div class="suffix"><input type="number" data-field="budget" placeholder="500" min="0" inputmode="numeric"><span class="u">USD / oy</span></div></div>
 
     <div class="q full"><span class="qlab">Asosiy reklama kanalingiz</span>
@@ -1115,6 +1128,8 @@ section.block > h3 .n{
   <div class="wrap">
     <p><b>Tekshirma</b> &mdash; hisob-kitob dvigateli brauzerda ishlaydi, kiritilgan raqamlar hech qayerga yuborilmaydi. Etalon qiymatlar hisobot oxiridagi manbalar ro&lsquo;yxatida keltirilgan; bozor koeffitsienti va tizim koeffitsientlari model taxminlari bo&lsquo;lib, ular hisobotda ochiq belgilangan.</p>
     <p style="margin-top:8px">tekshirma.uz &middot; Tekshir. Tahlil qil. Ishonch hosil qil.</p>
+    <p class="credit">Dastur muallifi &mdash; <b>Alisher Asqad Ali</b>. <span>Actions Test Team</span> mahsuloti.
+      Aloqa uchun: <a href="mailto:sje.kore@gmail.com">sje.kore@gmail.com</a></p>
   </div>
 </footer>
 
@@ -1275,6 +1290,7 @@ function show(i){
   if(f[i].id==="p-report"){ const err=validate(); if(err){ alert(err); return; } build(); }
   cur=i;
   if(f[i].id==="p-sector") renderSector();
+  if(f[i].id==="p-3") applyTerms();
   $$(".panel").forEach(p=>p.classList.remove("on","anim"));
   $("#"+f[i].id).classList.add("on","anim");
   $("#stepper").style.display="block";
@@ -1317,7 +1333,7 @@ document.addEventListener("click",e=>{
     $$(".opt",g).forEach(o=>o.setAttribute("aria-pressed","false"));
     opt.setAttribute("aria-pressed","true");
     S[f]=opt.dataset.v;
-    if(f==="sector") drawStepper();
+    if(f==="sector"){ drawStepper(); applyTerms(); }
     if(f==="cur"){ VIEW_CUR=null; refreshUnits(); }
     return;
   }
@@ -1485,9 +1501,15 @@ const num=(n,d)=>{
 };
 const pct=(n,d)=>isFinite(n)?(n*100).toFixed(d===undefined?1:d)+"%":"—";
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const T=()=> mod()==="clinic"
-  ? {lead:"murojaat", client:"bemor", clientCap:"Bemor"}
-  : {lead:"lid", client:"mijoz", clientCap:"Mijoz"};
+const T=()=>{
+  if(typeof TERMS!=="undefined" && S.sector && TERMS[S.sector]){
+    const t=TERMS[S.sector];
+    return {lead:t.lead, client:t.client, clientCap:t.clientCap, model:t.model};
+  }
+  return mod()==="clinic"
+    ? {lead:"murojaat", client:"bemor", clientCap:"Bemor", model:"bitim"}
+    : {lead:"lid", client:"mijoz", clientCap:"Mijoz", model:"bitim"};
+};
 function srcTag(key){ if(!key||!SRC[key]) return ""; return '<span class="src">Manba: '+esc(SRC[key].o)+'</span>'; }
 function srcLink(key){
   if(!key||!SRC[key]) return "";
@@ -1520,6 +1542,147 @@ function ring(score, tone){
 }
 
 /* ==================================================================
+   SOHA TILI — universal maydonlar har bir sohada o'z nomini oladi.
+   To'lov modeli uchta: obuna (oylik), bitim (har safar), loyiha.
+   ================================================================== */
+const TERMS = {
+  talim:{ lead:"so‘rov", client:"o‘quvchi", clientCap:"O‘quvchi", model:"obuna",
+    check:{l:"Bir o‘quvchining oylik to‘lovi", ph:45,
+      h:"O‘quv markazida to‘lov oyma-oy olinadi. Bitta oylik to‘lovni yozing — butun kurs narxini emas."},
+    margin:{h:"Oylik to‘lovdan bevosita xarajat (ustoz ish haqi, darslik, tarqatma material) ayirilgach qolgan ulush. Ijara va ma’muriyat bu yerga kirmaydi."},
+    freq:{l:"O‘quvchi o‘rtacha necha oy o‘qiydi?", u:"oy", ph:6,
+      h:"To‘lov oylik bo‘lgani uchun LTV shunday chiqadi: oylik to‘lov × o‘qish oylari. Bir kurs 6 oy bo‘lsa 6 yozing."},
+    conv:{h:"100 ta so‘rovning nechtasi haqiqatan yozilib, birinchi to‘lovni qiladi."},
+    current:{h:"Barcha o‘quvchilardan tushgan oylik to‘lovlar yig‘indisi."} },
+
+  fitnes:{ lead:"so‘rov", client:"a’zo", clientCap:"A’zo", model:"obuna",
+    check:{l:"Bir a’zoning oylik to‘lovi", ph:30, h:"Yillik abonement sotsangiz, uni 12 ga bo‘lib oylik qiymatini yozing."},
+    margin:{h:"Oylik to‘lovdan bevosita xarajat (murabbiy ishbay haqi, sarf material) ayirilgach qolgan ulush. Ijara va uskuna amortizatsiyasi bu yerga kirmaydi."},
+    freq:{l:"A’zo o‘rtacha necha oy qoladi?", u:"oy", ph:8,
+      h:"Yillik oqim 30% bo‘lsa, o‘rtacha qolish ~8 oy. LTV shundan chiqadi."},
+    conv:{h:"100 ta so‘rovning nechtasi abonement sotib oladi."},
+    current:{h:"Barcha a’zolardan tushgan oylik to‘lovlar yig‘indisi."} },
+
+  tibbiyot:{ lead:"murojaat", client:"bemor", clientCap:"Bemor", model:"bitim",
+    check:{l:"O‘rtacha chek", ph:450,
+      h:"Bitta bemor bitta murojaatida qoldiradigan pul. Statsionar bo‘lsa — bitta yotqizilgan bemorning to‘liq hisobi (palata + dori + muolaja + tahlil)."},
+    margin:{h:"Chekdan bevosita xarajat (dori, sarf materiallari, ishbay ish haqi) ayirilgach qolgan ulush."},
+    freq:{l:"Bir bemor yiliga necha marta murojaat qiladi?", u:"marta / yil", ph:2,
+      h:"Bir martalik bo‘lsa 1 yozing. Bu LTV ni belgilaydi."},
+    conv:{h:"100 ta murojaatning nechtasi to‘lovchi bemorga aylanadi."},
+    current:{h:"Barcha bo‘limlardan tushgan oylik tushum."} },
+
+  stomatologiya:{ lead:"murojaat", client:"bemor", clientCap:"Bemor", model:"bitim",
+    check:{l:"Bir davolash rejasining o‘rtacha qiymati", ph:250,
+      h:"Bitta tashrif emas — boshidan oxirigacha bo‘lgan davolash rejasi. Stomatologiyada bemor odatda bir necha marta keladi va bitta reja bo‘yicha to‘laydi."},
+    margin:{h:"Chekdan bevosita xarajat (material, texnik ish, ishbay shifokor haqi) ayirilgach qolgan ulush."},
+    freq:{l:"Bir bemor yiliga nechta davolash rejasini oladi?", u:"reja / yil", ph:1,
+      h:"Profilaktik ko‘rik alohida reja sifatida sanalsa, 2 bo‘lishi mumkin."},
+    conv:{h:"Taklif qilingan 100 ta davolash rejasining nechtasi boshlanadi."},
+    current:{h:"Oylik kassa jami."} },
+
+  gozallik:{ lead:"so‘rov", client:"mijoz", clientCap:"Mijoz", model:"bitim",
+    check:{l:"O‘rtacha chek", ph:25, h:"Bitta tashrifda qoldiriladigan pul. Bir necha xizmat birga olinsa, hammasi qo‘shiladi."},
+    margin:{h:"Chekdan bevosita xarajat (kosmetika, sarf material, ustaning foizi) ayirilgach qolgan ulush."},
+    freq:{l:"Bir mijoz yiliga necha marta keladi?", u:"marta / yil", ph:8,
+      h:"Oyiga bir marta kelsa 12 yozing. Bu LTV ning eng kuchli omili."},
+    conv:{h:"100 ta so‘rovning nechtasi haqiqatan kelib xizmat oladi."},
+    current:{h:"Oylik kassa jami."} },
+
+  horeca:{ lead:"tashrif", client:"mehmon", clientCap:"Mehmon", model:"bitim",
+    check:{l:"O‘rtacha chek (bir mehmon)", ph:9, h:"Bitta mehmon bir kelishida qoldiradigan pul. Stol cheki emas — uni o‘rindiq soniga bo‘ling."},
+    margin:{h:"Chekdan mahsulot tannarxi ayirilgach qolgan ulush. Ish haqi va ijara bu yerga kirmaydi — ular doimiy xarajat."},
+    freq:{l:"Bir mehmon yiliga necha marta keladi?", u:"marta / yil", ph:12,
+      h:"Oyiga bir marta kelsa 12. Doimiy mijozlarni hisobga oling."},
+    conv:{h:"Restoranda bu ko‘rsatkich odatda o‘lchanmaydi — bo‘sh qoldiring."},
+    current:{h:"Oylik kassa jami."} },
+
+  savdo:{ lead:"tashrif", client:"xaridor", clientCap:"Xaridor", model:"bitim",
+    check:{l:"O‘rtacha chek", ph:22, h:"Bitta xarid summasi. Kassadagi jami tushumni chek soniga bo‘ling."},
+    margin:{h:"Sotuv narxidan tovar tannarxi ayirilgach qolgan ulush."},
+    freq:{l:"Bir xaridor yiliga necha marta xarid qiladi?", u:"marta / yil", ph:4,
+      h:"Takroriy xaridni o‘lchamasangiz 1 yozing — bu ehtiyotkor baho."},
+    conv:{h:"Do‘konga kirgan yoki saytga tushgan 100 odamning nechtasi xarid qiladi."},
+    current:{h:"Oylik aylanma jami."} },
+
+  xizmat:{ lead:"so‘rov", client:"mijoz", clientCap:"Mijoz", model:"bitim",
+    check:{l:"Bir buyurtmaning o‘rtacha qiymati", ph:35, h:"Bitta chaqiruv yoki buyurtma uchun olinadigan pul."},
+    margin:{h:"Buyurtma qiymatidan bevosita xarajat (ehtiyot qism, sarf material, ustaning foizi, yo‘l) ayirilgach qolgan ulush."},
+    freq:{l:"Bir mijoz yiliga necha marta buyurtma beradi?", u:"marta / yil", ph:2,
+      h:"Shartnoma asosida xizmat ko‘rsatsangiz, yillik chaqiruvlar sonini yozing."},
+    conv:{h:"100 ta so‘rovning nechtasi buyurtmaga aylanadi."},
+    current:{h:"Oylik tushum jami."} },
+
+  kochmas:{ lead:"murojaat", client:"mijoz", clientCap:"Mijoz", model:"loyiha",
+    check:{l:"Bir bitimdan o‘rtacha komissiya", ph:2500, h:"Obyekt narxi emas — sizga qoladigan komissiya summasi."},
+    margin:{h:"Komissiyadan agentning foizi va bitimga ketgan bevosita xarajat ayirilgach qolgan ulush."},
+    freq:{l:"Bir mijoz yiliga nechta bitim qiladi?", u:"bitim / yil", ph:1,
+      h:"Ko‘chmas mulkda odatda 1. Investor mijozlar bo‘lsa ko‘proq."},
+    conv:{h:"100 ta murojaatning nechtasi yopilgan bitimga aylanadi. Bu sohada odatda past — 2–5%."},
+    current:{h:"Oylik komissiya tushumi."} },
+
+  b2b:{ lead:"murojaat", client:"mijoz", clientCap:"Mijoz", model:"loyiha",
+    check:{l:"Bir shartnomaning o‘rtacha qiymati", ph:1200, h:"Bitta loyiha yoki yillik shartnoma summasi."},
+    margin:{h:"Shartnoma qiymatidan bevosita xarajat (loyihaga jalb qilingan xodimlar vaqti, subpudrat) ayirilgach qolgan ulush."},
+    freq:{l:"Bir mijoz yiliga nechta shartnoma qiladi?", u:"shartnoma / yil", ph:1,
+      h:"Uzoq muddatli mijozlar bo‘lsa, yillik takrorlanish sonini yozing."},
+    conv:{h:"100 ta murojaatning nechtasi shartnomaga aylanadi. SPI ma’lumotida taklif yutish darajasi ~48%, lekin murojaatdan shartnomagacha ancha past."},
+    current:{h:"Oylik tushum jami."} },
+
+  qurilish:{ lead:"so‘rov", client:"buyurtmachi", clientCap:"Buyurtmachi", model:"loyiha",
+    check:{l:"Bir obyektning o‘rtacha qiymati", ph:12000, h:"Butun obyekt bo‘yicha shartnoma summasi."},
+    margin:{h:"Shartnoma qiymatidan bevosita xarajat (material, ishchilar haqi, texnika ijarasi, subpudrat) ayirilgach qolgan ulush. CFMA bo‘yicha eng yaxshi pudratchilarda 21,8%."},
+    freq:{l:"Bir buyurtmachi yiliga nechta obyekt beradi?", u:"obyekt / yil", ph:1,
+      h:"Takroriy buyurtmachilar bo‘lsa ko‘proq yozing — bu tender xarajatini keskin kamaytiradi."},
+    conv:{h:"Yuborilgan 100 ta taklifning nechtasi shartnomaga aylanadi."},
+    current:{h:"Oylik tushum — tugallangan bosqichlar bo‘yicha."} },
+
+  ishlab_chiqarish:{ lead:"so‘rov", client:"xaridor", clientCap:"Xaridor", model:"bitim",
+    check:{l:"Bir buyurtmaning o‘rtacha qiymati", ph:3000, h:"Bitta partiya yoki jo‘natmaning summasi."},
+    margin:{h:"Sotuv narxidan bevosita xarajat (xom ashyo, ishbay ish haqi, energiya) ayirilgach qolgan ulush."},
+    freq:{l:"Bir xaridor yiliga necha marta buyurtma beradi?", u:"marta / yil", ph:4,
+      h:"Doimiy xaridorlar bilan ishlasangiz, yillik jo‘natmalar sonini yozing."},
+    conv:{h:"100 ta so‘rovning nechtasi buyurtmaga aylanadi."},
+    current:{h:"Oylik sotuv tushumi."} },
+
+  boshqa:{ lead:"so‘rov", client:"mijoz", clientCap:"Mijoz", model:"bitim",
+    check:{l:"O‘rtacha chek", ph:20, h:"Bitta mijoz bitta bitimda qoldiradigan pul."},
+    margin:{h:"Chekdan bevosita xarajat ayirilgach qolgan ulush. Ijara va oklad bu yerga kirmaydi."},
+    freq:{l:"Bir mijoz yiliga necha marta murojaat qiladi?", u:"marta / yil", ph:2,
+      h:"Bir martalik bo‘lsa 1 yozing. Bu LTV ni belgilaydi."},
+    conv:{h:"100 ta so‘rovning nechtasi to‘lovchi mijozga aylanadi."},
+    current:{h:"Oylik tushum jami."} }
+};
+function terms(){ return TERMS[S.sector] || TERMS.boshqa; }
+
+/* Universal maydonlarni soha tiliga o'tkazish */
+function applyTerms(){
+  const t=terms();
+  const set=(id,lab,hint)=>{
+    const q=$("#"+id); if(!q) return;
+    if(lab){ const l=q.querySelector(".qlab"); if(l) l.textContent=lab; }
+    if(hint){ const h=q.querySelector(".hint"); if(h) h.innerHTML=hint; }
+  };
+  const num=(id,ph,unit)=>{
+    const q=$("#"+id); if(!q) return;
+    const inp=q.querySelector("input[type=number]");
+    if(inp && ph!==undefined){ inp.dataset.ph=String(ph); inp.placeholder=String(ph); }
+    if(unit!==undefined){
+      const u=q.querySelector(".u");
+      if(u && !u.dataset.money) u.textContent=unit;
+    }
+  };
+  set("qCheck", t.check.l, t.check.h);      num("qCheck", t.check.ph);
+  set("qMargin", null,     t.margin.h);
+  set("qFreq",  t.freq.l,  t.freq.h);       num("qFreq",  t.freq.ph, t.freq.u);
+  set("qConv",  null,      t.conv.h);
+  set("qCurrent", null,    t.current.h);
+  const cpl=$("#qCPL"); if(cpl){ const h=cpl.querySelector(".hint");
+    if(h) h.textContent="Bitta "+t.lead+"ning haqiqiy narxi. O‘lchagan bo‘lsangiz kiriting — bu etalondan ustun turadi."; }
+  if(typeof refreshUnits==="function") refreshUnits();
+}
+
+/* ==================================================================
    SOHA MODULI — har bir soha uchun alohida savollar, etalon va xulosa
    ================================================================== */
 
@@ -1547,6 +1710,7 @@ Object.assign(SRC, {
   /* --- fitnes --- */
   hfa:  {t:"Fitnes klublarida yillik a’zolar oqimi (churn) 28.6–33.3%; median EBITDA marjasi 23.6%; median tushum o‘sishi 9.9%; 175 kompaniya, 17 000 dan ortiq obyekt", o:"Health & Fitness Association (IHRSA) 2025 Benchmarking Report", u:"https://www.healthandfitness.org/health-fitness-association-releases-2025-fitness-industry-benchmarking-report/"},
   hfat: {t:"A’zo oyiga o‘rtacha necha marta keladi: premium klublar 5.2 marta (seans 86 daqiqa), butik studiyalar ~2.5 marta; ~11 000 obyekt o‘lchangan", o:"HFA FIT Tracker, 2025-yil 1-yarim yillik", u:"https://www.healthandfitness.org/2025-fitness-industry-foot-traffic-trends-budget-gyms-booming-engagement-up-across-all-segments/"},
+  hfanc:{t:"A’zolik badalidan tashqari daromad (shaxsiy murabbiy, bufet, do‘kon, qo‘shimcha mashg‘ulotlar) klub tushumining taxminan chorak qismini tashkil qiladi. Diqqat: manba 2016-yilga tegishli, yo‘nalish ko‘rsatkichi sifatida qaralsin", o:"IHRSA (M. Rodriguez), Health & Fitness Association orqali", u:"https://www.healthandfitness.org/improve-your-club/top-5-profit-centers-at-multipurpose-health-clubs/"},
   gcb:  {t:"Yangi klub loyihalashda 1 m² ga 2.5 a’zo me’yori qo‘llaniladi", o:"GCB Consulting, Health & Fitness Association orqali", u:"https://www.healthandfitness.org/improve-your-club/solve-overcrowding-at-your-gym-with-this-simple-equation/"},
 
   /* --- ko'chmas mulk --- */
@@ -1579,16 +1743,41 @@ const SQ = {
 
   talim:{
     lab:"Ta’lim markazi",
-    intro:"Ta’lim markazining quvvati oddiy ko‘paytma bilan chiqadi: xona × kunlik smena × bir guruh sig‘imi. Ayni vaqtdagi o‘quvchi soni shu ko‘paytmadan qancha past bo‘lsa, farq bo‘sh turgan pul.",
+    intro:"Ta’lim markazining quvvati dars jadvalidan chiqadi: ochiq soat, tanaffus va dars davomiyligi kunlik smena sonini beradi. Xona × smena × sig‘im — nazariy o‘rin. Ayni vaqtdagi o‘quvchi soni shu ko‘paytmadan qancha past bo‘lsa, farq bo‘sh turgan pul.",
     mode:"stock",
     cap:{
       unit :{f:"x_unit", l:"O‘quv xonalari soni",                 ph:"6",  u:"xona"},
-      slot :{f:"x_slot", l:"Bir xonada kuniga nechta guruh o‘tadi",ph:"4", u:"guruh / kun", hint:"Ertalabki, kunduzgi, kechki smenalarni sanang."},
-      seat :{f:"x_seat", l:"Bitta guruhga sig‘adigan o‘quvchi",    ph:"12", u:"o‘quvchi", hint:"Xonadagi jismoniy sig‘im — hozirgi to‘ldirish emas."},
+      seat :{f:"x_seat", l:"Bitta xonaga sig‘adigan o‘quvchi",    ph:"12", u:"o‘quvchi", hint:"Xonadagi jismoniy sig‘im — hozirgi to‘ldirish emas. Sinflar har xil bo‘lsa, o‘rtachasini oling."},
       days :{f:"x_days", l:"Oyiga necha kun dars bo‘ladi",         ph:"24", u:"kun"},
       used :{f:"x_used", l:"Ayni vaqtda ishlayotgan guruhlar",     ph:"18", u:"guruh"},
-      fill :{f:"x_fill", l:"Bitta guruhdagi o‘rtacha o‘quvchi",    ph:"8",  u:"o‘quvchi"},
+      students:{f:"x_students", l:"Ayni vaqtdagi jami o‘quvchilar soni", ph:"150", u:"o‘quvchi",
+        hint:"Bu raqam o‘quv markazida aniq bilinadi. Guruhga bo‘lib o‘rtacha sig‘imni asbob o‘zi hisoblaydi."},
       price:{f:"x_price",l:"Bitta o‘quvchining oylik to‘lovi",     ph:"45", u:"USD"}
+    },
+    /* dars jadvalidan kunlik smena soni chiqariladi */
+    slotFrom:{
+      title:"Dars jadvali",
+      fields:[
+        {f:"x_open", l:"Markaz kuniga necha soat ochiq", ph:"12", u:"soat", hint:"Masalan 8:00–20:00 bo‘lsa 12."},
+        {f:"x_break",l:"Kunlik tanaffus",                ph:"60", u:"daqiqa", hint:"Odatda 12:00–13:00 oralig‘ida. Tanaffus bo‘lmasa 0 yozing."},
+        {f:"x_len",  l:"Bitta dars davomiyligi",         ph:"90", u:"daqiqa", hint:"O‘quv markazlarida odatda 90 daqiqa."}
+      ],
+      fn:function(n){
+        const open=n("x_open"), br=n("x_break"), len=n("x_len");
+        if(!(open>0&&len>0)) return 0;
+        return Math.floor((open*60-br)/len);
+      },
+      label:"Bir xonada kuniga nechta guruh o‘ta oladi"
+    },
+    extra:{
+      t:"Oylik to‘lovdan tashqari daromad",
+      hint:"O‘quv markazida asosiy pul oylik to‘lovdan keladi, lekin yagona oqim emas.",
+      bench:null, src:"bain",
+      why:"Bu oqimlar mavjud o‘quvchilardan keladi — yangi o‘quvchi jalb qilish shart emas. Ko‘pincha ular umuman hisobga olinmaydi va shu sababli o‘stirilmaydi.",
+      fields:[
+        {f:"x_e2", l:"Darslik va materiallar oylik sotuvi", ph:"300", u:"USD / oy"},
+        {f:"x_e3", l:"Imtihon, sertifikat, intensiv kurslar oylik tushumi", ph:"400", u:"USD / oy"}
+      ]
     },
     mix:{
       t:"Yo‘nalishlar kesimi",
@@ -1624,6 +1813,16 @@ const SQ = {
       days :{f:"x_days", l:"Oyiga ish kunlari",                    ph:"26", u:"kun"},
       used :{f:"x_used", l:"Kuniga fakt xizmat ko‘rsatilgan mijoz",ph:"26", u:"mijoz / kun"},
       price:{f:"x_price",l:"O‘rtacha chek",                        ph:"25", u:"USD"}
+    },
+    extra:{
+      t:"Xizmatdan tashqari daromad",
+      hint:"Salonda mijoz allaqachon kursida o‘tiribdi — unga uy uchun vosita sotish eng arzon sotuv turi.",
+      bench:null, src:"bain",
+      why:"Kosmetika sotuvi qo‘shimcha reklama xarajatisiz keladi va marjasi xizmatnikidan yuqori bo‘ladi. Bu ko‘rsatkich o‘lchanmasa, u odatda umuman boshqarilmaydi.",
+      fields:[
+        {f:"x_e2", l:"Kosmetika va vositalar oylik sotuvi", ph:"400", u:"USD / oy"},
+        {f:"x_e3", l:"Sovg‘a sertifikatlari oylik sotuvi",  ph:"150", u:"USD / oy"}
+      ]
     },
     mix:{
       t:"Ustalar kesimi",
@@ -1724,6 +1923,19 @@ const SQ = {
     },
     perClient:{f:"x_freq",l:"Bitta a’zo oyiga necha marta keladi",ph:"5",u:"marta",bench:5.2,src:"hfat",
       hint:"Kunlik tashrifni a’zo soniga bo‘lib chiqarish mumkin."},
+    extra:{
+      t:"Abonementdan tashqari daromad",
+      hint:"Fitnesda tushumning sezilarli qismi abonementdan tashqarida: bir martalik tashrif, bufet, sport ovqati, shaxsiy murabbiy. Bularsiz hisob klubni haqiqiydan kambag‘alroq ko‘rsatadi.",
+      bench:25, benchLab:"jami tushumning ~25% i", src:"hfanc",
+      why:"IHRSA ma’lumotiga ko‘ra abonementdan tashqari daromad klub tushumining chorak qismini tashkil qiladi. Bu ulush past bo‘lsa, klub allaqachon binoda turgan odamdan qo‘shimcha pul olmayapti — eng arzon sotuv shu.",
+      fields:[
+        {f:"x_e1n", l:"Bir martalik (kunlik) tashriflar", ph:"200", u:"tashrif / oy"},
+        {f:"x_e1p", l:"Bir martalik tashrif narxi",        ph:"3",   u:"USD"},
+        {f:"x_e2",  l:"Bufet va do‘kon oylik tushumi",      ph:"600", u:"USD / oy",
+         hint:"Suv, energetik ichimlik, sport ovqati, kiyim, aksessuar."},
+        {f:"x_e3",  l:"Shaxsiy murabbiy oylik tushumi",     ph:"900", u:"USD / oy"}
+      ]
+    },
     mix:{
       t:"Yo‘nalishlar kesimi",
       hint:"Trenajyor zali, guruh mashg‘ulotlari, shaxsiy murabbiy, basseyn — har birini alohida yozing.",
@@ -1858,6 +2070,16 @@ const SQ = {
       used :{f:"x_used", l:"Kuniga fakt bajarilgan buyurtma",       ph:"18", u:"buyurtma / kun"},
       price:{f:"x_price",l:"Bir buyurtmadan o‘rtacha tushum",       ph:"35", u:"USD"}
     },
+    extra:{
+      t:"Ish haqidan tashqari daromad",
+      hint:"Ehtiyot qism va materialni o‘zingiz yetkazsangiz, uning marjasi ham sizga qoladi.",
+      bench:null, src:"cgau",
+      why:"Ehtiyot qism sotuvi va shartnoma asosidagi profilaktika — bashorat qilinadigan, takrorlanuvchi daromad. Ular xizmat biznesini bir martalik chaqiruvlarga qaramlikdan chiqaradi.",
+      fields:[
+        {f:"x_e2", l:"Ehtiyot qism va material oylik sotuvi", ph:"500", u:"USD / oy"},
+        {f:"x_e3", l:"Profilaktika shartnomalari oylik tushumi", ph:"700", u:"USD / oy"}
+      ]
+    },
     mix:{
       t:"Xizmat turlari kesimi",
       hint:"Har bir xizmat turini alohida yozing.",
@@ -1928,13 +2150,27 @@ function renderSector(){
   h+='<div class="panel-head"><span class="bar"></span><p class="eyebrow">Bosqich 04 &middot; '+c.lab+'</p>'+
      '<h2>'+c.lab+' moduli</h2><p>'+c.intro+'</p></div>';
 
-  h+='<p class="sub-head">A. Quvvat va ayni holat</p><div class="qgrid">';
-  ["unit","slot","seat","days","used","fill","price"].forEach(k=>{ if(c.cap[k]) h+=fieldHtml(c.cap[k]); });
+  if(c.slotFrom){
+    h+='<p class="sub-head">A. '+c.slotFrom.title+'</p><div class="qgrid">';
+    c.slotFrom.fields.forEach(q=>h+=fieldHtml(q));
+    h+='</div><div class="derived" id="derivedSlot"></div>';
+  }
+  h+='<p class="sub-head">'+(c.slotFrom?"B":"A")+'. Quvvat va ayni holat</p><div class="qgrid">';
+  ["unit","slot","seat","days","used","students","fill","price"].forEach(k=>{ if(c.cap[k]) h+=fieldHtml(c.cap[k]); });
   if(c.perClient) h+=fieldHtml(c.perClient);
   h+='</div>';
+  if(c.cap.students) h+='<div class="derived" id="derivedGroup"></div>';
 
+  if(c.extra){
+    h+='<p class="sub-head">'+(c.slotFrom?"C":"B")+'. '+c.extra.t+'</p>';
+    h+='<p class="hint" style="margin:-14px 0 16px">'+c.extra.hint+
+       (c.extra.benchLab?' <b style="color:var(--ink-2)">Etalon: '+c.extra.benchLab+'.</b>':'')+'</p>';
+    h+='<div class="qgrid">';
+    c.extra.fields.forEach(q=>h+=fieldHtml(q));
+    h+='</div><div class="derived" id="derivedExtra"></div>';
+  }
   if(c.mix){
-    h+='<p class="sub-head">B. '+c.mix.t+'</p><p class="hint" style="margin:-14px 0 16px">'+c.mix.hint+'</p>';
+    h+='<p class="sub-head">'+(c.slotFrom?(c.extra?"D":"C"):(c.extra?"C":"B"))+'. '+c.mix.t+'</p><p class="hint" style="margin:-14px 0 16px">'+c.mix.hint+'</p>';
     h+='<div class="mixwrap"><table class="mixtable"><thead><tr><th>'+c.mix.row+'</th>'+
        c.mix.cols.map(col=>'<th>'+col.l+'<i>'+col.u+'</i></th>').join('')+'</tr></thead><tbody>';
     for(let i=0;i<MIXN;i++){
@@ -1945,7 +2181,8 @@ function renderSector(){
     h+='</tbody></table></div>';
   }
 
-  h+='<p class="sub-head">C. Soha ko‘rsatkichlari</p><div class="qgrid">';
+  const secLet = ["A","B","C","D","E"][ (c.slotFrom?1:0)+(c.extra?1:0)+(c.mix?1:0)+1 ];
+  h+='<p class="sub-head">'+secLet+'. Soha ko‘rsatkichlari</p><div class="qgrid">';
   c.kpi.forEach(k=>{
     const bl = k.benchLab ? '<p class="hint" style="color:var(--ink-3)">Etalon: '+k.benchLab+'</p>' : '';
     h+='<div class="q"><span class="qlab">'+k.l+'</span>'+(k.hint?'<p class="hint">'+k.hint+'</p>':'')+bl+
@@ -1958,7 +2195,45 @@ function renderSector(){
   refreshUnits();
   /* saqlangan qiymatlarni qaytarish */
   $$("[data-field]",box).forEach(el=>{ const v=S[el.dataset.field]; if(v!==undefined&&v!==null&&v!=="") el.value=v; });
+  updateDerived();
 }
+
+/* Kiritilgan raqamlardan darhol chiqadigan hisoblar */
+function updateDerived(){
+  const c=sq(); if(!c) return;
+  const n=k=>{ const v=S[k]; return (typeof v==="number"&&isFinite(v))?v:0; };
+  const ds=$("#derivedSlot");
+  if(ds && c.slotFrom){
+    const s=c.slotFrom.fn(n);
+    ds.innerHTML = s>0
+      ? '<b>'+c.slotFrom.label+': '+s+' ta</b><span>('+n("x_open")+' soat × 60 − '+n("x_break")+' daqiqa) ÷ '+n("x_len")+' daqiqa. Quvvat hisobida shu son ishlatiladi.</span>'
+      : '<span>Yuqoridagi uchta maydonni to‘ldiring — kunlik smena soni o‘zi hisoblanadi.</span>';
+  }
+  const de=$("#derivedExtra");
+  if(de && c.extra){
+    let ex=0;
+    c.extra.fields.forEach(q=>{ if(/n$/.test(q.f)) return; ex += n(q.f); });
+    const cnt=n("x_e1n"), pr=n("x_e1p");
+    if(cnt>0&&pr>0) ex += cnt*pr;
+    const X0=sectorEngine();
+    const main = (X0&&X0.ok) ? (X0.revNow||0) : 0;
+    de.innerHTML = ex>0
+      ? '<b>Qo‘shimcha daromad: '+money(ex)+' / oy</b><span>'+
+        (main>0 ? 'Jami tushumdagi ulushi '+Math.round(ex/(main+ex)*100)+'%'+
+                  (c.extra.bench?' · etalon ~'+c.extra.bench+'%':'') : 'Asosiy tushum kiritilgach ulushi ham chiqadi')+'</span>'
+      : '<span>Bu oqimlarni yozsangiz, ular hisobotda alohida satr bo‘lib chiqadi.</span>';
+  }
+  const dg=$("#derivedGroup");
+  if(dg && c.cap.students){
+    const st=n("x_students"), gr=n("x_used");
+    dg.innerHTML = (st>0&&gr>0)
+      ? '<b>Bitta guruhdagi o‘rtacha o‘quvchi: '+(st/gr).toFixed(1)+' ta</b><span>'+st+' o‘quvchi ÷ '+gr+' guruh. Sinf sig‘imi '+(n("x_seat")||"—")+' ta bo‘lsa, to‘ldirish '+(n("x_seat")>0?Math.round(st/gr/n("x_seat")*100)+'%':"—")+'.</span>'
+      : '<span>O‘quvchilar va guruhlar sonini yozing — o‘rtacha guruh kattaligi o‘zi chiqadi.</span>';
+  }
+}
+document.addEventListener("input",e=>{
+  if(e.target.dataset && /^x_/.test(e.target.dataset.field||"")) updateDerived();
+});
 
 /* ------------------------------------------------------------------
    SOHA DVIGATELI
@@ -1983,7 +2258,10 @@ function sectorEngine(){
     X.util    = X.benchOff>0 ? X.conv/X.benchOff : 0;
     X.ok=true;
   } else {
-    const unit=n("x_unit"), slot=n("x_slot"), seat=n("x_seat")||1;
+    const unit=n("x_unit");
+    const slot = c.slotFrom ? c.slotFrom.fn(n) : n("x_slot");
+    const seat=n("x_seat")||1;
+    X.slot=slot;
     if(!(unit>0&&slot>0&&price>0)) return X;
     const perDay = unit*slot*seat;
     X.perDay=perDay; X.price=price; X.days=days;
@@ -1996,16 +2274,22 @@ function sectorEngine(){
       } else if(c.cap.fill){                      /* guruh modeli: guruh o'rniga o'quvchi */
         capacity = perDay;                        /* xona × smena × sig'im = o'quvchi o'rni */
       }
-      const usedGroups=n("x_used"), fill=n("x_fill");
+      const usedGroups=n("x_used");
+      const students=n("x_students");
+      const fill = c.cap.students
+        ? (usedGroups>0 ? students/usedGroups : 0)
+        : n("x_fill");
       let actual;
-      if(c.cap.fill && usedGroups>0 && fill>0) actual = usedGroups*fill;
+      if(c.cap.students && students>0) actual = students;
+      else if(c.cap.fill && usedGroups>0 && fill>0) actual = usedGroups*fill;
       else actual = usedGroups;
+      X.fill=fill;
       X.cap=capacity; X.actual=actual;
       X.util = capacity>0 ? actual/capacity : 0;
       X.revNow = actual*price;
       X.revFull= capacity*price;
       /* guruh to'ldirish alohida ko'rsatkich */
-      if(c.cap.fill){
+      if(c.cap.fill || c.cap.students){
         X.grpUsed=usedGroups; X.grpCap = unit*slot;
         X.grpFill = n("x_seat")>0 ? fill/n("x_seat") : 0;
         X.grpUtil = X.grpCap>0 ? usedGroups/X.grpCap : 0;
@@ -2028,6 +2312,24 @@ function sectorEngine(){
     X.gap = Math.max(0, X.capReal - X.actual);
     X.gapMoney = X.gap*price;
     X.ok=true;
+  }
+
+  /* qo'shimcha daromad oqimlari */
+  if(c.extra){
+    let ex=0; const parts=[];
+    const cnt=n("x_e1n"), pr=n("x_e1p");
+    if(cnt>0&&pr>0){ ex+=cnt*pr; parts.push({l:c.extra.fields[0].l, v:cnt*pr, note:grp(cnt)+" × "+money(pr)}); }
+    c.extra.fields.forEach(q=>{
+      if(/n$/.test(q.f)||/p$/.test(q.f)) return;
+      const v=n(q.f); if(v>0){ ex+=v; parts.push({l:q.l, v:v, note:""}); }
+    });
+    X.extra=ex; X.extraParts=parts; X.extraSpec=c.extra;
+    const main=X.revNow||0;
+    X.extraShare = (main+ex)>0 ? ex/(main+ex) : 0;
+    X.revTotal = main+ex;
+    if(c.extra.bench!=null && ex>0){
+      X.extraGap = Math.max(0, (c.extra.bench/100)*(main/(1-c.extra.bench/100)) - ex);
+    }
   }
 
   /* aralashma jadvali */
@@ -2098,11 +2400,37 @@ function sectorFindings(X){
       out.push({
         sev:"warn", kind:"struct", loss:0,
         title:"Guruhlar to‘ldirilmagan holda ochilyapti",
-        fact:"Guruhdagi o‘rtacha to‘ldirish "+Math.round(X.grpFill*100)+"% — sig‘im "+grp(S.x_seat)+" o‘rin, fakt "+sig3(S.x_fill)+" kishi.",
+        fact:"Guruhdagi o‘rtacha to‘ldirish "+Math.round(X.grpFill*100)+"% — sig‘im "+grp(S.x_seat)+" o‘rin, fakt "+sig3(X.fill)+" kishi.",
         bench:"Guruh xarajati (ustoz soati, xona, kommunal) o‘quvchi soniga qarab o‘zgarmaydi.",
         src:null,
         why:"To‘ldirilmagan guruh — eng qimmat xato turi, chunki xarajat to‘liq guruhnikidek qoladi, tushum esa yarmi. Ikkita yarim guruhni bittaga birlashtirish xarajatni ikki barobar kamaytiradi va sifatni pasaytirmaydi.",
         fix:"Jadvalni qayta yig‘ing: bir xil daraja va bir xil vaqtdagi kichik guruhlarni birlashtiring. Yangi guruhni minimal to‘ldirish chegarasiga yetmaguncha ochmang — chegarani hisoblab yozing."
+      });
+    }
+  }
+
+  /* qo'shimcha daromad xulosasi */
+  if(X.extraSpec){
+    const sp=X.extraSpec;
+    if(!(X.extra>0)){
+      out.push({
+        sev:"warn", kind:"struct", loss:0,
+        title:sp.t+" umuman hisobga olinmagan",
+        fact:"Bu oqimlar bo‘yicha hech qanday raqam kiritilmadi.",
+        bench: sp.benchLab ? "Etalon: "+sp.benchLab : "Bu daromad mavjud mijozlardan keladi va qo‘shimcha reklama talab qilmaydi.",
+        src: sp.src||null,
+        why: sp.why,
+        fix:"Oxirgi oyning kassasidan shu oqimlarni alohida ajratib chiqing. Agar ular umuman yo‘q bo‘lsa — bu yo‘qotish emas, ochilmagan imkoniyat."
+      });
+    } else if(sp.bench!=null && X.extraShare < sp.bench/100*0.7){
+      out.push({
+        sev:"warn", kind:"now", loss:X.extraGap||0,
+        title:sp.t+" etalondan past",
+        fact:"Qo‘shimcha daromad "+money(X.extra)+" — jami tushumning "+Math.round(X.extraShare*100)+"% i.",
+        bench:"Etalon: "+sp.benchLab+".",
+        src:sp.src||null,
+        why:sp.why,
+        fix:"Eng oson uchta qadam: kassaga ko‘rinadigan javon qo‘ying, narxni ko‘rsating, xodimga sotuvdan foiz belgilang. Mijoz allaqachon binoda — unga yetib borish xarajati nolga teng."
       });
     }
   }
@@ -2806,7 +3134,7 @@ function build(){
   if(P){ usedSrc.add("oee"); usedSrc.add("oeeb"); }
   if(C){ usedSrc.add("nosh"); usedSrc.add("lic"); usedSrc.add("lic2"); usedSrc.add("dna"); }
   if(I){ ["bor","eff","bev","cost","ind","alos","eu","dbn","nar","nar2","arv","arv2","bum","aci","hub","mri","staff","krung"].forEach(k=>usedSrc.add(k)); }
-  if(X && X.ok){ (X.c.kpi||[]).forEach(k=>{ if(k.src) usedSrc.add(k.src); }); if(X.mode==="conv"){ usedSrc.add("trur"); usedSrc.add("irp"); } if(X.c.perClient && X.c.perClient.src) usedSrc.add(X.c.perClient.src); }
+  if(X && X.ok){ (X.c.kpi||[]).forEach(k=>{ if(k.src) usedSrc.add(k.src); }); if(X.mode==="conv"){ usedSrc.add("trur"); usedSrc.add("irp"); } if(X.c.perClient && X.c.perClient.src) usedSrc.add(X.c.perClient.src); if(X.c.extra && X.c.extra.src) usedSrc.add(X.c.extra.src); }
 
   const name=S.company?esc(S.company):"Nomsiz tashkilot";
   const dt=new Date();
@@ -3103,6 +3431,16 @@ function build(){
       }
     }
     H+='</tbody></table></div>';
+
+    if(X.extra>0 && X.extraParts && X.extraParts.length){
+      H+='<div class="tblwrap" style="margin-top:14px"><table class="tbl"><thead><tr><th>'+esc(X.extraSpec.t)+'</th><th style="text-align:right">Oylik tushum</th><th>Izoh</th></tr></thead><tbody>';
+      X.extraParts.forEach(pt=>{ H+='<tr><td>'+esc(pt.l)+'</td><td class="n">'+money(pt.v)+'</td><td class="formula">'+esc(pt.note||"")+'</td></tr>'; });
+      H+=row("<b>Jami qo‘shimcha</b>","<b>"+money(X.extra)+"</b>","");
+      H+=row("Asosiy xizmatdan tushum", money(X.revNow||0), "");
+      H+=row("<b>Qo‘shimchaning ulushi</b>","<b>"+pct(X.extraShare)+"</b>", X.extraSpec.bench!=null ? "etalon ~"+X.extraSpec.bench+"%" : "");
+      H+='</tbody></table></div>';
+      if(X.extraSpec.src) H+='<p class="note">'+srcTag(X.extraSpec.src)+'</p>';
+    }
 
     if(X.mix.length){
       H+='<div class="tblwrap" style="margin-top:14px"><table class="tbl"><thead><tr><th>'+esc(c.mix.row)+'</th><th style="text-align:right">'+esc(c.mix.cols[0].l)+'</th><th style="text-align:right">'+esc(c.mix.cols[1].l)+'</th><th style="text-align:right">Oylik tushum</th><th style="text-align:right">Ulush</th><th style="text-align:right">1 xodimga</th></tr></thead><tbody>';
