@@ -1,0 +1,5 @@
+# Archives & temp files
+*.zip
+tekshirma-main/
+.DS_Store
+Thumbs.db
