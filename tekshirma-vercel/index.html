@@ -124,32 +124,31 @@ img,svg{max-width:100%}
 /* ===================== HERO ===================== */
 .hero{position:relative;overflow:hidden}
 .hero::after{
-  content:"";position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.55;
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.45;
   background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
                    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
-  background-size:72px 72px;
-  -webkit-mask-image:radial-gradient(130% 95% at 50% 0%,#000 20%,transparent 78%);
-  mask-image:radial-gradient(130% 95% at 50% 0%,#000 20%,transparent 78%);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(130% 95% at 50% 0%,#000 20%,transparent 80%);
+  mask-image:radial-gradient(130% 95% at 50% 0%,#000 20%,transparent 80%);
 }
-.hero-in{position:relative;z-index:3;padding-top:56px;padding-bottom:70px}
-@media(min-width:820px){.hero-in{padding-top:104px;padding-bottom:118px}}
-.hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:60px;align-items:center}
-@media(max-width:960px){.hero-grid{grid-template-columns:1fr;gap:44px}}
+.hero-in{position:relative;z-index:3;padding-top:clamp(28px,4.5vh,54px);padding-bottom:clamp(34px,5vh,64px)}
+.hero-grid{display:grid;grid-template-columns:1.24fr .76fr;gap:clamp(24px,3.5vw,48px);align-items:center}
+@media(max-width:960px){.hero-grid{grid-template-columns:1fr;gap:30px;text-align:left}}
 .hero h1{
-  font-size:clamp(33px,8.6vw,88px);max-width:15ch;font-weight:900;line-height:1.04;
-  font-variation-settings:"wdth" 118;letter-spacing:-.04em;margin-top:20px;
-  overflow-wrap:break-word;hyphens:auto;
+  font-size:clamp(28px,4.3vw,56px);max-width:23ch;font-weight:850;line-height:1.15;
+  font-variation-settings:"wdth" 116;letter-spacing:-.035em;margin-top:14px;
+  overflow-wrap:break-word;
 }
 .hero h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero .lede{max-width:50ch;color:var(--ink-2);font-size:17px;margin:26px 0 0}
-@media(min-width:820px){.hero .lede{font-size:19.5px;line-height:1.6}}
-.hero-cta{display:flex;gap:13px;margin-top:38px;flex-wrap:wrap}
-.hero-meta{display:flex;gap:12px 26px;flex-wrap:wrap;margin-top:34px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
-.hero-meta span{display:flex;align-items:center;gap:8px}
+.hero .lede{max-width:54ch;color:var(--ink-2);font-size:clamp(15px,1.35vw,17.5px);line-height:1.6;margin:16px 0 0}
+.hero-cta{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.hero-meta{display:flex;gap:10px 22px;flex-wrap:wrap;margin-top:26px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.hero-meta span{display:flex;align-items:center;gap:7px}
 .hero-meta i{width:5px;height:5px;border-radius:50%;background:var(--mint);display:block;flex:0 0 auto;box-shadow:0 0 8px var(--mint)}
 
-.dial{position:relative;width:100%;max-width:420px;margin-left:auto;aspect-ratio:1}
-@media(max-width:960px){.dial{max-width:320px;margin:0 auto}}
+.dial{position:relative;width:100%;max-width:290px;margin:0 auto;aspect-ratio:1}
+@media(max-width:960px){.dial{max-width:240px}}
+@media(max-width:520px){.dial{max-width:200px}}
 .dial svg{width:100%;height:100%;display:block;overflow:visible}
 .dial .halo{animation:pulse 4.5s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:.18}50%{opacity:.4}}
@@ -160,16 +159,16 @@ img,svg{max-width:100%}
 .dial-read{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;text-align:center;padding-top:5%}
 .dial-read b{
   font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 110;font-weight:900;
-  font-size:clamp(40px,8vw,64px);line-height:1;letter-spacing:-.05em;
+  font-size:clamp(38px,7vw,58px);line-height:1;letter-spacing:-.05em;
   background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
   font-variant-numeric:tabular-nums;
 }
-.dial-read span{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-3);margin-top:11px}
-.dial-read em{font-style:normal;font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-3);margin-top:5px;letter-spacing:.08em;opacity:.7}
+.dial-read span{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);margin-top:9px}
+.dial-read em{font-style:normal;font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--ink-3);margin-top:4px;letter-spacing:.08em;opacity:.7}
 @media(prefers-reduced-motion:reduce){.dial .sweep{animation:none;stroke-dashoffset:var(--dashRest)}.dial .needle,.dial .halo{animation:none}}
 
-.fade-up{opacity:0;transform:translateY(18px);animation:fadeUp .9s cubic-bezier(.16,1,.3,1) forwards}
-.fade-up.d1{animation-delay:.08s}.fade-up.d2{animation-delay:.17s}.fade-up.d3{animation-delay:.26s}.fade-up.d4{animation-delay:.35s}
+.fade-up{opacity:0;transform:translateY(16px);animation:fadeUp .8s cubic-bezier(.16,1,.3,1) forwards}
+.fade-up.d1{animation-delay:.06s}.fade-up.d2{animation-delay:.13s}.fade-up.d3{animation-delay:.20s}.fade-up.d4{animation-delay:.27s}
 @keyframes fadeUp{to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.fade-up{animation:none;opacity:1;transform:none}}
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
@@ -529,6 +528,120 @@ section.block > h3 .n{
 .footer{border-top:1px solid var(--hair);margin-top:88px;padding-top:34px;padding-bottom:60px;color:var(--ink-3);font-size:13.5px;position:relative;z-index:2}
 .footer a{color:var(--ink-2)}
 
+/* ===================== MOSLASHUVCHANLIK VA QULAYLIK ===================== */
+@media(max-width:680px){
+  .opts{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(130px,1fr))!important;gap:7px!important}
+  .opt{padding:10px 12px;font-size:13px;border-radius:12px;justify-content:center;text-align:center;display:flex;align-items:center;min-height:42px}
+  .qgrid{grid-template-columns:1fr!important;gap:12px!important}
+  .q{padding:16px 15px;border-radius:var(--r-sm)}
+  .stepper{top:58px}
+  .step{min-width:85px;padding:10px 8px 8px;font-size:10px}
+  .step b{font-size:8.5px}
+  .mobilebar{padding:10px var(--gut) calc(10px + env(safe-area-inset-bottom));box-shadow:0 -10px 30px rgba(0,0,0,.6)}
+}
+
+/* ===================== ADMIN PANEL VA ANALITIKA ===================== */
+.admin-backdrop{
+  position:fixed;inset:0;z-index:1000;background:rgba(3,5,10,.86);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  display:flex;align-items:center;justify-content:center;padding:16px;
+}
+.admin-card{
+  background:#080D18;border:1px solid var(--hair-lit);border-radius:20px;
+  width:100%;max-width:920px;max-height:92vh;display:flex;flex-direction:column;
+  box-shadow:0 30px 80px rgba(0,0,0,.85),0 0 0 1px rgba(47,224,168,.12);
+  overflow:hidden;position:relative;animation:fadeUp .3s cubic-bezier(.16,1,.3,1);
+}
+.admin-card-head{
+  padding:16px 22px;border-bottom:1px solid var(--hair);display:flex;
+  justify-content:space-between;align-items:center;background:rgba(255,255,255,.02);
+}
+.admin-title-wrap{display:flex;align-items:center;gap:10px}
+.admin-badge{
+  font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;color:#04120D;background:var(--grad);
+  padding:3px 8px;border-radius:6px;
+}
+.admin-card-head h3{font-size:17px;font-weight:700;letter-spacing:-.02em;margin:0}
+.admin-head-actions{display:flex;align-items:center;gap:12px}
+.live-dot{
+  width:8px;height:8px;border-radius:50%;background:var(--mint);
+  box-shadow:0 0 10px var(--mint);animation:pulse 2s infinite;
+}
+.icon-btn-sm{
+  background:var(--s1);border:1px solid var(--hair);border-radius:8px;
+  width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--ink-2);transition:.18s;
+}
+.icon-btn-sm:hover{background:var(--s2);color:var(--ink);border-color:rgba(255,255,255,.2)}
+.admin-view{padding:22px;overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch}
+.admin-intro{color:var(--ink-2);font-size:14px;line-height:1.5;margin-bottom:18px}
+.admin-field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.admin-field label{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--ink-2);letter-spacing:.05em}
+.admin-field input{
+  width:100%;padding:11px 14px;border:1px solid var(--hair);border-radius:var(--r-sm);
+  background:rgba(0,0,0,.35);color:var(--ink);font:inherit;font-size:14.5px;
+}
+.admin-field input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-wash)}
+.admin-error{color:var(--crit);font-size:13px;padding:8px 12px;background:var(--crit-wash);border-radius:8px;margin-top:8px}
+
+.admin-stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:18px}
+.stat-card{
+  background:var(--s1);border:1px solid var(--hair);border-radius:14px;
+  padding:15px;display:flex;align-items:center;gap:12px;box-shadow:0 1px 0 var(--hair-lit) inset;
+}
+.stat-icon{font-size:22px}
+.stat-info{display:flex;flex-direction:column}
+.stat-val{font-family:"Archivo",sans-serif;font-size:22px;font-weight:800;color:var(--ink);line-height:1}
+.stat-lbl{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--ink-3);letter-spacing:.08em;margin-top:4px}
+
+.admin-box{
+  background:var(--s1);border:1px solid var(--hair);border-radius:14px;
+  padding:16px 18px;margin-bottom:16px;box-shadow:0 1px 0 var(--hair-lit) inset;
+}
+.admin-box h4{font-size:14px;font-weight:700;letter-spacing:-.01em;margin:0 0 12px;color:var(--ink)}
+.admin-box-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.admin-box-head h4{margin-bottom:0}
+.lbl-dim{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-3)}
+
+.funnel-bars{display:flex;flex-direction:column;gap:10px}
+.funnel-step{display:flex;flex-direction:column;gap:4px}
+.funnel-step-head{display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink-2)}
+.funnel-step-head b{color:var(--mint);font-family:"JetBrains Mono",monospace}
+.fbar-bg{width:100%;height:6px;background:rgba(255,255,255,.06);border-radius:100px;overflow:hidden}
+.fbar{height:100%;background:var(--grad);border-radius:100px;transition:width .6s cubic-bezier(.16,1,.3,1)}
+
+.admin-split-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+@media(max-width:680px){.admin-split-grid{grid-template-columns:1fr}}
+.device-bars, .sector-bars{display:flex;flex-direction:column;gap:8px}
+.bar-row{display:flex;flex-direction:column;gap:3px;font-size:12px}
+.bar-row-head{display:flex;justify-content:space-between;color:var(--ink-2)}
+.bar-row-head b{font-family:"JetBrains Mono",monospace;color:var(--ink)}
+
+.admin-table-wrap{overflow-x:auto;max-height:220px;scrollbar-width:thin}
+.admin-table{width:100%;border-collapse:collapse;font-size:12px;text-align:left}
+.admin-table th{
+  position:sticky;top:0;background:#0d1424;padding:8px 10px;font-family:"JetBrains Mono",monospace;
+  font-size:10px;text-transform:uppercase;color:var(--ink-3);letter-spacing:.08em;border-bottom:1px solid var(--hair);
+}
+.admin-table td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--ink-2);white-space:nowrap}
+.drow{display:flex;flex-direction:column;gap:3px;font-size:12px;margin-bottom:8px}
+.drow-head{display:flex;justify-content:space-between;color:var(--ink-2);margin-bottom:2px}
+.drow-head b{font-family:"JetBrains Mono",monospace;color:var(--ink)}
+.dbar-bg{width:100%;height:6px;background:rgba(255,255,255,.06);border-radius:100px;overflow:hidden}
+.dbar{height:100%;background:var(--cyan);border-radius:100px;transition:width .5s ease}
+.t-stamp{font-family:"JetBrains Mono",monospace;color:var(--ink-3);font-size:11px}
+.dev-badge{display:inline-flex;align-items:center;padding:2px 6px;border-radius:4px;font-size:10.5px;background:rgba(255,255,255,.05);border:1px solid var(--hair)}
+.dev-badge.mobile{border-color:rgba(47,224,168,.35);color:var(--mint)}
+.dev-badge.tablet{border-color:rgba(56,189,248,.35);color:var(--cyan)}
+.sec-badge{display:inline-block;padding:2px 6px;border-radius:4px;font-size:10.5px;background:rgba(255,255,255,.04);color:var(--ink-2)}
+
+.admin-footer-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding-top:4px}
+.btn-sm{min-height:36px;padding:8px 14px;font-size:12.5px;border-radius:8px}
+.admin-link-wrap{margin-top:14px}
+.link-btn{background:none;border:none;color:var(--ink-3);font-family:"JetBrains Mono",monospace;font-size:11px;cursor:pointer;text-decoration:underline;padding:0}
+.link-btn:hover{color:var(--accent)}
+
 /* ===================== CHOP ETISH: oq qog'oz ===================== */
 @media print{
   :root{
@@ -598,6 +711,10 @@ section.block > h3 .n{
     <button class="icon-btn" id="resetBtn" type="button" style="display:none">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
       <span class="lbl">Qaytadan</span>
+    </button>
+    <button class="icon-btn" id="adminBtn" type="button" aria-label="Boshqaruv paneli" title="Boshqaruv paneli">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span class="lbl">Admin</span>
     </button>
   </div>
 </header>
@@ -1132,8 +1249,154 @@ section.block > h3 .n{
     <p style="margin-top:8px">tekshirma.uz &middot; Tekshir. Tahlil qil. Ishonch hosil qil.</p>
     <p class="credit">Dastur muallifi &mdash; <b>Alisher Asqad Ali</b>. <span>Actions Test Team</span> mahsuloti.
       Aloqa uchun: <a href="mailto:sje.kore@gmail.com">sje.kore@gmail.com</a></p>
+    <p class="admin-link-wrap"><button type="button" class="link-btn" id="footerAdminBtn">Boshqaruv (Admin panel)</button></p>
   </div>
 </footer>
+
+<!-- ============ ADMIN MODAL & ANALITIKA ============ -->
+<div class="admin-backdrop" id="adminModal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+  <div class="admin-card">
+    <div class="admin-card-head">
+      <div class="admin-title-wrap">
+        <span class="admin-badge">Admin</span>
+        <h3 id="adminTitle">Tekshirma Analytics &amp; Boshqaruv</h3>
+      </div>
+      <div class="admin-head-actions">
+        <span class="live-dot" title="Jonli hisoblagich faol"></span>
+        <button class="icon-btn-sm" id="adminCloseBtn" type="button" aria-label="Yopish">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Login View -->
+    <div id="adminLoginView" class="admin-view">
+      <p class="admin-intro">Saytga nechta odam kirib-chiqqani, qaysi sohalar tekshirilgani va konversiyani ko‘rish uchun tizimga kiring.</p>
+      <form id="adminLoginForm" onsubmit="return false">
+        <div class="admin-field">
+          <label for="adminLoginInput">Login</label>
+          <input type="text" id="adminLoginInput" placeholder="Loginni kiriting" autocomplete="username" required>
+        </div>
+        <div class="admin-field">
+          <label for="adminPassInput">Parol</label>
+          <input type="password" id="adminPassInput" placeholder="Parolni kiriting" autocomplete="current-password" required>
+        </div>
+        <div id="adminLoginErr" class="admin-error" style="display:none">Login yoki parol noto‘g‘ri!</div>
+        <button type="submit" class="btn" id="adminSubmitBtn" style="width:100%;justify-content:center;margin-top:14px">
+          Kirish
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+    </div>
+
+    <!-- Dashboard View -->
+    <div id="adminDashView" class="admin-view" style="display:none">
+      <div class="admin-stats-grid">
+        <div class="stat-card">
+          <span class="stat-icon">👁️</span>
+          <div class="stat-info">
+            <span class="stat-val" id="statTotalVisits">0</span>
+            <span class="stat-lbl">Jami tashriflar</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">👤</span>
+          <div class="stat-info">
+            <span class="stat-val" id="statUniqueVisits">0</span>
+            <span class="stat-lbl">Noyob mehmonlar</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">📋</span>
+          <div class="stat-info">
+            <span class="stat-val" id="statAuditsStarted">0</span>
+            <span class="stat-lbl">Boshlangan auditlar</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">🎯</span>
+          <div class="stat-info">
+            <span class="stat-val" id="statAuditsCompleted">0</span>
+            <span class="stat-lbl">Yakunlangan hisobotlar</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Funnel Progress -->
+      <div class="admin-box">
+        <h4>Audit voronkasi konversiyasi</h4>
+        <div class="funnel-bars">
+          <div class="funnel-step">
+            <div class="funnel-step-head"><span>1. Bosh sahifaga kirish</span><b id="funnelStep1Val">100%</b></div>
+            <div class="fbar-bg"><div class="fbar" style="width:100%"></div></div>
+          </div>
+          <div class="funnel-step">
+            <div class="funnel-step-head"><span>2. Audit boshlandi</span><b id="funnelStep2Val">0%</b></div>
+            <div class="fbar-bg"><div class="fbar" id="funnelStep2Bar" style="width:0%"></div></div>
+          </div>
+          <div class="funnel-step">
+            <div class="funnel-step-head"><span>3. Pasport &amp; Moliya to‘ldirildi</span><b id="funnelStep3Val">0%</b></div>
+            <div class="fbar-bg"><div class="fbar" id="funnelStep3Bar" style="width:0%"></div></div>
+          </div>
+          <div class="funnel-step">
+            <div class="funnel-step-head"><span>4. Hisobot ko‘rildi</span><b id="funnelStep4Val">0%</b></div>
+            <div class="fbar-bg"><div class="fbar" id="funnelStep4Bar" style="width:0%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Split section: Devices & Sectors -->
+      <div class="admin-split-grid">
+        <div class="admin-box">
+          <h4>Qurilmalar kesimi</h4>
+          <div class="device-bars" id="deviceBars"></div>
+        </div>
+        <div class="admin-box">
+          <h4>Eng ko‘p tekshirilgan sohalar</h4>
+          <div class="sector-bars" id="sectorBars"></div>
+        </div>
+      </div>
+
+      <!-- Live Recent Activity Table -->
+      <div class="admin-box">
+        <div class="admin-box-head">
+          <h4>So‘nggi harakatlar jurnali</h4>
+          <span class="lbl-dim" id="recentLogCount">0 ta yozuv</span>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Vaqti</th>
+                <th>Qurilma</th>
+                <th>Soha</th>
+                <th>Harakat</th>
+              </tr>
+            </thead>
+            <tbody id="adminActivityBody">
+              <tr><td colspan="4" style="text-align:center;color:var(--ink-3)">Hozircha ma’lumot yo‘q</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="admin-footer-actions">
+        <button class="btn ghost btn-sm" id="adminExportBtn" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Eksport (JSON)
+        </button>
+        <button class="btn ghost btn-sm" id="adminResetDataBtn" type="button" style="color:var(--crit)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          Hisoblagichni tozalash
+        </button>
+        <button class="btn ghost btn-sm" id="adminLogoutBtn" type="button" style="margin-left:auto">
+          Chiqish
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -1291,11 +1554,22 @@ function show(i){
     window.scrollTo(0,0);
     return;
   }
+  const prevCur = cur;
   i=Math.min(i,f.length-1);
   if(f[i].id==="p-report"){ const err=validate(); if(err){ alert(err); return; } build(); }
   cur=i;
   if(f[i].id==="p-sector") renderSector();
   if(f[i].id==="p-3") applyTerms();
+  if(typeof Analytics!=="undefined"){
+    if(prevCur===-1 && i===0){
+      Analytics.logEvent("audit_start");
+    } else if(f[i].id==="p-report"){
+      Analytics.logEvent("audit_complete", { sector: S.sector||"—", company: S.company||"" });
+    } else if(i>prevCur && i>=0){
+      const stName = typeof f[i].t==="function" ? f[i].t() : f[i].t;
+      Analytics.logEvent("step_advance", { step: i, title: stName });
+    }
+  }
   $$(".panel").forEach(p=>p.classList.remove("on","anim"));
   $("#"+f[i].id).classList.add("on","anim");
   $("#stepper").style.display="block";
@@ -1338,7 +1612,13 @@ document.addEventListener("click",e=>{
     $$(".opt",g).forEach(o=>o.setAttribute("aria-pressed","false"));
     opt.setAttribute("aria-pressed","true");
     S[f]=opt.dataset.v;
-    if(f==="sector"){ drawStepper(); applyTerms(); }
+    if(f==="sector"){
+      drawStepper();
+      applyTerms();
+      if(typeof Analytics!=="undefined"){
+        Analytics.logEvent("sector_select", { sector: opt.dataset.v, title: opt.textContent.trim() });
+      }
+    }
     if(f==="cur"){ VIEW_CUR=null; refreshUnits(); }
     return;
   }
@@ -1401,9 +1681,13 @@ function updateCurBtn(){
 $("#curBtn").onclick=()=>{
   VIEW_CUR = viewCur()==="usd" ? "uzs" : "usd";
   updateCurBtn();
+  if(typeof Analytics!=="undefined") Analytics.logEvent("currency_toggle", { cur: VIEW_CUR });
   if($("#p-report.on")) build();
 };
-$("#printBtn").onclick=()=>window.print();
+$("#printBtn").onclick=()=>{
+  if(typeof Analytics!=="undefined") Analytics.logEvent("print_report");
+  window.print();
+};
 $("#resetBtn").onclick=()=>{ if(confirm("Barcha javoblar tozalansinmi?")) location.reload(); };
 
 /* ma'lumot yig'ish varaqasi */
@@ -1419,7 +1703,10 @@ function showSheet(on){
   cur=-1;
   window.scrollTo(0,0);
 }
-$("#sheetBtn").onclick=()=>showSheet(true);
+$("#sheetBtn").onclick=()=>{
+  if(typeof Analytics!=="undefined") Analytics.logEvent("sheet_open");
+  showSheet(true);
+};
 $("#sheetPrint").onclick=()=>window.print();
 ["#sheetBack","#sheetBack2"].forEach(id=>{ const b=$(id); if(b) b.onclick=()=>showSheet(false); });
 
@@ -1464,6 +1751,7 @@ const DEMO = {
   d_tpa:0, d_ref:2, d_corp:0, d_camp:0, d_or:3, d_diag:5, d_dbn:12, d_cadence:"monthly"
 };
 $("#demoBtn").onclick=()=>{
+  if(typeof Analytics!=="undefined") Analytics.logEvent("demo_view");
   DEMO_ON=true; VIEW_CUR=null;
   Object.keys(DEMO).forEach(k=>{ S[k]=DEMO[k]; });
   ["c1","c2","c4","c7","c10","c11"].forEach(k=>CHECKS[k]=true);
@@ -3630,8 +3918,392 @@ function build(){
   }
 }
 
+/* ==================================================================
+   ADMIN VA ANALITIKA TIZIMI
+   ================================================================== */
+const ADMIN_CONFIG = {
+  user: "shertoy",
+  pass: "ali7400",
+  storageKey: "tekshirma_analytics_v1",
+  vidKey: "tekshirma_vid",
+  sidKey: "tekshirma_sid",
+  authKey: "tekshirma_admin_auth"
+};
+
+const Analytics = (function(){
+  function getStorage(){
+    try {
+      const raw = localStorage.getItem(ADMIN_CONFIG.storageKey);
+      if(raw){
+        const d = JSON.parse(raw);
+        if(d && typeof d === "object") return d;
+      }
+    } catch(e){}
+    return {
+      visits: 0,
+      uniqueCount: 0,
+      uniqueVisitors: {},
+      funnel: { visits: 0, started: 0, stepCompleted: 0, reports: 0 },
+      devices: { mobile: 0, tablet: 0, desktop: 0 },
+      sectors: {},
+      events: []
+    };
+  }
+
+  function saveStorage(data){
+    try {
+      localStorage.setItem(ADMIN_CONFIG.storageKey, JSON.stringify(data));
+    } catch(e){}
+  }
+
+  function detectDevice(){
+    const w = window.innerWidth;
+    const ua = navigator.userAgent || "";
+    if(/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua) || (w >= 641 && w <= 1024)) return "tablet";
+    if(/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/i.test(ua) || w <= 640) return "mobile";
+    return "desktop";
+  }
+
+  function getOrSetVid(){
+    let vid = localStorage.getItem(ADMIN_CONFIG.vidKey);
+    let isNew = false;
+    if(!vid){
+      vid = "v_" + Date.now().toString(36) + "_" + Math.random().toString(36).substring(2, 8);
+      try { localStorage.setItem(ADMIN_CONFIG.vidKey, vid); } catch(e){}
+      isNew = true;
+    }
+    return { vid, isNew };
+  }
+
+  function recordVisit(){
+    const data = getStorage();
+    const { vid, isNew } = getOrSetVid();
+    const device = detectDevice();
+    let isNewSession = false;
+
+    if(!sessionStorage.getItem(ADMIN_CONFIG.sidKey)){
+      const sid = "s_" + Date.now().toString(36) + "_" + Math.random().toString(36).substring(2, 6);
+      try { sessionStorage.setItem(ADMIN_CONFIG.sidKey, sid); } catch(e){}
+      isNewSession = true;
+    }
+
+    if(!data.uniqueVisitors) data.uniqueVisitors = {};
+    if(isNew || !data.uniqueVisitors[vid]){
+      data.uniqueVisitors[vid] = { firstSeen: new Date().toISOString(), device };
+      data.uniqueCount = Object.keys(data.uniqueVisitors).length;
+    }
+
+    if(isNewSession){
+      data.visits = (data.visits || 0) + 1;
+      if(!data.funnel) data.funnel = { visits: 0, started: 0, stepCompleted: 0, reports: 0 };
+      data.funnel.visits = data.visits;
+      if(!data.devices) data.devices = { mobile: 0, tablet: 0, desktop: 0 };
+      data.devices[device] = (data.devices[device] || 0) + 1;
+      if(!data.events) data.events = [];
+      
+      data.events.unshift({
+        id: "ev_" + Date.now(),
+        time: new Date().toLocaleTimeString("uz-UZ", {hour:"2-digit", minute:"2-digit", second:"2-digit"}),
+        date: new Date().toISOString().slice(0, 10),
+        device,
+        sector: S.sector || "—",
+        type: "visit",
+        desc: "Yangi tashrif (Bosh sahifa)"
+      });
+      if(data.events.length > 200) data.events.length = 200;
+      saveStorage(data);
+    }
+  }
+
+  function logEvent(type, meta){
+    const data = getStorage();
+    const device = detectDevice();
+    let desc = "";
+
+    if(!data.funnel) data.funnel = { visits: 0, started: 0, stepCompleted: 0, reports: 0 };
+    if(!data.sectors) data.sectors = {};
+    if(!data.events) data.events = [];
+
+    if(type === "audit_start"){
+      data.funnel.started = (data.funnel.started || 0) + 1;
+      desc = "Audit boshlandi";
+    } else if(type === "sector_select"){
+      const sec = meta && meta.sector ? meta.sector : (S.sector || "Noma'lum");
+      const title = meta && meta.title ? meta.title : sec;
+      data.sectors[sec] = (data.sectors[sec] || 0) + 1;
+      desc = "Soha tanlandi: " + title;
+    } else if(type === "step_advance"){
+      data.funnel.stepCompleted = (data.funnel.stepCompleted || 0) + 1;
+      desc = meta && meta.title ? "Bosqich o‘tildi: " + meta.title : "Bosqich davom ettirildi";
+    } else if(type === "audit_complete"){
+      data.funnel.reports = (data.funnel.reports || 0) + 1;
+      desc = "Yakuniy hisobot ko‘rildi" + (meta && meta.company ? " (" + meta.company + ")" : "");
+    } else if(type === "demo_view"){
+      desc = "Namuna (demo) hisobot ochildi";
+    } else if(type === "print_report"){
+      desc = "Hisobot chop etishga yuborildi (PDF)";
+    } else if(type === "sheet_open"){
+      desc = "Savolnoma varaqasi ochildi";
+    } else if(type === "currency_toggle"){
+      desc = "Valyuta almashtirildi: " + ((meta && meta.cur) || "").toUpperCase();
+    } else {
+      desc = meta && meta.desc ? meta.desc : type;
+    }
+
+    const secName = (meta && meta.sector) || S.sector || "—";
+    data.events.unshift({
+      id: "ev_" + Date.now(),
+      time: new Date().toLocaleTimeString("uz-UZ", {hour:"2-digit", minute:"2-digit", second:"2-digit"}),
+      date: new Date().toISOString().slice(0, 10),
+      device,
+      sector: secName,
+      type,
+      desc
+    });
+    if(data.events.length > 200) data.events.length = 200;
+    saveStorage(data);
+  }
+
+  function getData(){
+    return getStorage();
+  }
+
+  function resetData(){
+    const fresh = {
+      visits: 0,
+      uniqueCount: 0,
+      uniqueVisitors: {},
+      funnel: { visits: 0, started: 0, stepCompleted: 0, reports: 0 },
+      devices: { mobile: 0, tablet: 0, desktop: 0 },
+      sectors: {},
+      events: []
+    };
+    saveStorage(fresh);
+    return fresh;
+  }
+
+  return { recordVisit, logEvent, getData, resetData, detectDevice };
+})();
+
+const AdminController = (function(){
+  const modal = $("#adminModal");
+  const loginView = $("#adminLoginView");
+  const dashView = $("#adminDashView");
+  const loginForm = $("#adminLoginForm");
+  const loginInput = $("#adminLoginInput");
+  const passInput = $("#adminPassInput");
+  const loginErr = $("#adminLoginErr");
+
+  function isAuth(){
+    return sessionStorage.getItem(ADMIN_CONFIG.authKey) === "1";
+  }
+
+  function setAuth(val){
+    if(val) sessionStorage.setItem(ADMIN_CONFIG.authKey, "1");
+    else sessionStorage.removeItem(ADMIN_CONFIG.authKey);
+  }
+
+  function open(){
+    if(!modal) return;
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+    if(isAuth()){
+      showDash();
+    } else {
+      showLogin();
+    }
+  }
+
+  function close(){
+    if(!modal) return;
+    modal.style.display = "none";
+    document.body.style.overflow = "";
+    if(loginErr) loginErr.style.display = "none";
+  }
+
+  function showLogin(){
+    if(loginView) loginView.style.display = "block";
+    if(dashView) dashView.style.display = "none";
+    if(loginErr) loginErr.style.display = "none";
+    if(loginInput){ loginInput.value = ""; setTimeout(()=>loginInput.focus(), 50); }
+    if(passInput) passInput.value = "";
+  }
+
+  function showDash(){
+    if(loginView) loginView.style.display = "none";
+    if(dashView) dashView.style.display = "block";
+    renderDash();
+  }
+
+  function renderDash(){
+    const d = Analytics.getData();
+    const visits = Math.max(d.visits || 0, d.uniqueCount || 0);
+    const unique = d.uniqueCount || Object.keys(d.uniqueVisitors || {}).length;
+    const started = (d.funnel && d.funnel.started) || 0;
+    const reports = (d.funnel && d.funnel.reports) || 0;
+
+    $("#statTotalVisits").textContent = grp(visits);
+    $("#statUniqueVisits").textContent = grp(unique);
+    $("#statAuditsStarted").textContent = grp(started);
+    $("#statAuditsCompleted").textContent = grp(reports);
+
+    // Voronka konversiyasi
+    const pctStarted = visits ? Math.min(100, Math.round((started / visits) * 100)) : 0;
+    const stepCompleted = (d.funnel && d.funnel.stepCompleted) || 0;
+    const pctStep = visits ? Math.min(100, Math.round((stepCompleted / visits) * 100)) : 0;
+    const pctReports = visits ? Math.min(100, Math.round((reports / visits) * 100)) : 0;
+
+    $("#funnelStep1Val").textContent = visits ? "100% (" + visits + ")" : "0%";
+    $("#funnelStep2Val").textContent = pctStarted + "% (" + started + ")";
+    $("#funnelStep2Bar").style.width = pctStarted + "%";
+    $("#funnelStep3Val").textContent = pctStep + "% (" + stepCompleted + ")";
+    $("#funnelStep3Bar").style.width = pctStep + "%";
+    $("#funnelStep4Val").textContent = pctReports + "% (" + reports + ")";
+    $("#funnelStep4Bar").style.width = pctReports + "%";
+
+    // Qurilmalar kesimi
+    const devBox = $("#deviceBars");
+    if(devBox){
+      const dev = d.devices || { mobile: 0, tablet: 0, desktop: 0 };
+      const devTotal = (dev.mobile || 0) + (dev.tablet || 0) + (dev.desktop || 0) || 1;
+      const devConfig = [
+        { key: "mobile", name: "Telefon (Mobile)", icon: "📱", count: dev.mobile || 0 },
+        { key: "tablet", name: "Planshet (Tablet)", icon: "📟", count: dev.tablet || 0 },
+        { key: "desktop", name: "Kompyuter (Desktop)", icon: "💻", count: dev.desktop || 0 }
+      ];
+      devBox.innerHTML = devConfig.map(c => {
+        const p = Math.round((c.count / devTotal) * 100);
+        return '<div class="drow">' +
+          '<div class="drow-head"><span>' + c.icon + ' ' + c.name + '</span><b>' + c.count + ' ta (' + p + '%)</b></div>' +
+          '<div class="dbar-bg"><div class="dbar" style="width:' + p + '%"></div></div>' +
+        '</div>';
+      }).join("");
+    }
+
+    // Top sohalar
+    const secBox = $("#sectorBars");
+    if(secBox){
+      const secMap = d.sectors || {};
+      const secEntries = Object.entries(secMap).sort((a,b) => b[1] - a[1]);
+      if(!secEntries.length){
+        secBox.innerHTML = '<p style="color:var(--ink-3);font-size:12px;margin:8px 0">Hozircha soha tanlanmagan</p>';
+      } else {
+        const topTotal = secEntries.reduce((sum, e) => sum + e[1], 0) || 1;
+        secBox.innerHTML = secEntries.slice(0, 5).map(([sec, count]) => {
+          const p = Math.round((count / topTotal) * 100);
+          const lab = (SECTORS[sec] && SECTORS[sec].lab) ? SECTORS[sec].lab : sec;
+          return '<div class="drow">' +
+            '<div class="drow-head"><span>' + esc(lab) + '</span><b>' + count + ' ta (' + p + '%)</b></div>' +
+            '<div class="dbar-bg"><div class="dbar" style="width:' + p + '%;background:var(--accent)"></div></div>' +
+          '</div>';
+        }).join("");
+      }
+    }
+
+    // So'nggi harakatlar
+    const tbody = $("#adminActivityBody");
+    const countLbl = $("#recentLogCount");
+    const events = d.events || [];
+    if(countLbl) countLbl.textContent = events.length + " ta yozuv";
+    if(tbody){
+      if(!events.length){
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--ink-3)">Hozircha harakat qayd etilmagan</td></tr>';
+      } else {
+        const devIcons = { mobile: "📱 Telefon", tablet: "📟 Planshet", desktop: "💻 Komp" };
+        tbody.innerHTML = events.slice(0, 30).map(ev => {
+          const devBadge = '<span class="dev-badge ' + esc(ev.device || 'desktop') + '">' + esc(devIcons[ev.device] || ev.device) + '</span>';
+          const secName = (ev.sector !== '—' && SECTORS[ev.sector]) ? SECTORS[ev.sector].lab : ev.sector;
+          return '<tr>' +
+            '<td><span class="t-stamp">' + esc(ev.time || '—') + '</span></td>' +
+            '<td>' + devBadge + '</td>' +
+            '<td><span class="sec-badge">' + esc(secName) + '</span></td>' +
+            '<td><b>' + esc(ev.desc || ev.type) + '</b></td>' +
+          '</tr>';
+        }).join("");
+      }
+    }
+  }
+
+  function handleLogin(e){
+    if(e && e.preventDefault) e.preventDefault();
+    const u = (loginInput.value || "").trim();
+    const p = (passInput.value || "").trim();
+    if(u === ADMIN_CONFIG.user && p === ADMIN_CONFIG.pass){
+      setAuth(true);
+      if(loginErr) loginErr.style.display = "none";
+      showDash();
+    } else {
+      if(loginErr){
+        loginErr.style.display = "block";
+        loginErr.textContent = "Login yoki parol noto‘g‘ri! Iltimos, tekshirib qaytadan tering.";
+      }
+    }
+  }
+
+  function handleLogout(){
+    setAuth(false);
+    showLogin();
+  }
+
+  function exportData(){
+    const data = Analytics.getData();
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "tekshirma_analytics_" + new Date().toISOString().slice(0, 10) + ".json";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 200);
+  }
+
+  function resetAll(){
+    if(confirm("DIQQAT! Barcha yig‘ilgan analitika va tashriflar hisoblagichi tozalansinmi?")){
+      Analytics.resetData();
+      renderDash();
+      alert("Hisoblagich ma’lumotlari muvaffaqiyatli tozalandi.");
+    }
+  }
+
+  function init(){
+    const btn1 = $("#adminBtn"); if(btn1) btn1.onclick = open;
+    const btn2 = $("#footerAdminBtn"); if(btn2) btn2.onclick = open;
+    const closeBtn = $("#adminCloseBtn"); if(closeBtn) closeBtn.onclick = close;
+    const logoutBtn = $("#adminLogoutBtn"); if(logoutBtn) logoutBtn.onclick = handleLogout;
+    const exportBtn = $("#adminExportBtn"); if(exportBtn) exportBtn.onclick = exportData;
+    const resetBtn = $("#adminResetDataBtn"); if(resetBtn) resetBtn.onclick = resetAll;
+
+    if(loginForm) loginForm.onsubmit = handleLogin;
+    const subBtn = $("#adminSubmitBtn"); if(subBtn) subBtn.onclick = handleLogin;
+
+    if(modal){
+      modal.onclick = (e) => {
+        if(e.target === modal) close();
+      };
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape" && modal && modal.style.display === "flex"){
+        close();
+      }
+      if(e.ctrlKey && e.shiftKey && (e.key === "A" || e.key === "a")){
+        e.preventDefault();
+        open();
+      }
+    });
+
+    if(window.location.hash === "#admin"){
+      setTimeout(open, 300);
+    }
+  }
+
+  return { init, open, close, renderDash };
+})();
+
 refreshUnits();
 drawStepper();
+Analytics.recordVisit();
+AdminController.init();
 })();
 </script>
 </body>
