@@ -254,11 +254,22 @@ input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 4px var(--a
 .opts{display:flex;flex-wrap:wrap;gap:8px}
 .opt{
   border:1px solid var(--hair);background:var(--s1);border-radius:100px;
-  padding:10px 17px;font-size:14.5px;cursor:pointer;transition:.18s;line-height:1.3;
-  min-height:42px;color:var(--ink);font-weight:500;
+  padding:10px 16px;font-size:14px;cursor:pointer;transition:.18s;line-height:1.3;
+  min-height:44px;color:var(--ink);font-weight:500;
+  display:inline-flex;align-items:center;gap:7px;
+}
+.opt-icon{
+  width:16px;height:16px;flex:0 0 auto;stroke:currentColor;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round;fill:none;vertical-align:middle;
+  transition:transform .18s ease;opacity:.88;
 }
 .opt:hover{border-color:rgba(47,224,168,.45);background:var(--accent-wash)}
-.opt[aria-pressed="true"]{background:var(--grad);border-color:transparent;color:#04120D;font-weight:700;box-shadow:0 0 24px -6px rgba(47,224,168,.5)}
+.opt:hover .opt-icon{transform:scale(1.12);opacity:1;stroke:var(--mint)}
+.opt[aria-pressed="true"],.opt.active{
+  background:var(--grad);border-color:transparent;color:#04120D !important;
+  font-weight:700;box-shadow:0 0 24px -6px rgba(47,224,168,.5);
+}
+.opt[aria-pressed="true"] .opt-icon,.opt.active .opt-icon{stroke:#04120D;opacity:1}
 
 .checklist{display:flex;flex-direction:column;border:1px solid var(--hair);border-radius:var(--r);background:var(--s1);overflow:hidden}
 .ck{display:flex;gap:14px;padding:15px 17px;border-bottom:1px solid var(--hair);align-items:flex-start;cursor:pointer;transition:background .18s}
@@ -500,7 +511,7 @@ section.block > h3 .n{
 @media(max-width:880px){.split{grid-template-columns:minmax(0,1fr)}}
 
 /* --- ma'lumot yig'ish varaqasi --- */
-.sheet{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px;margin-top:8px}
+.sheet{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;margin-top:8px}
 .sheet-grp{border:1px solid var(--hair);border-radius:var(--r);background:var(--s1);padding:20px 22px;box-shadow:0 1px 0 var(--hair-lit) inset}
 .sheet-grp h3{
   font-size:19px;letter-spacing:-.03em;display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;
@@ -526,12 +537,19 @@ section.block > h3 .n{
 .sheet-sel-badge{
   font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;letter-spacing:.12em;
   text-transform:uppercase;color:#04120D;background:var(--grad);padding:3px 9px;border-radius:6px;
+  display:inline-flex;align-items:center;gap:5px;
 }
 .sheet-sector-opts{display:flex;flex-wrap:wrap;gap:8px}
-.sheet-sector-opts .opt{font-size:12.5px;padding:8px 14px;border-radius:100px;min-height:36px;cursor:pointer}
+.sheet-sector-opts .opt{font-size:13px;padding:8px 14px;border-radius:100px;min-height:38px;cursor:pointer}
+.sheet-sector-opts .opt-icon{width:15px;height:15px}
 .sheet-sector-opts .opt[aria-pressed="true"]{
   background:var(--grad);color:#04120D;border-color:transparent;font-weight:700;
   box-shadow:0 0 16px rgba(47,224,168,.35);
+}
+@media(max-width:540px){
+  .sheet{grid-template-columns:1fr;gap:12px}
+  .sheet-grp{padding:16px 17px}
+  .sheet-selector-card{padding:14px 15px}
 }
 .sheet-print-header{display:none}
 @media print{
@@ -610,15 +628,33 @@ section.block > h3 .n{
 .admin-field input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-wash)}
 .admin-error{color:var(--crit);font-size:13px;padding:8px 12px;background:var(--crit-wash);border-radius:8px;margin-top:8px}
 
-.admin-stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:18px}
+.admin-stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px;margin-bottom:18px}
 .stat-card{
   background:var(--s1);border:1px solid var(--hair);border-radius:14px;
   padding:15px;display:flex;align-items:center;gap:12px;box-shadow:0 1px 0 var(--hair-lit) inset;
 }
-.stat-icon{font-size:22px}
+.stat-icon{
+  width:42px;height:42px;border-radius:11px;background:rgba(255,255,255,.03);
+  border:1px solid var(--hair);display:flex;align-items:center;justify-content:center;
+  flex:0 0 auto;
+}
+.stat-icon svg{width:22px;height:22px;stroke-width:2}
 .stat-info{display:flex;flex-direction:column}
 .stat-val{font-family:"Archivo",sans-serif;font-size:22px;font-weight:800;color:var(--ink);line-height:1}
 .stat-lbl{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--ink-3);letter-spacing:.08em;margin-top:4px}
+@media(max-width:540px){
+  .admin-backdrop{padding:8px}
+  .admin-card{max-height:96vh;border-radius:14px}
+  .admin-view{padding:14px}
+  .admin-card-head{padding:12px 14px}
+  .admin-stats-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .stat-card{padding:10px 11px;gap:8px}
+  .stat-icon{width:34px;height:34px;border-radius:8px}
+  .stat-icon svg{width:18px;height:18px}
+  .stat-val{font-size:18px}
+  .stat-lbl{font-size:9px}
+  .admin-box{padding:12px 14px}
+}
 
 .admin-box{
   background:var(--s1);border:1px solid var(--hair);border-radius:14px;
@@ -837,19 +873,19 @@ section.block > h3 .n{
     <div class="q full"><span class="qlab">Faoliyat sohangiz</span>
       <p class="hint">Har bir soha uchun moslashtirilgan chuqur tahlil moduli mavjud.</p>
       <div class="opts" data-field="sector" data-type="single">
-        <button class="opt" data-v="tibbiyot" type="button">Klinika / shifoxona</button>
-        <button class="opt" data-v="stomatologiya" type="button">Stomatologiya</button>
-        <button class="opt" data-v="ishlab_chiqarish" type="button">Ishlab chiqarish / zavod</button>
-        <button class="opt" data-v="talim" type="button">Ta&rsquo;lim markazi / kurslar</button>
-        <button class="opt" data-v="gozallik" type="button">Go&lsquo;zallik / kosmetologiya</button>
-        <button class="opt" data-v="qurilish" type="button">Qurilish / ta&rsquo;mir / mebel</button>
-        <button class="opt" data-v="savdo" type="button">Do&lsquo;kon / onlayn savdo</button>
-        <button class="opt" data-v="horeca" type="button">Restoran / kafe</button>
-        <button class="opt" data-v="kochmas" type="button">Ko&lsquo;chmas mulk</button>
-        <button class="opt" data-v="fitnes" type="button">Sport / fitnes</button>
-        <button class="opt" data-v="xizmat" type="button">Xizmat ko&lsquo;rsatish (B2C)</button>
-        <button class="opt" data-v="b2b" type="button">B2B / professional</button>
-        <button class="opt" data-v="boshqa" type="button">Boshqa</button>
+        <button class="opt" data-v="tibbiyot" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Klinika / shifoxona</button>
+        <button class="opt" data-v="stomatologiya" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.5 2 6 4.5 6 8c0 3.5 1.5 7 2.5 11 .5 2 2 3 3.5 3s3-1 3.5-3c1-4 2.5-7.5 2.5-11 0-3.5-2.5-6-6-6z"/><path d="M10 8c1 0 1.5 1 2 1s1-1 2-1"/></svg>Stomatologiya</button>
+        <button class="opt" data-v="ishlab_chiqarish" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M6 20V10l6 4V10l6 4V4h4v16"/></svg>Ishlab chiqarish / zavod</button>
+        <button class="opt" data-v="talim" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 3 3 6 3s6-1 6-3v-5"/></svg>Ta&rsquo;lim markazi / kurslar</button>
+        <button class="opt" data-v="gozallik" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>Go&lsquo;zallik / kosmetologiya</button>
+        <button class="opt" data-v="qurilish" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22h20"/><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Qurilish / ta&rsquo;mir / mebel</button>
+        <button class="opt" data-v="savdo" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Do&lsquo;kon / onlayn savdo</button>
+        <button class="opt" data-v="horeca" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2v20M18 8a3 3 0 0 0 0-6"/><path d="M6 2v7a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V2"/><line x1="8" y1="2" x2="8" y2="9"/><line x1="8" y1="11" x2="8" y2="22"/></svg>Restoran / kafe</button>
+        <button class="opt" data-v="kochmas" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/><path d="M10 9h4M10 13h4M10 17h4"/></svg>Ko&lsquo;chmas mulk</button>
+        <button class="opt" data-v="fitnes" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6.5 6.5 11 11"/><path d="m21 21-1-1a2.83 2.83 0 0 0 0-4l-1-1-4 4 1 1a2.83 2.83 0 0 0 4 0l1 1"/><path d="m3 3 1 1a2.83 2.83 0 0 0 0 4l1 1 4-4-1-1a2.83 2.83 0 0 0-4 0L3 3"/></svg>Sport / fitnes</button>
+        <button class="opt" data-v="xizmat" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Xizmat ko&lsquo;rsatish (B2C)</button>
+        <button class="opt" data-v="b2b" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>B2B / professional</button>
+        <button class="opt" data-v="boshqa" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>Boshqa</button>
       </div>
     </div>
 
@@ -1146,18 +1182,19 @@ section.block > h3 .n{
       <p class="hint" style="margin:0">Istalgan sohani tanlang &mdash; varaqadagi barcha savollar, mas’ul shaxslar va qonuniy me’yorlar aynan shu sohaga moslashadi:</p>
     </div>
     <div class="opts sheet-sector-opts" id="sheetSectorOpts" data-type="single">
-      <button class="opt" data-v="tibbiyot" type="button">🏥 Klinika / shifoxona</button>
-      <button class="opt" data-v="stomatologiya" type="button">🦷 Stomatologiya</button>
-      <button class="opt" data-v="ishlab_chiqarish" type="button">🏭 Ishlab chiqarish</button>
-      <button class="opt" data-v="talim" type="button">🎓 Ta’lim markazi</button>
-      <button class="opt" data-v="gozallik" type="button">💇‍♀️ Go‘zallik saloni</button>
-      <button class="opt" data-v="horeca" type="button">🍽️ Restoran / kafe</button>
-      <button class="opt" data-v="savdo" type="button">🛍️ Do‘kon / Savdo</button>
-      <button class="opt" data-v="fitnes" type="button">💪 Sport / fitnes</button>
-      <button class="opt" data-v="kochmas" type="button">🏢 Ko‘chmas mulk</button>
-      <button class="opt" data-v="qurilish" type="button">🏗️ Qurilish / mebel</button>
-      <button class="opt" data-v="b2b" type="button">💼 B2B xizmatlar</button>
-      <button class="opt" data-v="xizmat" type="button">🔧 Xizmat ko‘rsatish</button>
+      <button class="opt" data-v="tibbiyot" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Klinika / shifoxona</button>
+      <button class="opt" data-v="stomatologiya" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.5 2 6 4.5 6 8c0 3.5 1.5 7 2.5 11 .5 2 2 3 3.5 3s3-1 3.5-3c1-4 2.5-7.5 2.5-11 0-3.5-2.5-6-6-6z"/><path d="M10 8c1 0 1.5 1 2 1s1-1 2-1"/></svg>Stomatologiya</button>
+      <button class="opt" data-v="ishlab_chiqarish" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M6 20V10l6 4V10l6 4V4h4v16"/></svg>Ishlab chiqarish</button>
+      <button class="opt" data-v="talim" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 3 3 6 3s6-1 6-3v-5"/></svg>Ta’lim markazi</button>
+      <button class="opt" data-v="gozallik" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>Go‘zallik saloni</button>
+      <button class="opt" data-v="horeca" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2v20M18 8a3 3 0 0 0 0-6"/><path d="M6 2v7a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V2"/><line x1="8" y1="2" x2="8" y2="9"/><line x1="8" y1="11" x2="8" y2="22"/></svg>Restoran / kafe</button>
+      <button class="opt" data-v="savdo" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Do‘kon / Savdo</button>
+      <button class="opt" data-v="fitnes" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6.5 6.5 11 11"/><path d="m21 21-1-1a2.83 2.83 0 0 0 0-4l-1-1-4 4 1 1a2.83 2.83 0 0 0 4 0l1 1"/><path d="m3 3 1 1a2.83 2.83 0 0 0 0 4l1 1 4-4-1-1a2.83 2.83 0 0 0-4 0L3 3"/></svg>Sport / fitnes</button>
+      <button class="opt" data-v="kochmas" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/><path d="M10 9h4M10 13h4M10 17h4"/></svg>Ko‘chmas mulk</button>
+      <button class="opt" data-v="qurilish" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22h20"/><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Qurilish / mebel</button>
+      <button class="opt" data-v="b2b" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>B2B xizmatlar</button>
+      <button class="opt" data-v="xizmat" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Xizmat ko‘rsatish</button>
+      <button class="opt" data-v="boshqa" type="button"><svg class="opt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>Boshqa soha</button>
     </div>
   </div>
 
@@ -1244,28 +1281,36 @@ section.block > h3 .n{
     <div id="adminDashView" class="admin-view" style="display:none">
       <div class="admin-stats-grid">
         <div class="stat-card">
-          <span class="stat-icon">👁️</span>
+          <span class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--neon)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </span>
           <div class="stat-info">
             <span class="stat-val" id="statTotalVisits">0</span>
             <span class="stat-lbl">Jami tashriflar</span>
           </div>
         </div>
         <div class="stat-card">
-          <span class="stat-icon">👤</span>
+          <span class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--mint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </span>
           <div class="stat-info">
             <span class="stat-val" id="statUniqueVisits">0</span>
             <span class="stat-lbl">Noyob mehmonlar</span>
           </div>
         </div>
         <div class="stat-card">
-          <span class="stat-icon">📋</span>
+          <span class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--warn)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="m9 14 2 2 4-4"/></svg>
+          </span>
           <div class="stat-info">
             <span class="stat-val" id="statAuditsStarted">0</span>
             <span class="stat-lbl">Boshlangan auditlar</span>
           </div>
         </div>
         <div class="stat-card">
-          <span class="stat-icon">🎯</span>
+          <span class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </span>
           <div class="stat-info">
             <span class="stat-val" id="statAuditsCompleted">0</span>
             <span class="stat-lbl">Yakunlangan hisobotlar</span>
@@ -1636,8 +1681,11 @@ markMoney(document);
 function refreshUnits(){
   const uzs = baseCur()==="uzs";
   $$(".u[data-money]").forEach(u=>{
-    u.textContent = uzs ? u.dataset.orig.replace("USD","so‘m") : u.dataset.orig;
-    const inp=u.closest(".suffix").querySelector("input[type=number]");
+    if(u.dataset && u.dataset.orig){
+      u.textContent = uzs ? u.dataset.orig.replace("USD","so‘m") : u.dataset.orig;
+    }
+    const sfx = u.closest(".suffix");
+    const inp = sfx ? sfx.querySelector("input[type=number]") : null;
     if(inp && inp.dataset.ph){
       const v=parseFloat(inp.dataset.ph);
       inp.placeholder = (uzs && isFinite(v)) ? grp(Math.round(v*fxRate()/1000)*1000) : inp.dataset.ph;
@@ -2782,7 +2830,7 @@ function applyTerms(){
     if(lab){ const l=q.querySelector(".qlab"); if(l) l.textContent=lab; }
     if(hint){ const h=q.querySelector(".hint"); if(h) h.innerHTML=hint; }
   };
-  const num=(id,ph,unit)=>{
+  const setFieldVal=(id,ph,unit)=>{
     const q=$("#"+id); if(!q) return;
     const inp=q.querySelector("input[type=number]");
     if(inp && ph!==undefined){ inp.dataset.ph=String(ph); inp.placeholder=String(ph); }
@@ -2791,9 +2839,9 @@ function applyTerms(){
       if(u && !u.dataset.money) u.textContent=unit;
     }
   };
-  set("qCheck", t.check.l, t.check.h);      num("qCheck", t.check.ph);
+  set("qCheck", t.check.l, t.check.h);      setFieldVal("qCheck", t.check.ph);
   set("qMargin", null,     t.margin.h);
-  set("qFreq",  t.freq.l,  t.freq.h);       num("qFreq",  t.freq.ph, t.freq.u);
+  set("qFreq",  t.freq.l,  t.freq.h);       setFieldVal("qFreq",  t.freq.ph, t.freq.u);
   set("qConv",  null,      t.conv.h);
   set("qCurrent", null,    t.current.h);
   const cpl=$("#qCPL"); if(cpl){ const h=cpl.querySelector(".hint");
@@ -3661,26 +3709,32 @@ function sectorFindings(X){
    5. DVIGATEL — universal
    ================================================================== */
 function engine(){
-  const sec = SECTORS[S.sector], mk = MARKET[S.market];
-  const G = S.goal, A = S.check, m = S.margin/100, freq = (S.freq&&S.freq>0)?S.freq:1;
-  const R0 = S.current||0;
-
-  const convGiven = !!(S.conv>0);
-  const cNow = convGiven ? S.conv/100 : sec.cvr/100;
-  const cplGiven = !!(S.cpl>0);
+  const sec = SECTORS[S.sector] || SECTORS.boshqa, mk = MARKET[S.market] || MARKET.uz;
   const fx = (S.cur==="uzs") ? fxRate() : 1;
-  const cplBenchUSD = sec.cpl*mk.k;
-  const cplBench = cplBenchUSD*fx;
+  const term = (typeof TERMS !== "undefined" && TERMS[S.sector]) ? TERMS[S.sector] : (TERMS.boshqa || {});
+  const defaultCheck = ((term.check && term.check.ph) || 100) * fx;
+  const A = (S.check && S.check > 0) ? S.check : defaultCheck;
+  const defaultGoal = (S.current && S.current > 0) ? S.current * 1.3 : (A * 50);
+  const G = (S.goal && S.goal > 0) ? S.goal : defaultGoal;
+  const m = (S.margin && S.margin > 0 ? S.margin : 35) / 100;
+  const freq = (S.freq && S.freq > 0) ? S.freq : ((term.freq && term.freq.ph) || 1);
+  const R0 = S.current || 0;
+
+  const convGiven = !!(S.conv > 0);
+  const cNow = convGiven ? S.conv / 100 : sec.cvr / 100;
+  const cplGiven = !!(S.cpl > 0);
+  const cplBenchUSD = sec.cpl * mk.k;
+  const cplBench = cplBenchUSD * fx;
   const cplNow = cplGiven ? S.cpl : cplBench;
 
-  const N = G/A;
-  const Lnow = N/cNow;
-  const budgetNow = Lnow*cplNow;
-  const GP1 = A*m;
-  const LTV = A*m*freq;
-  const CAC = budgetNow/N;
-  const ratio = LTV/CAC;
-  const mkShare = budgetNow/G;
+  const N = Math.max(1, G / A);
+  const Lnow = Math.max(1, N / cNow);
+  const budgetNow = Lnow * cplNow;
+  const GP1 = A * m;
+  const LTV = A * m * freq;
+  const CAC = budgetNow / N;
+  const ratio = CAC > 0 ? LTV / CAC : 1;
+  const mkShare = G > 0 ? budgetNow / G : 0.05;
 
   const conv = F_CONV.map(f=>({...f, k:(f.k[S[f.f]]!==undefined?f.k[S[f.f]]:1)})).filter(x=>x.k>1);
   const cplF = F_CPL .map(f=>({...f, k:(f.k[S[f.f]]!==undefined?f.k[S[f.f]]:1)})).filter(x=>x.k>1);
@@ -3961,30 +4015,30 @@ function scoring(E,P,C,I){
   const d3 = pick("social",{strong:5,mid:3,weak:0}) + (S.channel&&S.channel!=="none"?3:0) + budOK;
   D.push({k:"Marketing bosimi", got:d3, max:14});
 
-  const rScore = Math.max(0,Math.min(14,(E.ratio/B.ltvCac)*10));
-  const mgScore = Math.max(0,Math.min(6,(E.m/0.45)*6));
-  const shScore = E.mkShare<=B.mkShare ? 8 : Math.max(0,8-(E.mkShare-B.mkShare)/B.mkShare*4);
+  const rScore = Math.max(0,Math.min(14, isFinite(E.ratio) ? (E.ratio/B.ltvCac)*10 : 0));
+  const mgScore = Math.max(0,Math.min(6, isFinite(E.m) ? (E.m/0.45)*6 : 0));
+  const shScore = !isFinite(E.mkShare) ? 4 : (E.mkShare<=B.mkShare ? 8 : Math.max(0,8-(E.mkShare-B.mkShare)/B.mkShare*4));
   D.push({k:"Birlik iqtisodiyoti", got:rScore+mgScore+shScore, max:28});
 
   const d5 = pick("retention",{yes:8,some:4,no:0}) + (E.freq>1.3?4:(E.freq>1?2:1));
   D.push({k:"Ushlab qolish", got:d5, max:12});
 
-  if(P) D.push({k:"Ishlab chiqarish samaradorligi", got:Math.max(0,Math.min(10,(P.OEE/B.oeeWorld)*10)), max:10});
+  if(P) D.push({k:"Ishlab chiqarish samaradorligi", got:Math.max(0,Math.min(10, isFinite(P.OEE) ? (P.OEE/B.oeeWorld)*10 : 0)), max:10});
   else if(C){
-    const comp=(C.done/C.total)*6;
+    const comp=C.total>0 ? (C.done/C.total)*6 : 3;
     const ops=(isFinite(C.util)?Math.min(2,(C.util/B.slotUtil)*2):1)
              +(isFinite(C.nsRate)?Math.min(2,(B.noShow/Math.max(0.01,C.nsRate))*2):1);
     D.push({k:"Klinika operatsiyasi", got:Math.min(10,comp+ops), max:10});
   }
   if(I){
-    const borS = Math.max(0,Math.min(8,(I.BOR/0.85)*8));
+    const borS = Math.max(0,Math.min(8, isFinite(I.BOR) ? (I.BOR/0.85)*8 : 0));
     const profS = I.profit>0 ? 4 : (I.BOR>=I.beBOR?2:0);
     const chS = Math.max(0,Math.min(4,(4-I.chZero)));
     D.push({k:"Statsionar iqtisodiyoti", got:Math.min(16,borS+profS+chS), max:16});
   }
 
-  const gotAll=D.reduce((a,x)=>a+x.got,0), maxAll=D.reduce((a,x)=>a+x.max,0);
-  const score=Math.round(gotAll/maxAll*100);
+  const gotAll=D.reduce((a,x)=>a+(isFinite(x.got)?x.got:0),0), maxAll=D.reduce((a,x)=>a+x.max,0);
+  const score=maxAll>0 ? Math.round(gotAll/maxAll*100) : 50;
   let g;
   if(score>=85) g={t:"Yetakchi",c:"c-ok"};
   else if(score>=70) g={t:"Barqaror",c:"c-ok"};
@@ -4790,9 +4844,20 @@ const ADMIN_CONFIG = {
 };
 
 const Analytics = (function(){
+  const safeStorage = {
+    getItem(k){ try{ return window.localStorage ? window.localStorage.getItem(k) : null; }catch(e){ return null; } },
+    setItem(k,v){ try{ if(window.localStorage) window.localStorage.setItem(k,v); }catch(e){} },
+    removeItem(k){ try{ if(window.localStorage) window.localStorage.removeItem(k); }catch(e){} }
+  };
+  const safeSession = {
+    getItem(k){ try{ return window.sessionStorage ? window.sessionStorage.getItem(k) : null; }catch(e){ return null; } },
+    setItem(k,v){ try{ if(window.sessionStorage) window.sessionStorage.setItem(k,v); }catch(e){} },
+    removeItem(k){ try{ if(window.sessionStorage) window.sessionStorage.removeItem(k); }catch(e){} }
+  };
+
   function getStorage(){
     try {
-      const raw = localStorage.getItem(ADMIN_CONFIG.storageKey);
+      const raw = safeStorage.getItem(ADMIN_CONFIG.storageKey);
       if(raw){
         const d = JSON.parse(raw);
         if(d && typeof d === "object") return d;
@@ -4811,7 +4876,7 @@ const Analytics = (function(){
 
   function saveStorage(data){
     try {
-      localStorage.setItem(ADMIN_CONFIG.storageKey, JSON.stringify(data));
+      safeStorage.setItem(ADMIN_CONFIG.storageKey, JSON.stringify(data));
     } catch(e){}
   }
 
@@ -4824,11 +4889,11 @@ const Analytics = (function(){
   }
 
   function getOrSetVid(){
-    let vid = localStorage.getItem(ADMIN_CONFIG.vidKey);
+    let vid = safeStorage.getItem(ADMIN_CONFIG.vidKey);
     let isNew = false;
     if(!vid){
       vid = "v_" + Date.now().toString(36) + "_" + Math.random().toString(36).substring(2, 8);
-      try { localStorage.setItem(ADMIN_CONFIG.vidKey, vid); } catch(e){}
+      safeStorage.setItem(ADMIN_CONFIG.vidKey, vid);
       isNew = true;
     }
     return { vid, isNew };
@@ -4840,9 +4905,9 @@ const Analytics = (function(){
     const device = detectDevice();
     let isNewSession = false;
 
-    if(!sessionStorage.getItem(ADMIN_CONFIG.sidKey)){
+    if(!safeSession.getItem(ADMIN_CONFIG.sidKey)){
       const sid = "s_" + Date.now().toString(36) + "_" + Math.random().toString(36).substring(2, 6);
-      try { sessionStorage.setItem(ADMIN_CONFIG.sidKey, sid); } catch(e){}
+      safeSession.setItem(ADMIN_CONFIG.sidKey, sid);
       isNewSession = true;
     }
 
@@ -4954,12 +5019,17 @@ const AdminController = (function(){
   const loginErr = $("#adminLoginErr");
 
   function isAuth(){
-    return sessionStorage.getItem(ADMIN_CONFIG.authKey) === "1";
+    try { return window.sessionStorage ? window.sessionStorage.getItem(ADMIN_CONFIG.authKey) === "1" : false; }
+    catch(e){ return false; }
   }
 
   function setAuth(val){
-    if(val) sessionStorage.setItem(ADMIN_CONFIG.authKey, "1");
-    else sessionStorage.removeItem(ADMIN_CONFIG.authKey);
+    try {
+      if(window.sessionStorage){
+        if(val) window.sessionStorage.setItem(ADMIN_CONFIG.authKey, "1");
+        else window.sessionStorage.removeItem(ADMIN_CONFIG.authKey);
+      }
+    } catch(e){}
   }
 
   function open(){
@@ -5026,14 +5096,14 @@ const AdminController = (function(){
       const dev = d.devices || { mobile: 0, tablet: 0, desktop: 0 };
       const devTotal = (dev.mobile || 0) + (dev.tablet || 0) + (dev.desktop || 0) || 1;
       const devConfig = [
-        { key: "mobile", name: "Telefon (Mobile)", icon: "📱", count: dev.mobile || 0 },
-        { key: "tablet", name: "Planshet (Tablet)", icon: "📟", count: dev.tablet || 0 },
-        { key: "desktop", name: "Kompyuter (Desktop)", icon: "💻", count: dev.desktop || 0 }
+        { key: "mobile", name: "Telefon (Mobile)", icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>', count: dev.mobile || 0 },
+        { key: "tablet", name: "Planshet (Tablet)", icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>', count: dev.tablet || 0 },
+        { key: "desktop", name: "Kompyuter (Desktop)", icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>', count: dev.desktop || 0 }
       ];
       devBox.innerHTML = devConfig.map(c => {
         const p = Math.round((c.count / devTotal) * 100);
         return '<div class="drow">' +
-          '<div class="drow-head"><span>' + c.icon + ' ' + c.name + '</span><b>' + c.count + ' ta (' + p + '%)</b></div>' +
+          '<div class="drow-head"><span style="display:inline-flex;align-items:center">' + c.icon + c.name + '</span><b>' + c.count + ' ta (' + p + '%)</b></div>' +
           '<div class="dbar-bg"><div class="dbar" style="width:' + p + '%"></div></div>' +
         '</div>';
       }).join("");
@@ -5068,9 +5138,13 @@ const AdminController = (function(){
       if(!events.length){
         tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--ink-3)">Hozircha harakat qayd etilmagan</td></tr>';
       } else {
-        const devIcons = { mobile: "📱 Telefon", tablet: "📟 Planshet", desktop: "💻 Komp" };
+        const devIcons = {
+          mobile: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:4px"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>Telefon',
+          tablet: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:4px"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>Planshet',
+          desktop: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:4px"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Komp'
+        };
         tbody.innerHTML = events.slice(0, 30).map(ev => {
-          const devBadge = '<span class="dev-badge ' + esc(ev.device || 'desktop') + '">' + esc(devIcons[ev.device] || ev.device) + '</span>';
+          const devBadge = '<span class="dev-badge ' + esc(ev.device || 'desktop') + '">' + (devIcons[ev.device] || devIcons.desktop) + '</span>';
           const secName = (ev.sector !== '—' && SECTORS[ev.sector]) ? SECTORS[ev.sector].lab : ev.sector;
           return '<tr>' +
             '<td><span class="t-stamp">' + esc(ev.time || '—') + '</span></td>' +
