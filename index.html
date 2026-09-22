@@ -518,6 +518,31 @@ section.block > h3 .n{
   content:"";position:absolute;left:0;top:2px;width:16px;height:16px;
   border:1px solid var(--hair-lit);border-radius:4px;
 }
+.sheet-selector-card{
+  background:var(--s1);border:1px solid var(--hair);border-radius:var(--r);
+  padding:16px 20px;margin-bottom:22px;box-shadow:0 1px 0 var(--hair-lit) inset;
+}
+.sheet-selector-head{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.sheet-sel-badge{
+  font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:#04120D;background:var(--grad);padding:3px 9px;border-radius:6px;
+}
+.sheet-sector-opts{display:flex;flex-wrap:wrap;gap:8px}
+.sheet-sector-opts .opt{font-size:12.5px;padding:8px 14px;border-radius:100px;min-height:36px;cursor:pointer}
+.sheet-sector-opts .opt[aria-pressed="true"]{
+  background:var(--grad);color:#04120D;border-color:transparent;font-weight:700;
+  box-shadow:0 0 16px rgba(47,224,168,.35);
+}
+.sheet-print-header{display:none}
+@media print{
+  .sheet-selector-card{display:none!important}
+  .sheet-print-header{
+    display:block!important;border-bottom:2px solid #000;padding-bottom:12px;margin-bottom:18px;
+  }
+  .sheet-print-header h2{font-size:16pt;margin:0 0 4px;color:#000}
+  .sheet-print-header p{font-size:9pt;margin:0 0 8px;color:#333}
+  .sheet-print-meta{display:flex;justify-content:space-between;font-size:9pt;font-weight:600;border-top:1px solid #ccc;padding-top:6px}
+}
 .demo-banner{
   display:flex;align-items:flex-start;gap:13px;padding:15px 19px;border-radius:var(--r-sm);
   background:var(--warn-wash);border:1px solid rgba(255,196,107,.35);color:var(--ink);
@@ -1112,120 +1137,46 @@ section.block > h3 .n{
   <div class="panel-head">
     <p class="eyebrow">Auditdan oldin</p>
     <h2>Ma&rsquo;lumot yig&lsquo;ish varaqasi</h2>
-    <p>Auditga borishdan oldin shu varaqani chop eting. Har bir raqamning yonida uni kimdan so&lsquo;rash kerakligi yozilgan. Bo&lsquo;sh qolgan raqam &mdash; hisobotdagi bo&lsquo;sh joy: asbob u yerga etalon qiymat qo&lsquo;yadi va buni ochiq belgilaydi.</p>
+    <p>Auditga borishdan yoki raqamlarni kiritishdan oldin o‘z sohangizga mos varaqani chop eting. Har bir raqamning yonida uni kimdan so‘rash kerakligi yozilgan. Bo‘sh qolgan raqam &mdash; hisobotdagi bo‘sh joy: asbob u yerga etalon qiymat qo‘yadi.</p>
   </div>
 
-  <div class="navrow no-print" style="margin-top:0;margin-bottom:26px">
+  <div class="sheet-selector-card no-print">
+    <div class="sheet-selector-head">
+      <span class="sheet-sel-badge">Sohani tanlang</span>
+      <p class="hint" style="margin:0">Istalgan sohani tanlang &mdash; varaqadagi barcha savollar, mas’ul shaxslar va qonuniy me’yorlar aynan shu sohaga moslashadi:</p>
+    </div>
+    <div class="opts sheet-sector-opts" id="sheetSectorOpts" data-type="single">
+      <button class="opt" data-v="tibbiyot" type="button">🏥 Klinika / shifoxona</button>
+      <button class="opt" data-v="stomatologiya" type="button">🦷 Stomatologiya</button>
+      <button class="opt" data-v="ishlab_chiqarish" type="button">🏭 Ishlab chiqarish</button>
+      <button class="opt" data-v="talim" type="button">🎓 Ta’lim markazi</button>
+      <button class="opt" data-v="gozallik" type="button">💇‍♀️ Go‘zallik saloni</button>
+      <button class="opt" data-v="horeca" type="button">🍽️ Restoran / kafe</button>
+      <button class="opt" data-v="savdo" type="button">🛍️ Do‘kon / Savdo</button>
+      <button class="opt" data-v="fitnes" type="button">💪 Sport / fitnes</button>
+      <button class="opt" data-v="kochmas" type="button">🏢 Ko‘chmas mulk</button>
+      <button class="opt" data-v="qurilish" type="button">🏗️ Qurilish / mebel</button>
+      <button class="opt" data-v="b2b" type="button">💼 B2B xizmatlar</button>
+      <button class="opt" data-v="xizmat" type="button">🔧 Xizmat ko‘rsatish</button>
+    </div>
+  </div>
+
+  <div class="navrow no-print" style="margin-top:0;margin-bottom:24px">
     <button class="btn" id="sheetPrint" type="button">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6M6 18H4v-7h16v7h-2M8 14h8v7H8z"/></svg>
-      Chop etish
+      Chop etish (PDF)
     </button>
-    <button class="btn ghost" id="sheetBack" type="button">Orqaga</button>
+    <button class="btn ghost" id="sheetAuditStartBtn" type="button" style="color:var(--mint)">
+      Ushbu sohada auditni boshlash &rarr;
+    </button>
+    <button class="btn ghost" id="sheetBack" type="button" style="margin-left:auto">Orqaga</button>
   </div>
 
-  <div class="sheet">
-    <section class="sheet-grp">
-      <h3><span class="who">Bosh hisobchi</span> Moliya</h3>
-      <ul>
-        <li>Oylik umumiy tushum (oxirgi 3 oy o&lsquo;rtachasi)<i></i></li>
-        <li>Oylik doimiy xarajat: oklad, ijara, kommunal, amortizatsiya, kredit<i></i></li>
-        <li>Shundan ish haqi fondi<i></i></li>
-        <li>Bevosita xarajat ulushi (dori, sarf materiallari, ishbay ish haqi) &mdash; marjani hisoblash uchun<i></i></li>
-        <li>Tushum xizmat turi bo&lsquo;yicha: statsionar<i></i></li>
-        <li>&mdash; operatsiya va muolaja<i></i></li>
-        <li>&mdash; ambulator qabul<i></i></li>
-        <li>&mdash; laboratoriya va diagnostika<i></i></li>
-        <li>Laboratoriya tushumida tashqi bemorlar ulushi (%)<i></i></li>
-      </ul>
-    </section>
+  <div id="sheetBody"></div>
 
-    <section class="sheet-grp">
-      <h3><span class="who">Bosh shifokor</span> Statsionar</h3>
-      <ul>
-        <li>Litsenziya bo&lsquo;yicha yotoq soni<i></i></li>
-        <li>O&lsquo;rtacha kunlik band yotoq (oxirgi oy)<i></i></li>
-        <li>O&lsquo;rtacha yotish davomiyligi, kun<i></i></li>
-        <li>Oyda yotqizilgan bemorlar soni<i></i></li>
-        <li>Bir yotoq-kun o&lsquo;rtacha daromadi (palata va davolash)<i></i></li>
-        <li>Bir yotoq-kun o&lsquo;zgaruvchan xarajati (dori, ovqat, sarf)<i></i></li>
-        <li>Operatsiya xonalari soni<i></i></li>
-        <li>Oyda bajarilgan operatsiyalar<i></i></li>
-        <li>Bitta operatsiyaning o&lsquo;rtacha to&lsquo;lovi<i></i></li>
-        <li>Og&lsquo;ir uskuna (MRT/KT) kuniga necha soat ishlaydi<i></i></li>
-        <li>Soat 12:00 gacha chiqarilgan bemorlar ulushi (%)<i></i></li>
-      </ul>
-    </section>
-
-    <section class="sheet-grp">
-      <h3><span class="who">Registratura</span> Bemor oqimi</h3>
-      <ul>
-        <li>Oyiga tushadigan jami murojaat (qo&lsquo;ng&lsquo;iroq, xabar, forma)<i></i></li>
-        <li>Javobsiz qolgan qo&lsquo;ng&lsquo;iroqlar ulushi (%) &mdash; ATS statistikasidan<i></i></li>
-        <li>Oyda yozilgan bemorlar soni<i></i></li>
-        <li>Ulardan kelmaganlar (no-show) soni<i></i></li>
-        <li>Onlayn o&lsquo;zi yozilganlar soni<i></i></li>
-        <li>Onlayn yozilganlarning kelish ulushi (%)<i></i></li>
-        <li>Ambulator qabulning o&lsquo;rtacha cheki<i></i></li>
-        <li>Qayta murojaat ulushi (%)<i></i></li>
-        <li>Qabul qiluvchi shifokorlar soni<i></i></li>
-        <li>Bir shifokorning kunlik qabul o&lsquo;rni<i></i></li>
-        <li>Call-markaz operatorlari soni<i></i></li>
-        <li>Bitta operatorning oylik xarajati<i></i></li>
-      </ul>
-    </section>
-
-    <section class="sheet-grp">
-      <h3><span class="who">Marketing</span> Tizim</h3>
-      <ul>
-        <li>Oylik reklama byudjeti<i></i></li>
-        <li>Asosiy kanal (Instagram, Telegram, Google, offlayn)<i></i></li>
-        <li>CRM bormi va kunda ishlatiladimi<i></i></li>
-        <li>Meta Pixel / analitika o&lsquo;rnatilganmi<i></i></li>
-        <li>Retarget kampaniyasi ishlaydimi<i></i></li>
-        <li>Murojaatga o&lsquo;rtacha javob vaqti<i></i></li>
-        <li>Suhbat skripti yozilganmi<i></i></li>
-      </ul>
-    </section>
-
-    <section class="sheet-grp">
-      <h3><span class="who">Rivojlanish</span> Hamkorlik kanallari</h3>
-      <ul>
-        <li>Sug&lsquo;urta va TPA shartnomalari soni<i></i></li>
-        <li>Yo&lsquo;naltiruvchi shifokor va klinikalar soni<i></i></li>
-        <li>Korporativ shartnomalar soni<i></i></li>
-        <li>Oyiga chiqma ko&lsquo;rik va skrining soni<i></i></li>
-        <li>Boshqaruv hisoboti qanchalik tez-tez ko&lsquo;riladi<i></i></li>
-      </ul>
-    </section>
-
-    <section class="sheet-grp">
-      <h3><span class="who">Huquqiy</span> Majburiy bosqichlar</h3>
-      <ul class="ticks">
-        <li>Yuridik shakl va davlat ro&lsquo;yxatidan o&lsquo;tish</li>
-        <li>Bino sanitariya-gigiyena talablariga muvofiq</li>
-        <li>Sanitariya-epidemiologiya xulosasi</li>
-        <li>Yong&lsquo;in xavfsizligi xulosasi</li>
-        <li>Tibbiyot faoliyati litsenziyasi</li>
-        <li>Har bir ixtisoslik litsenziyaga kiritilgan</li>
-        <li>Kadrlar hujjatlari to&lsquo;liq</li>
-        <li>Uskunalar ro&lsquo;yxatdan o&lsquo;tgan va tekshirilgan</li>
-        <li>Tibbiy chiqindilar utilizatsiya shartnomasi</li>
-        <li>Tibbiy hujjatlar yuritish tizimi (MIS)</li>
-        <li>Bemorning xabardor roziligi shakllari</li>
-        <li>Shaxsiy ma&rsquo;lumotlar himoyasi tartibi</li>
-      </ul>
-    </section>
+  <div class="navrow no-print" style="margin-top:28px">
+    <button class="btn ghost" id="sheetBack2" type="button">Orqaga</button>
   </div>
-
-  <div class="callout" style="--tone:var(--mint);--tone-wash:var(--accent-wash)">
-    <b>Uchta savol raqamdan muhimroq.</b>
-    Birinchi: oxirgi 12 oyda bandlik qanday o&lsquo;zgargan &mdash; o&lsquo;smoqdami, tushmoqdami?
-    Ikkinchi: bemor bu klinikani qayerdan bilib keladi &mdash; kim yuboradi?
-    Uchinchi: qaysi bo&lsquo;lim pul keltiradi, qaysi biri boqiladi &mdash; buni kimdir biladimi?
-    Javoblar raqamlarga ma&rsquo;no beradi.
-  </div>
-
-  <div class="navrow no-print"><button class="btn ghost" id="sheetBack2" type="button">Orqaga</button></div>
 </section>
 
 <!-- ============ HISOBOT ============ -->
@@ -1448,7 +1399,7 @@ const SRC = {
 const SECTORS = {
   ishlab_chiqarish:{name:"Ishlab chiqarish",       cpl:37.34, cvr:9.34,  src:"ws", module:"prod"},
   tibbiyot:        {name:"Klinika / shifoxona",    cpl:47.47, cvr:4.51,  src:"ws", module:"clinic"},
-  stomatologiya:   {name:"Stomatologiya",          cpl:76.71, cvr:6.38,  src:"ws", module:"clinic"},
+  stomatologiya:   {name:"Stomatologiya",          cpl:76.71, cvr:6.38,  src:"ws", module:null},
   talim:           {name:"Ta’lim / kurslar",       cpl:28.22, cvr:10.08, src:"ws", module:null},
   gozallik:        {name:"Go‘zallik / kosmetologiya",cpl:51.42,cvr:5.29, src:"ws", module:null},
   qurilish:        {name:"Qurilish / mebel",       cpl:41.26, cvr:5.22,  src:"ws", module:null},
@@ -1528,7 +1479,7 @@ const STEPS = [
   {id:"p-3",     n:"03", t:"Moliya"},
   {id:"p-prod",  n:"04", t:"Ishlab chiqarish", cond:()=>mod()==="prod"},
   {id:"p-clinic",n:"04", t:"Klinika",          cond:()=>mod()==="clinic"},
-  {id:"p-sector",n:"04", t:()=>(sq()?sq().lab:"Soha"), cond:()=>!!sq()},
+  {id:"p-sector",n:"04", t:()=>(sq()?sq().lab:"Soha"), cond:()=>!mod() && !!sq()},
   {id:"p-report",n:"05", t:"Hisobot"}
 ];
 function mod(){ const s=SECTORS[S.sector]; return s?s.module:null; }
@@ -1536,6 +1487,7 @@ function flow(){ return STEPS.filter(s=>!s.cond||s.cond()); }
 let cur = -1;
 let VIEW_CUR = null;
 function grp(x){ return String(x).replace(/\B(?=(\d{3})+(?!\d))/g," "); }
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 const $=(q,r)=>(r||document).querySelector(q), $$=(q,r)=>Array.from((r||document).querySelectorAll(q));
 
@@ -1615,6 +1567,26 @@ document.addEventListener("click",e=>{
     if(f==="sector"){
       drawStepper();
       applyTerms();
+      if(typeof activeSheetSector!=="undefined") activeSheetSector = opt.dataset.v;
+      const compInp = document.querySelector('input[data-field="company"]');
+      if(compInp && (!compInp.value || compInp.value.trim()==="")){
+        const phMap = {
+          tibbiyot: "Masalan: Shifo Nur klinikasi",
+          stomatologiya: "Masalan: Dent Max stomatologiyasi",
+          ishlab_chiqarish: "Masalan: Techno Zavod korxonasi",
+          talim: "Masalan: Smart Academy o‘quv markazi",
+          gozallik: "Masalan: Beauty Luxe saloni",
+          horeca: "Masalan: Rayhon restorani",
+          savdo: "Masalan: Apex Store do‘koni",
+          fitnes: "Masalan: Iron Gym fitnes klubi",
+          kochmas: "Masalan: Real Estate ko‘chmas mulk agentligi",
+          qurilish: "Masalan: Bino Qurilish MChJ",
+          b2b: "Masalan: Pro Consulting xizmatlari",
+          xizmat: "Masalan: Clean Pro servisi",
+          boshqa: "Masalan: Biznes nomi"
+        };
+        if(phMap[opt.dataset.v]) compInp.placeholder = phMap[opt.dataset.v];
+      }
       if(typeof Analytics!=="undefined"){
         Analytics.logEvent("sector_select", { sector: opt.dataset.v, title: opt.textContent.trim() });
       }
@@ -1690,6 +1662,822 @@ $("#printBtn").onclick=()=>{
 };
 $("#resetBtn").onclick=()=>{ if(confirm("Barcha javoblar tozalansinmi?")) location.reload(); };
 
+/* ==================================================================
+   MA'LUMOT YIG'ISH VARAQALARI (SOHALAR KESIMIDA)
+   ================================================================== */
+let activeSheetSector = "tibbiyot";
+
+const SHEET_TEMPLATES = {
+  tibbiyot: {
+    title: "Klinika va shifoxona auditi uchun ma’lumot yig‘ish varaqasi",
+    badge: "Tibbiyot / Statsionar",
+    intro: "Auditga borishdan oldin shifoxonaning mas’ul xodimlaridan to‘planishi kerak bo‘lgan ko‘rsatkichlar. Bo‘sh qolgan raqamga etalon qiymat qo‘yiladi.",
+    groups: [
+      {
+        who: "Bosh hisobchi", title: "Moliya va tushum tuzilishi",
+        items: [
+          "Oylik umumiy tushum (oxirgi 3 oy o‘rtachasi)",
+          "Oylik doimiy xarajat: oklad, ijara, kommunal, kredit",
+          "Shundan ish haqi fondi",
+          "Bevosita xarajat ulushi (dori, sarf materiallari, reaktivlar) — %",
+          "Tushum: Statsionar yotoq fondidan",
+          "Tushum: Jarrohlik amaliyotlari va operatsiyadan",
+          "Tushum: Ambulator qabul va konsultatsiyalardan",
+          "Tushum: Laboratoriya va diagnostikadan (MRT/KT/UTT)",
+          "Laboratoriya tushumida tashqi yo‘llanma bemorlar ulushi (%)"
+        ]
+      },
+      {
+        who: "Bosh shifokor", title: "Statsionar va o‘rin fondi",
+        items: [
+          "Litsenziya bo‘yicha rasmiy yotoq soni",
+          "O‘rtacha kunlik band yotoq (oxirgi oy)",
+          "O‘rtacha yotish davomiyligi (ALOS), kun",
+          "Oyda yotqizilgan bemorlar soni",
+          "Bir yotoq-kun o‘rtacha daromadi (palata va parvarish)",
+          "Bir yotoq-kun o‘zgaruvchan xarajati (dori, ovqat, sarf)",
+          "Operatsiya xonalari soni va oylik amaliyotlar",
+          "Bitta operatsiyaning o‘rtacha to‘lovi (chek)",
+          "MRT / KT uskunasi kuniga necha soat ishlaydi",
+          "Soat 12:00 gacha peshingacha chiqarilganlar ulushi (%)"
+        ]
+      },
+      {
+        who: "Registratura", title: "Bemor oqimi va aloqa",
+        items: [
+          "Oyiga tushadigan jami murojaatlar (qo‘ng‘iroq, bot, forma)",
+          "Javobsiz qolgan qo‘ng‘iroqlar ulushi (%) — ATS dan",
+          "Oyda yozilgan bemorlar soni",
+          "Ulardan kelmaganlar (no-show) soni",
+          "Onlayn o‘zi yozilgan bemorlar soni",
+          "Ambulator qabulning o‘rtacha cheki",
+          "Qayta murojaat qilgan bemorlar ulushi (%)",
+          "Qabul qiluvchi shifokorlar soni va kunlik slotlar",
+          "Call-markaz operatorlari soni va bitta operator xarajati"
+        ]
+      },
+      {
+        who: "Marketing", title: "Tizim va hamkorlik",
+        items: [
+          "Oylik reklama byudjeti va asosiy kanal",
+          "CRM / MIS tizimi mavjudligi va kunda ishlatilishi",
+          "Murojaatga o‘rtacha javob berish tezligi (daqiqa)",
+          "Sug‘urta va TPA shartnomalari soni",
+          "Yo‘naltiruvchi shifokorlar tarmog‘i soni",
+          "Oyiga bepul chiqma ko‘riklar va skrining soni",
+          "Boshqaruv hisoboti (P&L) ko‘rilish davriyligi"
+        ]
+      }
+    ],
+    checklistTitle: "Huquqiy va majburiy bosqichlar",
+    checklist: [
+      "Yuridik shakl va davlat ro‘yxatidan o‘tish (tibbiyot faoliyati kodi bilan)",
+      "Bino sanitariya-gigiyena talablariga muvofiqligi",
+      "Sanitariya-epidemiologiya xulosasi olingan",
+      "Yong‘in xavfsizligi xulosasi",
+      "Tibbiyot faoliyati litsenziyasi (har bir ixtisoslik bo‘yicha)",
+      "Kadrlar to‘liq malaka toifasi va diplomlari mavjud",
+      "Uskunalar davlat reestridan o‘tgan va metrologik tekshirilgan",
+      "Tibbiy chiqindilar (shprits, qon, to‘qima) utilizatsiya shartnomasi",
+      "Tibbiy axborot tizimi (MIS) va elektron kartalar",
+      "Bemorning xabardor roziligi shakllari yuritilishi"
+    ],
+    questions: [
+      "Oxirgi 12 oyda bandlik qanday o‘zgargan — o‘smoqdami yoki tushmoqdami?",
+      "Bemor bu klinikani qayerdan bilib keladi — kim yo‘naltiradi?",
+      "Qaysi bo‘lim haqiqiy pul keltirmoqda, qaysi biri boqilmoqda?"
+    ]
+  },
+
+  stomatologiya: {
+    title: "Stomatologiya klinikasi auditi uchun ma’lumot yig‘ish varaqasi",
+    badge: "Stomatologiya",
+    intro: "Stomatologik kreslolar unumi, shifokor smenalari, davolash rejalari konversiyasi va laboratoriya xarajatlarini audit qilish varaqasi.",
+    groups: [
+      {
+        who: "Bosh hisobchi / Rahbar", title: "Moliya va xarajatlar",
+        items: [
+          "Oylik umumiy kassa tushumi (oxirgi 3 oy o‘rtachasi)",
+          "Oylik doimiy xarajat (bino ijarasi, kommunal, ma’muriyat)",
+          "Shifokor-stomatologlar ishbay to‘lovi ulushi (odatda 20–30%)",
+          "Sarf materiallari xarajati (plomba, kompozit, anestetik, implant)",
+          "Tish texnigi laboratoriyasi xizmatlari oylik to‘lovi",
+          "Tushum: Terapiya (plomba, karies, endodontiya)",
+          "Tushum: Ortopediya (toj, vinir, sirkon, protez)",
+          "Tushum: Implantatsiya va jarrohlik",
+          "Tushum: Ortodontiya (breket, elayner)",
+          "Tushum: Bolalar stomatologiyasi va gigiyena"
+        ]
+      },
+      {
+        who: "Bosh shifokor", title: "Kreslo quvvati va amaliyot",
+        items: [
+          "Ishlayotgan stomatologik kreslolar soni",
+          "Kunlik ish smenalari va ish vaqti (masalan 9:00–21:00)",
+          "Faol shifokor-stomatologlar soni (asosiy va navbatchi)",
+          "Bitta kresloning kunlik qabul o‘rni (slot/bemor)",
+          "Kunlik amalda qabul qilinayotgan bemorlar soni",
+          "Bitta kresloning kunlik bo‘sh turish vaqti (soat)",
+          "Viziograf / rentgen apparati mavjudligi va oylik tushumi",
+          "Avtoklav va sterilizatsiya xonasi o‘tkazuvchanligi"
+        ]
+      },
+      {
+        who: "Administrator", title: "Bemor oqimi va reja to‘lovi",
+        items: [
+          "Oyiga birlamchi murojaatlar soni (telefon, Instagram, tavsiya)",
+          "Javobsiz qolgan qo‘ng‘iroqlar ulushi (%)",
+          "Konsultatsiyaga yozilganlar va kelmaganlar (no-show %)",
+          "Birlamchi ko‘rikdan to‘liq davolash rejasiga rozilik konversiyasi (%)",
+          "Bir davolash rejasining o‘rtacha qiymati (chek)",
+          "Reja to‘lovini qismlarga bo‘lib to‘lash ulushi (%)",
+          "Bemorlarni 6 oylik profilaktik ko‘rikka qayta chaqirish ulushi (%)",
+          "Eslatma SMS/qo‘ng‘iroq qilish tartibi mavjudligi"
+        ]
+      },
+      {
+        who: "Marketing", title: "Jalb qilish va raqamli tizim",
+        items: [
+          "Oylik reklama byudjeti (Instagram, Google, blogger)",
+          "Stomatologik CRM (Dental4Windows, IDENT, 1C Stom yoki bot)",
+          "Shifokorlarning portfoliosi (before/after) yuritilishi",
+          "Murojaatga o‘rtacha javob berish tezligi (daqiqa)",
+          "Doimiy bemorlarning tavsiya (sarafannoe radio) ulushi (%)"
+        ]
+      }
+    ],
+    checklistTitle: "Sanitariya va huquqiy talablar",
+    checklist: [
+      "Stomatologiya faoliyati litsenziyasi (terapevtik, jarrohlik, ortopedik)",
+      "Har bir kreslo uchun minimal maydon normasi (kamida 14 kv.m + qo‘shimcha 10 kv.m)",
+      "Rentgen / viziograf xonasining radiologik pasporti va sanitariya xulosasi",
+      "Sterilizatsiya xonasi (avtoklav, suxojar) va kunlik sinama jurnallari",
+      "Bir martalik vositalar va karpul anestetiklar utilizatsiyasi shartnomasi",
+      "Shifokor va hamshiralarning malaka toifalari va medknijkalari",
+      "Bemorning xabardor roziligi (implantatsiya, protezlash, anesteziya uchun)",
+      "Tish texnikasi laboratoriyasi bilan rasmiy hamkorlik shartnomasi"
+    ],
+    questions: [
+      "Konsultatsiyaga kelgan 10 ta bemorning nechtasi to‘liq davolash rejasini sotib olyapti?",
+      "Kreslolar kuniga necha soat bo‘sh turibdi?",
+      "Davolash tugagan bemor 6 oydan keyin profilaktik ko‘rikka qaytyaptimi?"
+    ]
+  },
+
+  ishlab_chiqarish: {
+    title: "Ishlab chiqarish korxonasi auditi uchun ma’lumot yig‘ish varaqasi",
+    badge: "Ishlab chiqarish / Zavod",
+    intro: "Tsex quvvati, uskunalar unumi (OEE), xomashyo zaxirasi, brak darajasi va buyurtmalar ijrosini audit qilish varaqasi.",
+    groups: [
+      {
+        who: "Bosh hisobchi", title: "Moliya va tannarx",
+        items: [
+          "Oylik umumiy ishlab chiqarish va sotuv tushumi",
+          "Oylik doimiy xarajat (bino ijarasi, kredit, asosiy okladlar, amortizatsiya)",
+          "Tannarxda xomashyo va materiallar ulushi (%)",
+          "Tannarxda bevosita tsex ishchilari maoshi ulushi (%)",
+          "Elektr, gaz, suv va energiya resurslari xarajati",
+          "Rejalashtirilgan va amaldagi yalpi marja (%)",
+          "Debitorlik qarzdorligi va pul aylanmasi muddati (kun)"
+        ]
+      },
+      {
+        who: "Bosh muhandis / Tsex boshlig‘i", title: "Quvvat va uskunalar",
+        items: [
+          "Asosiy uskunalar / stanoklar soni va turlari",
+          "Tsexning oylik nazariy maksimal quvvati (dona/metr/tonna)",
+          "Ayni paytdagi faktik ishlab chiqarish hajmi (quvvat bandligi %)",
+          "Ish smenalari soni va bir smenaning davomiyligi (soat)",
+          "Uskunalarning nosozlik tufayli rejasiz to‘xtab qolish vaqti (soat/oy)",
+          "Rejali texnik xizmat ko‘rsatish va ehtiyot qismlar xarajati",
+          "Bitta partiyani tayyorlashning o‘rtacha muddati (lead time)"
+        ]
+      },
+      {
+        who: "OTK va Ombor mudiri", title: "Sifat va zaxiralar",
+        items: [
+          "Mahsulotdagi nuqson va brak darajasi (%)",
+          "Brakni qayta ishlash yoki yo‘qotish oylik summasi",
+          "Xomashyo omboridagi o‘rtacha zaxira hajmi va muddati (kun)",
+          "Tayyor mahsulot omborida qolib ketayotgan tovarlar ulushi",
+          "Xomashyo yetkazib beruvchilarning kechikishlari soni"
+        ]
+      },
+      {
+        who: "Sotuv bo‘limi", title: "Buyurtmalar va mijozlar",
+        items: [
+          "Oylik yangi buyurtmalar soni va o‘rtacha buyurtma cheki",
+          "Ulgurji xaridorlar va dilerlar soni",
+          "Eng yirik 3 ta xaridorning tushumdagi ulushi (%)",
+          "Buyurtmalarni muddatida va to‘liq topshirish ko‘rsatkichi (OTIF %)",
+          "Qaytarilgan mahsulotlar (reklamatsiyalar) soni va sabablari"
+        ]
+      }
+    ],
+    checklistTitle: "Sanoat xavfsizligi va standartlar",
+    checklist: [
+      "Ishlab chiqarish faoliyatiga mos yuridik shakl va guvohnoma",
+      "Sanoat xavfsizligi davlat nazorati ruxsatnomalari",
+      "Mehnat muhofazasi va texnika xavfsizligi bo‘yicha o‘qitish jurnallari",
+      "Tsex yong‘in xavfsizligi, evakuatsiya va yong‘in o‘chirish vositalari",
+      "Ekologiya va atrof-muhitga ta’sir xulosasi (chiqindilar utilizatsiyasi)",
+      "Mahsulot muvofiqlik sertifikati yoki muvofiqlik deklaratsiyasi",
+      "Ishlab chiqarish sanitariya va gigiyena talablari (oziq-ovqat bo‘lsa SanPIN)",
+      "O‘lchash vositalari va tarozilarning davlat metrologik qiyoslovi"
+    ],
+    questions: [
+      "Uskunalar vaqtining necha foizi haqiqatda foydali mahsulot ishlab chiqaryapti (OEE)?",
+      "Xomashyo omborida aylanmay yotgan pul qancha?",
+      "Bitta yirik mijoz ketib qolsa, zavod zararsizlik nuqtasini ushlay oladimi?"
+    ]
+  },
+
+  talim: {
+    title: "Ta’lim markazi va o‘quv kurslari auditi uchun ma’lumot yig‘ish varaqasi",
+    badge: "Ta’lim markazi",
+    intro: "O‘quv xonalari sig‘imi, guruhlar jadvallari, o‘quvchilarni ushlab qolish (retention) va ustozlar yuklamasini audit qilish varaqasi.",
+    groups: [
+      {
+        who: "Bosh hisobchi / Rahbar", title: "Moliya va tushum",
+        items: [
+          "Oylik o‘quv to‘lovlaridan tushum (oxirgi 3 oy o‘rtachasi)",
+          "Bino ijarasi va kommunal xarajatlar",
+          "O‘qituvchilar maoshi fondi (tushumdan ulush yoki soatbay)",
+          "Administrator va sotuvchilar oylik ish haqi",
+          "Darslik, kitob va materiallar sotuvidan tushum",
+          "Bitta o‘quvchining oylik o‘rtacha to‘lovi (chek)",
+          "To‘lovni kechiktirayotgan yoki to‘lamagan o‘quvchilar soni"
+        ]
+      },
+      {
+        who: "O‘quv bo‘limi boshlig‘i", title: "Xonalar, guruhlar va jadval",
+        items: [
+          "O‘quv xonalari soni",
+          "Bitta xonaning jismoniy sig‘imi (stullar/partalar soni)",
+          "Markazning kunlik ochiq soatlari (masalan 8:00–20:00)",
+          "Bitta dars davomiyligi (daqiqa) va tanaffus vaqti",
+          "Kunlik bitta xonada o‘ta oladigan maksimal smenalar soni",
+          "Ayni paytda faol o‘qiyotgan guruhlar soni",
+          "Ayni paytdagi jami faol o‘quvchilar soni",
+          "Bitta guruhdagi o‘rtacha o‘quvchi soni",
+          "Bitta to‘liq stavkadagi o‘qituvchining haftalik dars soati"
+        ]
+      },
+      {
+        who: "Qabul va Sotuv bo‘limi", title: "Lidlar va voronka",
+        items: [
+          "Oyiga yangi murojaatlar soni (qo‘ng‘iroq, Telegram, Instagram)",
+          "Sinov (ochiq) darsiga yozilganlar soni",
+          "Sinov darsiga kelganlar ulushi (%)",
+          "Sinov darsidan keyin kursga to‘lov qilish konversiyasi (%)",
+          "Kursni boshidan oxirigacha tugatganlar ulushi (%)",
+          "Kurs tugagach keyingi bosqichga (level) o‘tganlar ulushi (%)",
+          "Murojaatga javob berish tezligi (daqiqa)"
+        ]
+      },
+      {
+        who: "Marketing", title: "Trafik va tizim",
+        items: [
+          "Oylik reklama byudjeti (Instagram, Telegram)",
+          "O‘quv markazni boshqarish CRM/LMS tizimi (Modme va h.k.)",
+          "O‘quvchilarga avtomatik to‘lov va dars eslatmalari",
+          "O‘quvchilarning do‘stini olib kelish (referral) dasturi"
+        ]
+      }
+    ],
+    checklistTitle: "Litsenziya va bino talablari",
+    checklist: [
+      "Maktabdan tashqari ta’lim litsenziyasi yoki vakolatli organ xabarnomasi",
+      "O‘quv binosining yong‘in xavfsizligi xulosasi",
+      "Sanitariya-epidemiologiya talablariga muvofiqligi (yorug‘lik, havo)",
+      "Tasdiqlangan o‘quv rejalari va dasturlari",
+      "Ota-onalar yoki o‘quvchilar bilan rasmiy shartnoma / oferta",
+      "O‘qituvchilar bilan mehnat yoki fuqarolik-huquqiy shartnomalari"
+    ],
+    questions: [
+      "O‘quv xonalari kun bo‘yi necha foizga to‘lyapti?",
+      "Kursni boshlagan 10 ta o‘quvchidan nechtasi oxirigacha bitiradi?",
+      "Kurs tugagach keyingi bosqichga necha foizi o‘tmoqda?"
+    ]
+  },
+
+  gozallik: {
+    title: "Go‘zallik saloni va kosmetologiya auditi uchun ma’lumot yig‘ish varaqasi",
+    badge: "Go‘zallik / Kosmetologiya",
+    intro: "Ish o‘rinlari unumi, ustalar bandligi, mijozlar qayta yozilishi va kosmetika savdosini audit qilish varaqasi.",
+    groups: [
+      {
+        who: "Bosh hisobchi / Ega", title: "Moliya va tushum",
+        items: [
+          "Oylik umumiy kassa tushumi (oxirgi 3 oy)",
+          "Bino ijarasi va kommunal xarajatlar",
+          "Ustalarga to‘lanadigan ulush (ishbay % — odatda 40–50%)",
+          "Professional sarf materiallari va kosmetika xarajati",
+          "Uy parvarishi kosmetikasi chakana savdosi tushumi",
+          "Salondagi o‘rtacha chek",
+          "Xizmatlar bo‘yicha tushum: soch, manikyur, kosmetologiya, vizaj"
+        ]
+      },
+      {
+        who: "Admin / Menejer", title: "Ish o‘rinlari va mijozlar",
+        items: [
+          "Ish o‘rinlari (kreslo, kushetka, kabinet) soni",
+          "Faol ishlayotgan ustalar soni",
+          "Salonning kunlik ish soati",
+          "Bir ish o‘rnida kuniga o‘rtacha xizmat ko‘rsatiladigan mijozlar",
+          "Kunlik amalda xizmat ko‘rsatilgan mijozlar soni",
+          "Usta ish vaqtining amaldagi bandlik foizi (%)",
+          "Yozilib kelmaganlar (no-show) ulushi (%)"
+        ]
+      },
+      {
+        who: "Marketing", title: "Mijozlarni ushlab qolish",
+        items: [
+          "Oylik birlamchi yangi mijozlar soni",
+          "Yangi mijozning ikkinchi marta qaytish ulushi (retention %)",
+          "Doimiy mijozlarning bir yildagi o‘rtacha tashrif chastotasi",
+          "Onlayn yozilish tizimi (Yclients, DIKIDI va h.k.)",
+          "Instagram byudjeti va ustalar portfoliosi yangilanishi",
+          "Mijozlarga avtomatik tashrif eslatmasi yuborilishi"
+        ]
+      }
+    ],
+    checklistTitle: "Sanitariya va xavfsizlik talablari",
+    checklist: [
+      "Yuridik shakl va guvohnoma",
+      "Kosmetologik invaziv muolajalar bo‘lsa — tibbiyot faoliyati litsenziyasi",
+      "Instrumentlarni sterilizatsiya qilish uskunasi (suxojar, avtoklav) va testlar",
+      "Bir martalik materiallar (fartuk, salfetka, qo‘lqop) yetarliligi",
+      "Xodimlarning tibbiy ko‘rik daftarchalari (medknijka)",
+      "Bino sanitariya va yong‘in xavfsizligi talablari"
+    ],
+    questions: [
+      "Ustalar ish vaqtining necha foizi bo‘sh o‘tiribdi?",
+      "Birinchi marta kelgan mijozlarning nechtasi ikkinchi marta qaytyapti?",
+      "Har bir mijozga xizmatdan tashqari uy parvarishi vositalari sotilyaptimi?"
+    ]
+  },
+
+  horeca: {
+    title: "Restoran va kafe auditi uchun ma’lumot yig‘ish varaqasi",
+    badge: "Restoran / Kafe / HoReCa",
+    intro: "O‘rindiqlar unumi, stol aylanishi, mahsulot tannarxi (Food cost) va ish haqi (Labor cost) ko‘rsatkichlarini audit qilish varaqasi.",
+    groups: [
+      {
+        who: "Bosh hisobchi / Boshqaruvchi", title: "Moliya va Prime Cost",
+        items: [
+          "Oylik umumiy kassa tushumi",
+          "Mahsulot tannarxi (Food cost) — oylik summa va tushumdagi ulushi (%)",
+          "Oshxona va zal xodimlari ish haqi (Labor cost) — ulushi (%)",
+          "Prime cost jami (Food cost + Labor cost — me’yori 58–62%)",
+          "Bino ijarasi va kommunal to‘lovlar",
+          "Yetkazib berish (dostavka) ulushi va agregatorlar komissiyasi",
+          "Mahsulotlarning eskirib hisobdan chiqarilishi (spisanie %)"
+        ]
+      },
+      {
+        who: "Menejer / Zal boshlig‘i", title: "Zal quvvati va stollar",
+        items: [
+          "Zallar soni va umumiy o‘rindiqlar (posadochnye mesta) soni",
+          "Stollar soni",
+          "Kunlik o‘rtacha tashrif buyurgan mehmonlar soni",
+          "Bir stoldan o‘rtacha tushum",
+          "Stol aylanish tezligi (pik vaqtida kuniga necha marta)",
+          "Bitta mehmonning o‘rtacha cheki",
+          "Tushlik (biznes-lanch) va kechki bandlik farqi",
+          "Oshxonadan taom chiqishining o‘rtacha vaqti (daqiqa)"
+        ]
+      },
+      {
+        who: "Marketing", title: "Mehmonlar va tizim",
+        items: [
+          "Restoran avtomatlashtirish tizimi (iiko, R-Keeper, Jowi, Poster)",
+          "Mehmonlar sodiqlik tizimi (keshbek, ilova)",
+          "Yandex / Google / 2GIS xaritalaridagi reyting va sharhlar",
+          "Instagram va reklama byudjeti",
+          "Doimiy mehmonlarning tashrif ulushi (%)"
+        ]
+      }
+    ],
+    checklistTitle: "Sanitariya va xavfsizlik me’yorlari",
+    checklist: [
+      "Oshxona sanitariya-gigiyena talablari (texnologik oqim, zonalashtirish)",
+      "Xodimlarning sanitariya daftarchalari (medknijka)",
+      "Go‘sht va tez buziluvchi mahsulotlarning kelib chiqish sertifikatlari",
+      "Oshxona shamollatish va yog‘ tutqich (ventilyatsiya) tizimi",
+      "Yong‘in xavfsizligi xulosasi va signalizatsiya",
+      "Spirtli ichimliklar savdosi ruxsatnomasi (agar sotilsa)"
+    ],
+    questions: [
+      "Prime cost (mahsulot + ish haqi) 60% dan oshib ketmaganmi?",
+      "Pik soatlarda bitta stol necha marta aylanadi?",
+      "Haftaning ish kunlarida bo‘sh soatlar qanday to‘ldirilmoqda?"
+    ]
+  },
+
+  savdo: {
+    title: "Do‘kon va savdo biznesi auditi uchun ma’lumot yig‘ish varaqasi",
+    badge: "Do‘kon / Savdo / E-commerce",
+    intro: "Savdo maydoni unumi, tovar aylanmasi tezligi, ombor zaxiralari va konversiyani audit qilish varaqasi.",
+    groups: [
+      {
+        who: "Bosh hisobchi", title: "Moliya va aylanma",
+        items: [
+          "Oylik umumiy tovar aylanmasi (kassa tushumi)",
+          "Sotilgan tovarlar tannarxi (COGS)",
+          "O‘rtacha savdo marjasi (%)",
+          "Savdo maydoni ijarasi va ekspluatatsiya",
+          "Sotuvchilar va kassirlar maoshi (ishbay % bilan)",
+          "O‘rtacha chek summasi",
+          "Bitta chekdagi mahsulotlar soni (UPT)"
+        ]
+      },
+      {
+        who: "Do‘kon mudiri / Merchendayzer", title: "Maydon va zaxira",
+        items: [
+          "Savdo zalining foydali maydoni (kv.m)",
+          "1 kv.m savdo maydonidan oylik tushum",
+          "Ombordagi tovar zaxirasining oylik o‘rtacha summasi",
+          "Tovar aylanmasi tezligi (yiliga necha marta aylanadi)",
+          "3 oydan ko‘p sotilmay yotgan tovarlar (dead stock) ulushi (%)",
+          "Qaytarilgan tovarlar ulushi (vozvrat %)",
+          "Kamomad va yo‘qotishlar (o‘g‘rilik/brak) darajasi (%)"
+        ]
+      },
+      {
+        who: "Sotuv va Marketing", title: "Xaridorlar oqimi",
+        items: [
+          "Do‘konga kirgan odamlar soni (hisoblagich yoki taxminiy)",
+          "Kirganlarning xarid qilish konversiyasi (%)",
+          "Savdo va ombor dasturi (1C, MoySklad, Poster)",
+          "Onlayn savdo kanallari ulushi (Instagram, Telegram-bot, veb-sayt)",
+          "Doimiy mijozlar kartasi va sodiqlik tizimi"
+        ]
+      }
+    ],
+    checklistTitle: "Savdo qoidalari va fiskal intizom",
+    checklist: [
+      "Yuridik shaxs yoki YaTT guvohnomasi",
+      "Onlayn-NKM / virtual kassa apparati va fiskal chek intizomi",
+      "Bank to‘lov terminali (QR-kod, Uzcard, Humo)",
+      "Mahsulotlarni majburiy raqamli markirovkalash (Asl Belgisi)",
+      "Iste’molchilar huquqlarini himoya qilish burchagi va qaytarish qoidalari",
+      "Yong‘in xavfsizligi va savdo zali xavfsizlik kameralari"
+    ],
+    questions: [
+      "Ombordagi tovarlar yiliga necha marta aylanmoqda?",
+      "Do‘konga kirgan 100 kishining nechtasi xarid bilan chiqmoqda?",
+      "Sotilmay yotgan 'o‘lik' tovarlarda qancha aylanma mablag‘ muzlab qolgan?"
+    ]
+  },
+
+  fitnes: {
+    title: "Sport zal va fitnes klub auditi uchun ma’lumot yig‘ish varaqasi",
+    badge: "Sport / Fitnes",
+    intro: "Zal maydoni sig‘imi, abonementlar yangilanishi (retention), murabbiylar mashg‘ulotlari va pik yuklamasini audit qilish varaqasi.",
+    groups: [
+      {
+        who: "Bosh hisobchi / Klub boshqaruvchisi", title: "Moliya va tushum",
+        items: [
+          "Oylik umumiy tushum (oxirgi 3 oy)",
+          "Abonementlar sotuvidan tushum",
+          "Shaxsiy murabbiy mashg‘ulotlaridan tushum",
+          "Fitnes-bar va qo‘shimcha xizmatlar tushumi",
+          "Bino ijarasi va kommunal xarajatlar (dush, issiq suv, ventilyatsiya)",
+          "Murabbiylar va ma’murlar ish haqi fondi",
+          "O‘rtacha abonement narxi"
+        ]
+      },
+      {
+        who: "Katta murabbiy / Menejer", title: "Quvvat va sig‘im",
+        items: [
+          "Klubning umumiy maydoni (kv.m)",
+          "Trenajyorlar soni va holati",
+          "Guruh mashg‘ulotlari zallari soni",
+          "Kiyinish xonasidagi shkaflar soni (erkaklar va ayollar)",
+          "Bir vaqtda xavfsiz mashg‘ulot o‘tash maksimal sig‘imi (kishi)",
+          "Pik soatlardagi (18:00–21:00) amaldagi yuklama (kishi)",
+          "Kunlik o‘rtacha tashrif buyuruvchilar soni"
+        ]
+      },
+      {
+        who: "Sotuv bo‘limi", title: "A’zolar va yangilanish",
+        items: [
+          "Faol a’zolar (abonement egalari) soni",
+          "Oyiga yangi sotilgan abonementlar soni",
+          "Muddati tugagan abonementlarni qayta yangilash ulushi (retention %)",
+          "Sinov mashg‘ulotidan keyin xarid qilish konversiyasi (%)",
+          "Klub boshqaruv dasturi (turniket, karta, 1C Fitness)",
+          "Shaxsiy mashg‘ulot oluvchi a’zolar ulushi (%)"
+        ]
+      }
+    ],
+    checklistTitle: "Sanitariya va xavfsizlik me’yorlari",
+    checklist: [
+      "Majburiy shamollatish va havoni tozalash (ventilyatsiya) tizimi",
+      "Suv havzasi (basseyn) bo‘lsa — suv tozalash va sanitariya jurnali",
+      "Birinchi tibbiy yordam dorixonasi va shifokor/hamshira ko‘rigi",
+      "Trenajyorlar texnik xavfsizligi va instruktaj qoidalari",
+      "Mijozlar bilan rasmiy oferta shartnomasi (salomatlik uchun javobgarlik)",
+      "Yong‘in xavfsizligi va evakuatsiya yo‘llari"
+    ],
+    questions: [
+      "Abonementi tugagan 10 kishidan nechtasi to‘lovni yangilayapti?",
+      "Kunduzgi bo‘sh soatlarda zal qanday to‘ldirilmoqda?",
+      "Shaxsiy mashg‘ulotlar tushumi klub daromadining qancha qismini tashkil qiladi?"
+    ]
+  },
+
+  kochmas: {
+    title: "Ko‘chmas mulk agentligi auditi uchun ma’lumot yig‘ish varaqasi",
+    badge: "Ko‘chmas mulk",
+    intro: "Rieltorlar unumi, ob’ektlar bazasi (listinglar), bitim yopilish muddati va komissiyalar tahlili varaqasi.",
+    groups: [
+      {
+        who: "Bosh hisobchi / Direktor", title: "Moliya va komissiya",
+        items: [
+          "Oylik jami komissiya tushumi",
+          "Bir bitimdan olinadigan o‘rtacha komissiya (summa va %)",
+          "Rieltorlar bilan komissiya bo‘linishi (% split — odatda 40/60 yoki 50/50)",
+          "Ofis ijarasi va aloqa xarajatlari",
+          "Reklama maydonchalari (Olx, Uybor va h.k.) oylik xarajati",
+          "Yuridik tekshiruv va notarius xarajatlari"
+        ]
+      },
+      {
+        who: "Sotuv bo‘limi rahbari (ROP)", title: "Agentlar va ob’ektlar",
+        items: [
+          "Faol ishlayotgan rieltorlar / agentlar soni",
+          "Bitta agentning oyiga o‘rtacha yopgan bitimlari soni (median 1–2 ta)",
+          "Bazadagi faol ob’ektlar (listinglar) umumiy soni",
+          "Eksklyuziv shartnoma bilan olingan ob’ektlar ulushi (%)",
+          "Ob’ekt sotuvga qo‘yilgandan sotilguncha o‘rtacha muddat (kun)"
+        ]
+      },
+      {
+        who: "Marketing", title: "Lidlar va konversiya",
+        items: [
+          "Oylik xaridorlar va mulk egalaridan kelgan yangi lidlar soni",
+          "Murojaatdan ob’ekt ko‘rsatuviga (pokaz) o‘tish konversiyasi (%)",
+          "Ko‘rsatuvdan oldi-sotdi bitimiga aylanish konversiyasi (%)",
+          "Ko‘chmas mulk CRM tizimi mavjudligi",
+          "Murojaatga javob berish tezligi (daqiqa)"
+        ]
+      }
+    ],
+    checklistTitle: "Huquqiy talablar va standartlar",
+    checklist: [
+      "Rieltorlik tashkiloti litsenziyasi va rieltor malaka sertifikati",
+      "Mulk egasi bilan tuzilgan rasmiy rieltorlik xizmati shartnomasi",
+      "Mulkning yuridik tozaligini (taqiq, garov, ro‘yxatda turganlar) tekshirish tartibi",
+      "Avans va garov pullarini saqlash reglamenti",
+      "Mijozlar bilan maxfiylik va shaxsiy ma’lumotlar himoyasi",
+      "Rieltorlik faoliyatida professional javobgarlik sug‘urtasi"
+    ],
+    questions: [
+      "Bitta agent oyiga o‘rtacha nechta bitim yopyapti?",
+      "Ob’ekt bazada necha kun 'muzlab' yotib qolmoqda?",
+      "Eksklyuziv shartnomalar ulushi umumiy bazaning necha foizini tashkil qiladi?"
+    ]
+  },
+
+  qurilish: {
+    title: "Qurilish va ta’mir biznesi auditi uchun ma’lumot yig‘ish varaqasi",
+    badge: "Qurilish / Ta’mir / Mebel",
+    intro: "Ob’ektlar quvvati, smeta marjasi, brigadalar unumi va kechikishlarni audit qilish varaqasi.",
+    groups: [
+      {
+        who: "Bosh hisobchi / Bosh smetachi", title: "Moliya va smeta",
+        items: [
+          "Oylik kassa va bajarilgan ishlar akti (F-2/F-3) tushumi",
+          "Qurilish materiallari xarajati (smeta bo‘yicha va fakt)",
+          "Brigadalar va ustalarga to‘langan ishbay haq",
+          "Maxsus texnika, transport va instrumentlar xarajati",
+          "Smetada rejalashtirilgan o‘rtacha marja (%)",
+          "Smeta xarajatlarining oshib ketishi (overrun %)",
+          "Buyurtmachilardan pul undirish muddati va avans ulushi"
+        ]
+      },
+      {
+        who: "Bosh muhandis / Prorab", title: "Quvvat va brigadalar",
+        items: [
+          "Bir vaqtda parallel olib borilayotgan ob’ektlar soni",
+          "Ishlayotgan brigadalar va ustalar soni",
+          "Bitta loyihaning o‘rtacha muddati (oy)",
+          "Bitta loyihaning o‘rtacha shartnoma qiymati (chek)",
+          "Loyihalarni shartnoma muddatida topshirish ko‘rsatkichi (%)",
+          "Kafolat muddati davomida qayta tuzatishlar (reklamatsiya) soni"
+        ]
+      },
+      {
+        who: "Sotuv va Mijozlar", title: "Buyurtmalar va shartnoma",
+        items: [
+          "Oylik yangi loyiha so‘rovlari va hisoblangan smetalar soni",
+          "Smeta taqdim etilgach shartnoma imzolanish konversiyasi (%)",
+          "Tavsiya (sarafannoe radio) bo‘yicha kelgan buyurtmachilar ulushi (%)",
+          "Qurilish jarayonini mijozga foto/video hisobot qilib borish tartibi"
+        ]
+      }
+    ],
+    checklistTitle: "Qurilish xavfsizligi va me’yorlar",
+    checklist: [
+      "Qurilish-montaj faoliyati litsenziyasi (tegishli toifada)",
+      "Arxitektura va qurilish nazorati (GASK) ruxsatnomalari",
+      "Loyiha-smeta hujjatlarining davlat ekspertizasi xulosasi",
+      "Mualliflik va texnik nazorat jurnallari yuritilishi",
+      "Qurilish maydonida mehnat muhofazasi va xavfsizlik jurnallari",
+      "Ishchilar bilan mehnat shartnomalari va maxsus kiyim-bosh ta’minoti"
+    ],
+    questions: [
+      "Smetadagi rejaviy foyda va haqiqiy kassa foydasi bir-biriga to‘g‘ri kelyaptimi?",
+      "Ob’ektlar necha foiz holatda kechikish bilan topshirilmoqda?",
+      "Materiallar xaridida ortiqcha yo‘qotishlar va o‘g‘rilik qanday nazorat qilinadi?"
+    ]
+  },
+
+  b2b: {
+    title: "B2B va professional xizmatlar auditi uchun ma’lumot yig‘ish varaqasi",
+    badge: "B2B / Konsalting / IT",
+    intro: "Mutaxassislar unumi (billable hours), abonentlik (retainer) modeli, mijozlar LTV va bitim davomiyligi varaqasi.",
+    groups: [
+      {
+        who: "Bosh hisobchi / Partner", title: "Moliya va tushum",
+        items: [
+          "Oylik umumiy xizmat tushumi (oxirgi 3 oy)",
+          "Oylik doimiy abonent to‘lovlari (retainer) ulushi (%)",
+          "Bir martalik yirik loyihalardan tushum ulushi (%)",
+          "Mutaxassislar ish haqi fondi (tushumga nisbatan %)",
+          "Ofis, dasturiy ta’minot litsenziyalari va serverlar xarajati",
+          "Bitta mijozning o‘rtacha oylik cheki",
+          "Mijozning o‘rtacha siz bilan qolish davomiyligi (LTV muddati, oy)"
+        ]
+      },
+      {
+        who: "Operatsion direktor / Team Lead", title: "Mutaxassislar va vaqt",
+        items: [
+          "Asosiy mutaxassislar (konsultant, yurist, dasturchi) soni",
+          "Xodimning haq to‘lanadigan ish soatlari ulushi (billable utilization % — norma 70%+)",
+          "Bitta mutaxassis bir vaqtda nechta mijoz/loyihani olib borishi mumkin",
+          "Bitta mutaxassis generatsiya qilayotgan oylik o‘rtacha daromad",
+          "Loyihalarni muddatida va byudjet ichida topshirish darajasi (%)"
+        ]
+      },
+      {
+        who: "Bosh sotuvchi / Biznes rivojlantirish", title: "Mijozlar va voronka",
+        items: [
+          "Faol doimiy mijozlar soni",
+          "Oylik yangi korporativ lidlar soni",
+          "Tijoriy taklif (KP) yuborilgach shartnoma yopilish konversiyasi (%)",
+          "Bitim yopilishining o‘rtacha muddati (kun)",
+          "Mijozlarning xizmatdan ketib qolish darajasi (churn %)"
+        ]
+      }
+    ],
+    checklistTitle: "Shartnomaviy standartlar va huquq",
+    checklist: [
+      "Professional xizmat ko‘rsatish bo‘yicha batafsil shartnoma va SLA",
+      "Maxfiylik va tijorat sirini saqlash kelishuvi (NDA)",
+      "Bajarilgan ishlar dalolatnomasi (akt) o‘z vaqtida imzolanish intizomi",
+      "Intellektual mulk huquqlarining buyurtmachiga o‘tish shartlari",
+      "Mutaxassislarning malaka sertifikatlari (yurist, auditor, arxitektor)",
+      "Professional javobgarlik sug‘urtasi mavjudligi"
+    ],
+    questions: [
+      "Mutaxassislar vaqtining necha foizi haq to‘lanadigan ishga sarflanmoqda?",
+      "Doimiy abonent to‘lovlari kompaniyaning barcha doimiy xarajatlarini qoplaydimi?",
+      "Mijozlarning yillik ketib qolish (churn) darajasi qancha?"
+    ]
+  },
+
+  xizmat: {
+    title: "Xizmat ko‘rsatish va servis biznesi auditi uchun ma’lumot yig‘ish varaqasi",
+    badge: "Xizmat ko‘rsatish (B2C)",
+    intro: "Xizmat nuqtalari o‘tkazuvchanligi, xodimlar unumi, mijozlar qoniqishi va takroriy murojaatlar varaqasi.",
+    groups: [
+      {
+        who: "Bosh hisobchi / Rahbar", title: "Moliya va tushum",
+        items: [
+          "Oylik jami tushum",
+          "Oylik doimiy xarajat (ijara, kommunal, oklad)",
+          "Bevosita sarf materiallari va ehtiyot qismlar xarajati",
+          "Ishchilar va ustalarning ishbay ish haqi",
+          "Bitta buyurtmaning o‘rtacha cheki",
+          "Kassa va to‘lov turlari (naqd, karta, QR)"
+        ]
+      },
+      {
+        who: "Menejer / Usta boshlig‘i", title: "Nuqtalar va quvvat",
+        items: [
+          "Xizmat ko‘rsatish nuqtalari / postlari / zonalari soni",
+          "Faoliyat yuritayotgan ustalar va xodimlar soni",
+          "Kunlik maksimal xizmat ko‘rsatish quvvati (buyurtma)",
+          "Kunlik amalda bajarilgan buyurtmalar soni",
+          "Xizmat nuqtalarining bandlik darajasi (%)",
+          "Bitta buyurtmani bajarishning o‘rtacha vaqti"
+        ]
+      },
+      {
+        who: "Sotuv va Mijozlar", title: "Mijozlar oqimi",
+        items: [
+          "Oylik birlamchi murojaatlar va qo‘ng‘iroqlar soni",
+          "Murojaatga javob berish tezligi (daqiqa)",
+          "Qayta murojaat qilgan doimiy mijozlar ulushi (%)",
+          "Buyurtmalarni qayd etish daftari yoki CRM tizimi",
+          "Mijozlar qoniqish darajasi (baholar, sharhlar)"
+        ]
+      }
+    ],
+    checklistTitle: "Standartlar va xizmat qoidalari",
+    checklist: [
+      "Yuridik ro‘yxatdan o‘tish va faoliyat toifasi",
+      "Bino sanitariya va yong‘in xavfsizligi talablari",
+      "Xizmat ko‘rsatish qoidalari va kafolat shartlari",
+      "Iste’molchi huquqlari burchagi va daftari",
+      "Soliq hisoboti va fiskal kassa apparati",
+      "Xodimlarning mehnat muhofazasi va instruktaji"
+    ],
+    questions: [
+      "Xizmat ko‘rsatish joylari kun davomida necha soat to‘liq ishlayapti?",
+      "Mijozlarning necha foizi sizga qayta murojaat qiladi?",
+      "Eng ko‘p daromad va marja keltirayotgan asosiy xizmat qaysi?"
+    ]
+  }
+};
+SHEET_TEMPLATES.boshqa = SHEET_TEMPLATES.xizmat;
+
+function renderDataSheet(sec){
+  if(!SHEET_TEMPLATES[sec]) sec = "tibbiyot";
+  activeSheetSector = sec;
+  const tpl = SHEET_TEMPLATES[sec];
+
+  const opts = document.querySelectorAll("#sheetSectorOpts .opt");
+  opts.forEach(btn => {
+    btn.setAttribute("aria-pressed", String(btn.dataset.v === sec));
+  });
+
+  const body = document.getElementById("sheetBody");
+  if(!body) return;
+
+  let html = '';
+
+  // Print header
+  html += '<div class="sheet-print-header">';
+  html += '<h2>' + esc(tpl.title) + '</h2>';
+  html += '<p>' + esc(tpl.intro) + '</p>';
+  const compName = S.company ? S.company : "__________________________________";
+  const todayStr = new Date().toLocaleDateString("uz-UZ");
+  html += '<div class="sheet-print-meta">';
+  html += '<span>Korxona: <b>' + esc(compName) + '</b></span>';
+  html += '<span>Sana: <b>' + esc(todayStr) + '</b></span>';
+  html += '<span>Auditor: <b>_____________________</b></span>';
+  html += '</div>';
+  html += '</div>';
+
+  // Screen header badge
+  html += '<div class="no-print" style="margin-bottom:18px;display:flex;align-items:center;gap:10px">';
+  html += '<span class="sheet-sel-badge">' + esc(tpl.badge) + '</span>';
+  html += '<b style="font-size:16px;color:var(--ink)">' + esc(tpl.title) + '</b>';
+  html += '</div>';
+
+  // The .sheet groups
+  html += '<div class="sheet">';
+  tpl.groups.forEach(grp => {
+    html += '<section class="sheet-grp">';
+    html += '<h3><span class="who">' + esc(grp.who) + '</span> ' + esc(grp.title) + '</h3>';
+    html += '<ul>';
+    grp.items.forEach(it => {
+      html += '<li>' + esc(it) + '<i></i></li>';
+    });
+    html += '</ul>';
+    html += '</section>';
+  });
+
+  if(tpl.checklist && tpl.checklist.length){
+    html += '<section class="sheet-grp">';
+    html += '<h3><span class="who">Huquqiy</span> ' + esc(tpl.checklistTitle || "Majburiy talablar") + '</h3>';
+    html += '<ul class="ticks">';
+    tpl.checklist.forEach(ck => {
+      html += '<li>' + esc(ck) + '</li>';
+    });
+    html += '</ul>';
+    html += '</section>';
+  }
+  html += '</div>';
+
+  // The 3 questions callout
+  if(tpl.questions && tpl.questions.length){
+    html += '<div class="callout" style="--tone:var(--mint);--tone-wash:var(--accent-wash);margin-top:20px">';
+    html += '<b>Uchta savol raqamdan muhimroq.</b>';
+    const ordinals = ["Birinchi: ", "Ikkinchi: ", "Uchinchi: "];
+    tpl.questions.forEach((q, idx) => {
+      html += '<p style="margin:6px 0 0"><b>' + (ordinals[idx]||"") + '</b>' + esc(q) + '</p>';
+    });
+    html += '</div>';
+  }
+
+  body.innerHTML = html;
+}
+
 /* ma'lumot yig'ish varaqasi */
 function showSheet(on){
   $$(".panel").forEach(p=>p.classList.remove("on","anim"));
@@ -1702,13 +2490,41 @@ function showSheet(on){
   document.body.classList.remove("in-flow");
   cur=-1;
   window.scrollTo(0,0);
+  if(on){
+    const targetSec = S.sector || activeSheetSector || "tibbiyot";
+    renderDataSheet(targetSec);
+  }
 }
+
 $("#sheetBtn").onclick=()=>{
   if(typeof Analytics!=="undefined") Analytics.logEvent("sheet_open");
   showSheet(true);
 };
 $("#sheetPrint").onclick=()=>window.print();
 ["#sheetBack","#sheetBack2"].forEach(id=>{ const b=$(id); if(b) b.onclick=()=>showSheet(false); });
+
+const sheetAuditBtn = $("#sheetAuditStartBtn");
+if(sheetAuditBtn){
+  sheetAuditBtn.onclick = () => {
+    S.sector = activeSheetSector;
+    const secBtn = $(`#p-1 .opts[data-field="sector"] button[data-v="${activeSheetSector}"]`);
+    if(secBtn){
+      $$("#p-1 .opts[data-field='sector'] button").forEach(o => o.setAttribute("aria-pressed", "false"));
+      secBtn.setAttribute("aria-pressed", "true");
+    }
+    applyTerms();
+    drawStepper();
+    show(0);
+    if(typeof Analytics!=="undefined") Analytics.logEvent("audit_start", { sector: activeSheetSector, from: "sheet" });
+  };
+}
+
+document.addEventListener("click", e => {
+  const btn = e.target.closest("#sheetSectorOpts .opt");
+  if(btn && btn.dataset.v){
+    renderDataSheet(btn.dataset.v);
+  }
+});
 
 /* masthead chegarasi va bo'limlarning chiqishi */
 (function(){
@@ -1804,7 +2620,6 @@ const num=(n,d)=>{
   return n.toLocaleString("en-US",{minimumFractionDigits:d||0,maximumFractionDigits:d||0}).replace(/,/g," ");
 };
 const pct=(n,d)=>isFinite(n)?(n*100).toFixed(d===undefined?1:d)+"%":"—";
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const T=()=>{
   if(typeof TERMS!=="undefined" && S.sector && TERMS[S.sector]){
     const t=TERMS[S.sector];
@@ -2431,9 +3246,53 @@ const SQ = {
       {f:"x_k3",l:"Sof foyda marjasi",u:"%",ph:"10",bench:9.74,dir:"up",benchLab:"umumiy bozor 9.74%",src:"dam",
        why:"Damodaran bazasida 5 994 kompaniya bo‘yicha sof marja 9.74%."}
     ]
+  },
+
+  stomatologiya:{
+    lab:"Stomatologiya klinikasi",
+    intro:"Stomatologiyada quvvat &mdash; stomatologik kreslo va shifokor smenasi. Kreslo bo‘sh turishi yoki bemor qabulga kelmasligi (no-show) to‘g‘ridan-to‘g‘ri boy berilgan daromaddir. Davolash rejalari konversiyasi esa eng katta o‘sish nuqtasi.",
+    mode:"flow",
+    cap:{
+      unit :{f:"x_unit", l:"Stomatologik kreslolar soni",            ph:"4",  u:"kreslo"},
+      slot :{f:"x_slot", l:"Bitta kresloda kuniga qabul o‘rni",      ph:"6",  u:"bemor / kun", hint:"Kunlik ish soati ÷ bitta bemor qabul vaqti (o‘rtacha 60–90 daqiqa)."},
+      seat :{f:"x_seat", l:"Bir qabulda bemor soni",                 ph:"1",  u:"bemor"},
+      days :{f:"x_days", l:"Oyiga ish kunlari",                     ph:"26", u:"kun"},
+      used :{f:"x_used", l:"Kuniga amalda qabul qilingan bemorlar", ph:"16", u:"bemor / kun"},
+      price:{f:"x_price",l:"O‘rtacha chek / davolash rejasi bosqichi", ph:"60", u:"USD"}
+    },
+    extra:{
+      t:"Qo‘shimcha stomatologik xizmatlar",
+      hint:"Davolashdan tashqari tushum olib keladigan diagnostika va servis xizmatlari.",
+      bench:null, src:"ws",
+      fields:[
+        {f:"x_e1", l:"Rentgen / viziograf / 3D tomografiya oylik tushumi", ph:"600", u:"USD / oy"},
+        {f:"x_e2", l:"Professional gigiyena va oqlash (Air-flow) oylik tushumi", ph:"800", u:"USD / oy"}
+      ]
+    },
+    mix:{
+      t:"Xizmat turlari (yo‘nalishlar) kesimi",
+      hint:"Klinikada qaysi yo‘nalish eng ko‘p marja va tushum berayotganini aniqlang.",
+      row:"Yo‘nalish",
+      def:["Terapiya (plomba, karies)","Ortopediya (toj, vinir, protez)","Implantatsiya va xirurgiya","Ortodontiya (breket, elayner)","Bolalar stomatologiyasi"],
+      cols:[{k:"st",l:"Shifokor",u:"nafar"},{k:"cl",l:"Bemor",u:"bemor / oy"},{k:"rv",l:"Oylik tushum",u:"USD"}]
+    },
+    kpi:[
+      {f:"x_k1",l:"Davolash rejasiga rozilik konversiyasi",u:"%",ph:"65",
+       hint:"Konsultatsiyadan so‘ng to‘liq davolash rejasini qabul qilgan bemorlar ulushi.",
+       bench:70,dir:"up",benchLab:"optimal 70%+",src:null,
+       why:"Konsultatsiya o‘tkazilib, bemor ketib qolsa &mdash; shifokor vaqti bekorga sarflanadi. Reja bo‘yicha ishlash o‘rtacha chekni 2–3 barobar oshiradi."},
+      {f:"x_k2",l:"Kelmaganlar (no-show) va bekor qilingan qabullar",u:"%",ph:"15",
+       hint:"Yozilib kelmagan yoki oxirgi daqiqada bekor qilingan qabullar ulushi.",
+       bench:10,dir:"down",benchLab:"norma 10% dan past",src:"nosh",
+       why:"Avtomatik SMS/Telegram eslatma va 24 soat oldin tasdiqlash no-show ni 29% ga kamaytiradi."},
+      {f:"x_k3",l:"Profilaktik ko‘rikka qaytish ulushi (6 oylik check-up)",u:"%",ph:"35",
+       hint:"Davolash tugagach, 6 oy ichida profilaktikaga chaqirilgan va kelgan bemorlar.",
+       bench:45,dir:"up",benchLab:"ilg‘or klinikalarda 45%+",src:"bain",
+       why:"Bemorlarni har 6 oyda bepul profilaktikaga chaqirish yangi bemor jalb qilishdan 5 barobar arzon."}
+    ]
   }
 };
-SQ.stomatologiya = null; SQ.tibbiyot = null; SQ.ishlab_chiqarish = null;
+SQ.tibbiyot = null; SQ.ishlab_chiqarish = null;
 
 function sq(){ return S.sector ? (SQ[S.sector]||null) : null; }
 
